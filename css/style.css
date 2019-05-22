@@ -1,0 +1,29 @@
+html{
+    height:100%
+}
+body{
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 80%);   
+}
+
+.nav{
+    float:right;
+    margin-right:10%;
+    margin-top:20px;
+}
+.nav a{
+    color:rgb(145, 140, 140);
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 5px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+}
+.nav a:hover{
+    color: black;
+}
+.nav a.active{
+    color:white;
+    background: black;
+    border-radius: 20px;
+}
+
