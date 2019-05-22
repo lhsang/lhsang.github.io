@@ -1,162 +1,93 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <title>Hello, I'm Sang</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
 
-<title>Le Hoang Sang - Profile</title>
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/animate1.css">
 
-<!-- Fichiers CSS -->
-<link rel="stylesheet" href="src/reset.css">
-<link rel="stylesheet" media="screen and (max-width:480px)" href="src/mobile.css">
-<link rel="stylesheet" media="screen and (min-width:481px)" href="src/cv.css">
-<link rel="stylesheet" media="print" href="src/print.css">
-<link rel="shortcut icon" type="image/png" href="https://i.imgur.com/7hms6E4.png"/>
- 
-<style>
-.btn{
-	padding: 8px 10px;
-	background: #0a8f0d;
-	color: white;
-	border: none;
-	border-radius: 10px;
-}
-</style>
-</head>
+    <link rel="stylesheet" href="css/aos.css">
 
-<body >
-	
-	
-	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-2"  id="exportPDF" style="text-align: right;">
-		
-		<button type="button" class="btn" onclick="HTMLtoPDF()">Export to PDF</button>
-		
-	</div>
-	
-	
-	
-	<!-- Header -->
-	<header role="banner">
-		<div class="container_16">
-				<hgroup>
-					<h1>Le Hoang Sang</h1>
-					<h2>Software engineer</h2>
-				</hgroup>
+    <link rel="stylesheet" href="css/ionicons.min.css">
 
-				<figure>
-					<img src="src/avatar.jpg" alt="Sheldon COOPER">
-				</figure>
-		</div>
-	</header>
-	
-	
-	<div id="myCV">
-		<div hidden style="align-content: center">
-			<h1>Le Hoang Sang</h1>
-			<i><h4>Software engineer</h4></i>
-			<hr>
-		</div>
-	<!-- Corps -->
-	<section role="main" class="container_16 clearfix">
-		<div class="grid_16">
-			<!-- A intro -->
-			<div class="grid_8 apropos">
-				<h3>Introduction</h3>
-				<p>Birthday: 7-06-1998</p>
-				<p>Hobbies: listening to music, playing game</p>
-				<p>I'm passionate about programming. I'm constantly exploring new things.</p>
-				<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspwhile(1)<BR>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp i++;</p>
-			</div>
-			
-			<!-- Compétences -->
-			<div class="grid_8 competences">
-				<h3>Programming language</h3>
-				<ul class="barres">
-					<li data-skills="70">C/C++<span style="width: 70%;"></span></li>
-					<li data-skills="50">C#<span style="width: 50%;"></span></li>
-					<li data-skills="50">Back-end: Java (Spring, Hibernate)<span style="width: 50%;"></span></li>
-					<li data-skills="60">Front-end: HTML/CSS/JS/Bootstrap<span style="width: 60%;"></span></li>
-					<li data-skills="60">Mobile: Android(Java)<span style="width: 60%;"></span></li>
-				</ul>
-			</div>
-		</div>
-		
-			<!-- Education -->
-			<div class="grid_16 formations">
-				<h3>Education</h3>
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+			<h1 id="colorlib-logo"><a href="index.html">Sang Le</a></h1>
+			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li>
-						<h4><strong>2013-2015</h4>
-						<span class="lieu"> </span>
-						<span class="dates"> </span>
-						<p>Student specializing in informatics at Nguyen Binh Khiem high school for the gifted.</p>
-					</li>
-					<li>
-						<h4><strong>2016-now</h4>
-						<span class="lieu">  </span>
-						<span class="dates">  </span>
-						<p>Information technology at Ho Chi Minh university of Science.</p>
-					</li>
+          <li class="colorlib-active"><a href="index".html">Hello world !</a></li>
+          <li><a href="http://1612554.github.io">Résume</a></li>
+          <li><a href="#">Blog</a></li>
 				</ul>
-			</div>
-			
-			<!-- buff for pdf-->
-			<div  style="margin-top:100px">
-					<h1> </h1>
-			</div>
-			<!-- Experiences -->
-			<div class="grid_16 experiences">
-				<h3>Experiences</h3>
-				<ul>
-					<li>
-						<h4><strong>2013-2015</strong> Blogging</h4>
-						<p>I used to create and write content for blogs when I was in high school.</p>
-					</li>
-					<li>
-						<h4><strong>7-2018 to 10-2018</strong> Internship</h4>
-						<p>Java web developer at Eteacher </p>
-						<p><BR></p>
-						<p> <BR> </p>
-					</li>
-				</ul>
-			</div>
-		
-			<!-- Award -->
-			<div class="grid_8 loisirs">
-				<h3>Awards</h3>
-				<p><strong>2018 :</strong> 2nd prize - MASTERING IT 2018 competition was held by<BR>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ho Chi Minh university of Technology and Education</p>
-				<p><strong>2018 :</strong> Pass the preliminary round of Thach thuc 2018 competition <BR>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp was held by Ho Chi Minh university of Science </p>
-			</div>
-			
-			<!-- Contact -->
-			<div class="grid_8 contact">
-				<h3>Contact</h3>
-				<p>I am a cheerful person in life, active in work.<BR>Do not hesitate to contact me : </p>
-				<ul>
-					<li class="lieu">Ho Chi Minh, VietNam</li>
-					<li class="phone">01269149xxx</li>
-					<li class="mail"><a href="mailto:lehoangsangcpp@gmail.com">lehoangsangcpp@gmail.com</a></li>
-					<li class="site"><a href="https://lhsang.github.io/">https://lhsang.github.io/</a></li>
-				</ul>
-			</div>
-	</section>
-	</div>
+			</nav>
 
-<!-- Scripts JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/ScrollMagic.js"></script>
-	<script src="src/pdfFromHTML.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  
-	<script src="src/jquery-1.js"></script>
-	<script src="src/validate.js"></script>
-	<script src="src/custom.js"></script>
-	<script src="src/jspdf.js"></script>
-><!--[if lt IE 9]>
-<script src="scripts/placeholder.js"></script>
-<![endif]-->
-<script src="src/plugins.js"></script>
+			<div class="colorlib-footer">
+			  Copyright &copy; Le Hoang Sang <script>document.write(new Date().getFullYear());</script> 
+			</div>
+		</aside> <!-- END COLORLIB-ASIDE -->
+		<div id="colorlib-main">
+			<div class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url(images/coding.jpg);" data-stellar-background-ratio="0.5">
+				<div class="overlay"></div>
+				<div class="js-fullheight d-flex justify-content-center align-items-center">
+					<div class="col-md-8 text text-center">
+						<div class="img mb-4 wow flipInY" style="background-image: url(images/author.png);"></div>
+						<div class="desc">
+							<h2 class="subheading wow bounceInRight" data-wow-duration="0.5">Hello I'm</h2>
+							<h1 class="mb-4 wow bounceInRight"  data-wow-duration="1.5s">Sang Le Hoang</h1>
+							<p class="mb-4 wow bounceInUp">I am a software engineer <br>I'm also starting the work of a data scientist</p>
+							<ul class="ftco-social mt-3">
+                <li class="ftco-animate"><a href="https://github.com/1612554" target="_blank"><span class="icon-github"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.facebook.com/hoangsang135"  target="_blank"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/"><span class="icon-linkedin"  target="_blank"></span></a></li>
+              </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
 
-</body></html>
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+     <script>
+        new WOW().init();
+    </script>
+  </body>
+</html>
