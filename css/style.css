@@ -8554,3 +8554,78 @@ textarea.form-control {
   #colorlib-aside li.colorlib-active a::after{
     background-color: transparent !important
   }
+
+  .block{
+    text-align: left;
+    padding: 30px 0px;
+    padding-left: 5%;
+    border: 0.4px solid rgb(189, 183, 183);
+  }
+  @media(min-width:1200px){
+    .block-intro{
+      height: 230px;
+    }
+    .block-edu{
+      height: 200px;
+    }
+    .block-skills{
+      
+    }
+  }
+  .block .header{
+    color:blue;
+    font-weight: 600;
+    font-size: 19px
+  }
+  .block .header span{
+    font-size: 17px;
+    color:blue;
+  }
+  .block .body{
+    color: rgb(70, 66, 66);
+    padding-left: 3%
+  }
+  .block .body p span{
+    color: rgb(44, 43, 43);
+    font-weight: 530;
+  }
+
+  .block .body a{
+    color: rgb(9, 9, 216);
+    font-weight: 450
+  }
+.block .body p {
+  margin: 0px 0px;
+}
+
+.cv{
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom:120px
+}
+
+.cv .block{
+  margin-top:50px
+}
+
+.cv .bar{
+  width:80%; 
+  background: white;
+  margin: 0px 10px 20px 5px !important;
+  padding: 2px !important;
+  border: 0.5px solid rgb(204, 197, 197);
+  border-radius: 10px;
+}
+
+.cv .percent{
+  width:60%; 
+  margin: 0px !important;
+  padding: 0px !important;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  background-image: linear-gradient( 90.5deg,  rgba(1,134,228,1) -1.7%, rgba(63,215,255,1) 58.1% );
+
+}
+
+
