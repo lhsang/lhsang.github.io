@@ -8577,7 +8577,28 @@ textarea.form-control {
 
   @media(max-width:768px){
     .cv{
-      margin-top:150px
+      margin-top:150px !important
+    }
+  }
+
+  @media(min-width:768px) and (max-width:1200px){
+    .block-intro{
+      height: 300px;
+    }
+    .block-edu{
+      height: 250px;
+    }
+    .block-skills{
+      height: 520px;
+    }
+    .cv{
+      margin-top:0px !important
+    }
+    .intro{
+      
+    }
+    .cv{
+      margin-top:100px !important
     }
   }
   .block .header{
@@ -8609,7 +8630,8 @@ textarea.form-control {
 .cv{
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom:120px
+  margin-bottom:120px;
+  margin-top:50px
 }
 
 
