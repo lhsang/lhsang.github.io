@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Tìm hiểu gRPC - Sang Le Hoang
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
+  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
+  <meta name="generator" content="Hugo 0.69.0 with theme pure" />
+  <title>Tìm hiểu gRPC - Sang Le Hoang</title>
+  
+  
+  <link rel="stylesheet" href="https://lhsang.me/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="Tìm hiểu gRPC" />
+<meta property="og:description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
+  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lhsang.me/posts/technique/grpc/" />
+<meta property="article:published_time" content="2020-02-15T08:40:50+07:00" />
+<meta property="article:modified_time" content="2020-02-15T08:40:50+07:00" />
+<meta itemprop="name" content="Tìm hiểu gRPC">
+<meta itemprop="description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
+  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice.">
+<meta itemprop="datePublished" content="2020-02-15T08:40:50&#43;07:00" />
+<meta itemprop="dateModified" content="2020-02-15T08:40:50&#43;07:00" />
+<meta itemprop="wordCount" content="902">
+
+
+
+<meta itemprop="keywords" content="Technique,RPC,HTTP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tìm hiểu gRPC"/>
+<meta name="twitter:description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
+  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/lhsang" target="_blank">
+            <img class="img-circle img-rotate" src="https://lhsang.me/img/profile.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Ho Chi Minh, Viet Nam</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-resume">
+                <a href="/r%C3%A9sume/">
+                    <i class="icon icon-profile"></i>
+                  <span class="menu-title">Résume</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Categories</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/experience/" class="tag-list-link">experience</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/http/" class="tag-list-link">http</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/internship/" class="tag-list-link">internship</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/interview/" class="tag-list-link">interview</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/message-broker/" class="tag-list-link">message-broker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/nginx/" class="tag-list-link">nginx</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/rpc/" class="tag-list-link">rpc</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/technique/" class="tag-list-link">technique</a><span
+                    class="tag-list-count">3</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-03-04 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-03-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/grpc/" class="title">Tìm hiểu gRPC</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/rabbitmq/" class="title">RabbitMQ - Demo with python</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/grpc/"
+    >Tìm hiểu gRPC</a
+  >
+</h1>
+
+            
+      
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://lhsang.me/posts/technique/grpc/" class="article-date">
+  <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/rpc/"> RPC </a>
+    <a class="article-tag-link" href="/tags/http/"> HTTP </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/grpc/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 902words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5minutes </span>
+      </div>
+      
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h2 id="grpc-là-gì-">gRPC là gì ?</h2>
+<p>Trong thời điểm hiện tại thì <strong>JSON REST API</strong> vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên <strong>protocol buffers</strong> và HTTP/2 của <strong>Google</strong> có tên là <strong>gRPC</strong></p>
+<ul>
+<li>
+<p><strong>gRPC</strong> là một <strong>RPC</strong> platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice.</p>
+</li>
+<li>
+<p><strong>gRPC</strong> dùng <strong>Protocol Buffers</strong> giảm kích thước request và response data, RPC để đơn giản hoá trong việc tạo ra các giao tiếp giữa các service với nhau và dùng HTTP/2 để tăng tốc gửi/nhận HTTP request.</p>
+</li>
+</ul>
+<p><strong>1. RPC là gì?</strong></p>
+<p>RPC là từ viết tắc của Remote Procedure Call, nó được xây dựng với ý tưởng là đơn giản hoá việc giao tiếp giữa những service với nhau, thay vì những service giao tiếp với nhau theo kiểu RESTful API thì giờ đơn giản là gọi hàm như những object nói chuyện với nhau thôi, còn việc phân tán các service là chuyện của tương lai không dính liếu đến việc code.</p>
+<p><strong>2. HTTP/2</strong></p>
+<p>HTTP/2 là một phiên bản nâng cấp của HTTP/1.1, HTTP/2 sinh với với mục đích cải thiện tốc độ giao tiếp giữa client/server trên nền tảng Web.</p>
+<p>HTTP/1.1 có nhược điểm là xử lý từng request 1, tức là một request nào đó gởi đến server xử lý xong thì mới gởi request khác đi. Ví dụ khi trang web cần lấy 2 file script.js và style.css với thứ tự tương ứng thì file script.js được trả về xong thì server mới xử lý yêu cầu lấy file style.css. Điều này làm cho thời gian chờ để lấy về tất cả dữ liệu rất tốn thời gian.</p>
+<p>HTTP/2 được ra đời với các mục tiêu: cải thiện tốc dộ giao tiếp, giữ được tính tương thích với HTTP/1và cho phép cả trình duyệt lẫn máy chủ có thể chọn loại giao thức kết nối:</p>
+<ul>
+<li><strong>Compression(nén) of request headers</strong></li>
+</ul>
+<p>Mỗi request của HTTP sẽ mang rất nhiều data headers đi và đến cho dù nó giống nhau từ request thứ 2 trở đi.
+Vì cả client và server đều duy trì một danh sách các headers được sử dụng cho các request trước đó (header frames) nên HTTP/2 sẽ loại bỏ những data headers trùng lặp lại ở những lần request thứ 2 trở đi và nén headers trước khi gửi đi (sử dụng HPACK), sau đó HPACK sẽ tìm kiếm lại header trong header frame để xây dựng lại headers đầy đủ.</p>
+<p><img src="/img/posts/technique/rpc/headers.png" alt="Header"></p>
+<ul>
+<li><strong>Binary protocol</strong></li>
+</ul>
+<p>Browsers sẽ convert text sang binary trước khi gởi qua đường network. Mục đích nhằm giảm kích thước gói tin, tiết kiệm băng thông, giảm chi phí parsing data.</p>
+<p><img src="/img/posts/technique/rpc/binary.png" alt="binary"></p>
+<ul>
+<li><strong>Request multiplexing over a single TCP connection</strong></li>
+</ul>
+<p>HTTP/2 có thể gửi cùng lúc nhiều request đến qua một kết nối TCP(single TCP) và kết quả được trả về bất đồng bộ với nhau (chú ý là hầu hết trình duyệt cũng có giới hạn TCP connections đến một server).</p>
+<p><img src="/img/posts/technique/rpc/multiple.png" alt="multiple"></p>
+<ul>
+<li><strong>HTTP/2 Server Push</strong>
+Thêm một cách để tối ưu tốc độ loading của website, thay vì phải có request từ client thì server mới trả resource liên quan về, HTTP/2 sẽ hiểu những resource liên quan và đẩy resource về cho client luôn mà không cần client gửi request.</li>
+</ul>
+<p><img src="/img/posts/technique/rpc/push.png" alt="push"></p>
+<p><strong>3. Vậy còn Protocol Buffers ?</strong></p>
+<p>Protocol Buffers gọi tắt là protobuf là ngôn ngữ được phát triển bới Google tạo ra chuẩn sắp xếp mã hóa data với mục đích tạo buffer truyền và nhận giao tiếp một cách linh hoạt, hiệu quả, đơn giản và tăng tốc độ truyền nhận (có vẻ khá giống XML hoặc JSON). Nó lưu trữ dữ liệu có cấu trúc có thể được Serialize hoặc De-Serialized tự động bưởi nhiều ngôn ngữ khác nhau.</p>
+<p>Chỉ cần định nghĩa cấu trúc data sử dụng protobuf tạo buffer, sau đó chỉ việc sử dụng hàm thư viện protobuf dễ dàng ghi và đọc cấu trúc data đó đến và từ rất nhiều ngôn ngữ khác nhau. Có thể update lại cấu trúc data nhưng code chương trình sẽ không cần phải thay đổi.</p>
+<p><strong>So sánh một chút với XML và JSON:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Protobuf</th>
+<th>JSON</th>
+<th>XML</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Không dành cho người đọc vì là binary</td>
+<td>Con người có thể đọc và chỉnh sửa dễ dành</td>
+<td>Con người có thể có thể đọc và chỉnh sửa dễ dàng</td>
+</tr>
+<tr>
+<td>Khó decode mà không biết schema, định dạng dữ liệu không rõ ràng</td>
+<td>Có thể phân tích mà không cần biết schema</td>
+<td>Có thể phân tích cú pháp mà không cần biết schema</td>
+</tr>
+<tr>
+<td>Xử lý rất nhanh, nhỏ hơn 3 - 10 lần so với XML hoặc JSON</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>Protobuf rất nhanh nhưng có những tình huống không nên sử dụng nó:</p>
+<ul>
+<li>Khi cần hoặc muốn dữ liệu con người có thể đọc dễ dàng.</li>
+<li>Dữ liệu từ Service được sử dụng trực tiếp bởi Browser.</li>
+</ul>
+<h2 id="demo-grpc-using-python">Demo gRPC using python</h2>
+<p><a href="https://grpc.io/docs/tutorials/basic/python/">gRPC Basics - Python</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://medium.com/@factoryhr/http-2-the-difference-between-http-1-1-benefits-and-how-to-use-it-38094fa0e95b">HTTP/2: the difference between HTTP/1.1, benefits and how to use it</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/overview">Protocol Buffers - Developer Guide</a></li>
+<li><a href="https://grpc.io/docs/tutorials/basic/python/">gRPC Basics - Python</a></li>
+<li><a href="https://techtalk.vn/cac-ky-su-eureka-da-toi-uu-ung-dung-chat-su-dung-grpc-nhu-the-nao.html">Các kỹ sư Eureka đã tối ưu ứng dụng chat sử dụng gRPC như thế nào</a></li>
+<li><a href="https://grpc.io/docs/">gRPC official docs</a></li>
+<li><a href="https://dominhhai.github.io/vi/2017/11/what-is-http2/">[Web] HTTP2</a></li>
+<li><a href="https://viblo.asia/p/protocol-buffers-la-gi-va-nhung-dieu-can-ban-can-biet-ve-no-maGK7D99Zj2">Protocol buffers là gì và những điều căn bản cần biết về nó</a></li>
+</ul>
+
+    </div>
+    
+    <div class="article-footer">
+
+      
+      <div class="fb-comments" data-href="http://www.lhsang.me/blog/technique/gRPC/" data-width="100%" data-numposts="5"></div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://lhsang.me/img/profile.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lhsang" target="_blank"><span class="text-dark">lhsang</span><small class="ml-1x">while(i){ i&#43;&#43;;  }</small></a></h3>
+        <div>Code for Food or Code for Fun?</div>
+      </div>
+    </figure>
+  </div>
+</div>
+    </div>
+    
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://lhsang.me/posts/technique/rabbitmq/" title="RabbitMQ - Demo with python"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://lhsang.me/posts/technique/nginx/"
+                    title="Nginx là gì ? Demo load balancing với nginx"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="facebook,twitter,linkedin"
+                data-mobile-sites="facebook,twitter,linkedin"></div>
+        </div>
+    </div>
+</nav>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://www.facebook.com/hoangsang135" target="_blank" title="facebook" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-facebook"></i></a></li>
+    <li><a href="https://github.com/lhsang" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy; Sang Le Hoang
+
+
+
+    2020
+    <div class="publishby">
+        Theme by xiaoheiAh
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/powershell.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://lhsang.me/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://lhsang.me/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/lhsang.me\/',
+            CONTENT_URL: 'https:\/\/lhsang.me\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://lhsang.me/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1317935755070864&autoLogAppEvents=1"></script>
+
+  </body>
+</html>

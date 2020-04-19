@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        RabbitMQ - Demo with python - Sang Le Hoang
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="1. Message-boker ?
+ Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
+  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)." />
+  <meta name="generator" content="Hugo 0.69.0 with theme pure" />
+  <title>RabbitMQ - Demo with python - Sang Le Hoang</title>
+  
+  
+  <link rel="stylesheet" href="https://lhsang.me/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="RabbitMQ - Demo with python" />
+<meta property="og:description" content="1. Message-boker ?
+ Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
+  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lhsang.me/posts/technique/rabbitmq/" />
+<meta property="article:published_time" content="2020-02-08T08:31:11+07:00" />
+<meta property="article:modified_time" content="2020-02-08T08:31:11+07:00" />
+<meta itemprop="name" content="RabbitMQ - Demo with python">
+<meta itemprop="description" content="1. Message-boker ?
+ Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
+  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).">
+<meta itemprop="datePublished" content="2020-02-08T08:31:11&#43;07:00" />
+<meta itemprop="dateModified" content="2020-02-08T08:31:11&#43;07:00" />
+<meta itemprop="wordCount" content="1208">
+
+
+
+<meta itemprop="keywords" content="Technique,Message broker,RabbitMQ," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RabbitMQ - Demo with python"/>
+<meta name="twitter:description" content="1. Message-boker ?
+ Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
+  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/lhsang" target="_blank">
+            <img class="img-circle img-rotate" src="https://lhsang.me/img/profile.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Ho Chi Minh, Viet Nam</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-resume">
+                <a href="/r%C3%A9sume/">
+                    <i class="icon icon-profile"></i>
+                  <span class="menu-title">Résume</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Categories</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/experience/" class="tag-list-link">experience</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/http/" class="tag-list-link">http</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/internship/" class="tag-list-link">internship</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/interview/" class="tag-list-link">interview</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/message-broker/" class="tag-list-link">message-broker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/nginx/" class="tag-list-link">nginx</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/rpc/" class="tag-list-link">rpc</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://lhsang.me/tags/technique/" class="tag-list-link">technique</a><span
+                    class="tag-list-count">3</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-03-04 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-03-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/grpc/" class="title">Tìm hiểu gRPC</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://lhsang.me/posts/technique/rabbitmq/" class="title">RabbitMQ - Demo with python</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/rabbitmq/"
+    >RabbitMQ - Demo with python</a
+  >
+</h1>
+
+            
+      
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://lhsang.me/posts/technique/rabbitmq/" class="article-date">
+  <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/message-broker/"> Message broker </a>
+    <a class="article-tag-link" href="/tags/rabbitmq/"> RabbitMQ </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/rabbitmq/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1208words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6minutes </span>
+      </div>
+      
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p><img src="/img/posts/technique/rabbitmq/rabbitMQ.png" alt="rabbitMQ"></p>
+<p><strong>1. Message-boker ?</strong></p>
+<ul>
+<li>Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever.</li>
+<li>Mesage-boker có 2 hình thức giao tiếp cơ bản là:
+<ul>
+<li>Publish và Subscribe (Topics)</li>
+<li>Point-to-Point (Queues)</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. RabbitMQ là gì ?</strong></p>
+<ul>
+<li>
+<p>RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).
+Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối tới để bỏ message vào và gửi message dựa trên nó.</p>
+<p>Message: ở đây có thể chứa nhiều kiểu thông tin. Ví dụ như thông tin về một process/task để khởi động một ứng dụng nào đó (nằm trên một server khác), hoặc có thể là một message chứa text đơn giản.</p>
+</li>
+<li>
+<p>RabbitMQ hỗ trợ nhiều giao thức (AMQP, STOMP, MQTT, HTTP and Websockets), tuy nhiên phương thức phố biến nhất mà rabbitmq sử dụng là AMQP - Advanced Message Queue Protocol</p>
+</li>
+</ul>
+<p><img src="/img/posts/technique/rabbitmq/message-queue-small.png" alt="message-queue-small"></p>
+<ul>
+<li>Phần mềm quản lý hàng đợi chứa các message cho đến khi ứng dụng nhận đến lấy message.</li>
+</ul>
+<ul>
+<li><strong>Một số thuật ngữ trong RabbitMQ</strong>
+<ul>
+<li><strong>Producer</strong>: Bên phát hành message (publisher)</li>
+<li><strong>Consumer</strong>: Bên nhận tin (subscriber)</li>
+<li><strong>Exchange</strong>: Làm nhiệm vụ điều hướng message từ producer đến các queue bên trong do các message không được công khai trực tiếp trong queue.<!-- raw HTML omitted --></li>
+<li><strong>Routing key</strong>: Là một khóa mà exchange dùng nó để quyết định cách đưa vào hàng đợi. Routing key có thể hiểu như một địa chỉ của message.</li>
+<li><strong>Queues</strong>: có nhiệm vụ lưu trữ bản tin được gửi lên</li>
+<li><strong>Connection</strong>: Là một kết nối TCP giữa ứng dụng của bạn và RabbitMQ</li>
+<li><strong>Channel</strong>: Một channel là một kết nối ảo bên trong một connection. Khi bạn đẩy đi hoặc nhận các message từ hàng đợi, tất cả phải đi qua channel</li>
+<li><strong>Binding</strong>: Là một kết nối giữa hàng đợi và exchange</li>
+<li><strong>User</strong>: người dùng có thể kết nối đến #RabbitMQ bằng username/password. Mỗi người dùng được cấp quyền như đọc, ghi và cấu hình quyền bên trong một instance. User còn có quyền trên một host ảo.</li>
+<li><strong>Virtual Host</strong>: Cung cấp chức năng tách ứng dụng dùng trên cùng #RabbitMQ. Người dùng khác nhau có quyền hạn khác nhau trên virtual host, hàng đợi hay exchange khác nhau. Chúng chỉ tồn tại trong một virtual host.</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Tại sao dùng RabbitMQ ?</strong></p>
+<ul>
+<li>
+<p><strong>Problems:</strong></p>
+<ul>
+<li>Đối với các hệ thống sử dụng kiến trúc microservice thì việc gọi chéo giữa các service quá nhiều khiến luồng xử lý khá phức tạp.</li>
+<li>Mức độ trao đổi data giữa các thành phần tăng lên khiến cho việc lập trình trở nên khó khăn (maintain).</li>
+<li>Khi phát triển làm sao để dev tập trung vào các domain, business logic thay vì các công việc trao đổi ở tầng infrastructure.</li>
+<li>Với các hệ thống phân tán, khi việc giao tiếp giữa các thành phần đòi hỏi chúng phải biết nhau. Nhưng điều này rắc rối cho việc viết code.
+Một thành phần phải viết quá nhiều đâm ra rất khó maintain, debug</li>
+</ul>
+</li>
+<li>
+<p><strong>Sử dụng RabbitMQ:</strong></p>
+<ul>
+<li>Một producer không cần phải biết comsumer. Nó chỉ việc gởi message đến các queue trong message-boker. Consumer chỉ việc đăng ký nhận message từ queue này.</li>
+<li>Vì producer giao tiếp với consumer trung gian qua message broker nên dù producer và consumer có khác biệt nhau về ngôn ngữ thì giao tiếp vẫn thành công.(Hiện nay rabbitmq   đã hỗ trợ rất nhiều ngôn ngữ khác nhau).</li>
+<li>Một đặc tính của rabbitmq là bất đồng bộ(asynchronous). Producer không thể biết khi nào message đến được consumer hay khi nào message được consumer xử lý xong. Đối với producer, đẩy message đến message broker là xong việc. Consumer sẽ lấy message về khi nó muốn. Đặc tính này có thể được tận dụng để xây dựng các hệ thống lưu trữ và xử lý log.</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. Exchange</strong></p>
+<p>Mặc định exchange là chuỗi &ldquo;&quot;. Một exchange có thể có nhiều queue.<!-- raw HTML omitted -->
+Exchange có 4 loại:<!-- raw HTML omitted --></p>
+<ul>
+<li><strong>Fanout</strong>: Một Fanout exchange sẽ đẩy message đến toàn bộ hàng đợi gắn với nó. <!-- raw HTML omitted --></li>
+<li><strong>Direct</strong>: Một Direct exchange sẽ đẩy message đến hàng đợi dựa theo khóa định tuyến – <strong>routing key</strong> (do producer khai báo).<!-- raw HTML omitted -->
+Ví dụ, nếu hàng đợi gắn với một exchange có binding key là pdfprocess, message được đẩy vào exchange với routing key là pdfprocess sẽ được đưa vào hàng đợi.<!-- raw HTML omitted --></li>
+<li><strong>Topic</strong>: Một topic exchange sẽ làm một lá bài (gọi là wildcard) để gắn routing key với một routing pattern khai báo trong binding<!-- raw HTML omitted -->
+Consumer có thể đăng ký những topic mà nó quan tâm. Cú pháp được sử dụng ở đây là * và #. <!-- raw HTML omitted -->
+<strong>Ví dụ:</strong> <!-- raw HTML omitted -->
+- booking.* -&gt; Được đăng ký bởi tất cả những key với pattern bắt đầu bằng booking.<!-- raw HTML omitted -->
+- booking.# -&gt; Được đăng ký bởi tất cả các key booking hoặc bắt đầu với booking <!-- raw HTML omitted --></li>
+<li><strong>Headers</strong>: Một header exchange sẽ dùng các thuộc tính header của message để định tuyến. Headers Exchange rất giống với Topic Exchange, nhưng nó định tuyến dựa trên các giá trị tiêu đề thay vì các khóa định tuyến.<!-- raw HTML omitted --></li>
+<li><strong>Dead Letter Exchange</strong>: Nếu không tìm thấy hàng đợi phù hợp cho tin nhắn, tin nhắn sẽ tự động bị hủy. RabbitMQ cung cấp một tiện ích mở rộng AMQP được gọi là “Dead Letter Exchange” — Cung cấp chức năng để chụp các tin nhắn không thể gửi được.</li>
+</ul>
+<p><strong>5. Workflow của RabbitMQ ?</strong></p>
+<p><img src="/img/posts/technique/rabbitmq/exchanges-bidings-routing-keys.png" alt="exchanges-bidings-routing-keys."></p>
+<ol>
+<li>Producer đẩy message vào exchange. Khi tạo exchange, phải mô tả nó thuộc loại gì.</li>
+<li>Sau khi exchange nhận message, nó chịu trách nhiệm định tuyến message. Exchange sẽ chịu trách về các thuộc tính của message, ví dụ routing key, phụ thuộc loại exchange.</li>
+<li>Việc binding phải được tạo từ exchange đến hàng đợi. Trong trường hợp như ảnh, ta sẽ có hai binding đến hai hàng đợi khác nhau từ một exchange. Exchange sẽ định tuyến message vào các hàng đợi dựa trên thuộc tính của của từng message.</li>
+<li>Các message nằm ở hàng đợi đến khi chúng được xử lý bởi một consumer.</li>
+<li>Consumer xử lý message.</li>
+</ol>
+<p><strong>6. Thử bắn và nhận msg với rabbitmq (python)</strong></p>
+<ul>
+<li>Tạo một service gởi - sender.py: với queue tên &lsquo;demo&rsquo;, exchange &lsquo;logs&rsquo; đẩy msg đến toàn bộ queue (exchange_type='fanout&rsquo;). Bắn msg với routing_keys='key1&rsquo;, nội dung trong body</li>
+</ul>
+<pre><code class="language-python">import pika
+
+# using CloudAMQP (https://www.cloudamqp.com/)
+CLOUDAMQP_URL = 'amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja'
+
+# establish a connection with RabbitMQ server.
+params = pika.URLParameters(CLOUDAMQP_URL)
+connection = pika.BlockingConnection(params)
+channel = connection.channel()
+
+# create queue with name 'demo'
+channel.queue_declare(queue='demo')
+channel.exchange_declare(exchange='logs', exchange_type='fanout')
+
+# Ready to send a message
+channel.basic_publish(exchange='logs',
+                      routing_key='key1',
+                      body='Hello world!')
+
+print(&quot; Sent message&quot;)
+# close connection
+connection.close()
+</code></pre>
+<ul>
+<li>Service nhận message- receiver.py. Đăng ký nhận msg ở queue &lsquo;demo&rsquo;</li>
+</ul>
+<pre><code class="language-python">import pika
+
+CLOUDAMQP_URL = 'amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja'
+
+# Access the CLODUAMQP_URL environment variable and parse it (fallback to localhost)
+params = pika.URLParameters(CLOUDAMQP_URL)
+connection = pika.BlockingConnection(params)
+channel = connection.channel()  # start a channel
+channel.queue_declare(queue='demo')  # Declare a queue
+
+
+def callback(ch, method, properties, body):
+    print(&quot; [x] Received &quot; + str(body))
+
+
+channel.basic_consume('hello',
+                      callback,
+                      auto_ack=True)
+
+print(' [*] Waiting for messages:')
+channel.start_consuming()
+connection.close()
+
+</code></pre>
+<ul>
+<li><strong>Run</strong></li>
+</ul>
+<pre><code class="language-shell">    $ python sender.py
+    $ python receiver.py
+</code></pre>
+<p><img src="/img/posts/technique/rabbitmq/sender.png" alt="Sender"></p>
+<p><img src="/img/posts/technique/rabbitmq/result.png" alt="Result"></p>
+<p>__References:__<!-- raw HTML omitted -->
+<a href="https://www.cloudamqp.com/blog/2015-05-18-part1-rabbitmq-for-beginners-what-is-rabbitmq.html">RabbitMQ for beginners - What is RabbitMQ?</a> <!-- raw HTML omitted -->
+<a href="https://medium.com/@buihuycuong/nh%E1%BB%AFng-%C4%91i%E1%BB%81u-c%E1%BA%A7n-bi%E1%BA%BFt-v%E1%BB%81-rabbitmq-354a37ecf218">Những điều cần biết về RabbitMQ</a><!-- raw HTML omitted -->
+<a href="https://dodangquan.blogspot.com/2018/10/rabbitmq-va-kafka-phan-1-hai-he-thong-truyen-tin-khac-nhau.html">RabbitMQ và Kafka</a></p>
+
+    </div>
+    
+    <div class="article-footer">
+
+      
+      <div class="fb-comments" data-href="https://www.lhsang.me/blog/technique/RabbitMQ/" data-width="100%" data-numposts="5"></div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://lhsang.me/img/profile.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lhsang" target="_blank"><span class="text-dark">lhsang</span><small class="ml-1x">while(i){ i&#43;&#43;;  }</small></a></h3>
+        <div>Code for Food or Code for Fun?</div>
+      </div>
+    </figure>
+  </div>
+</div>
+    </div>
+    
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://lhsang.me/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/" title="Ngày làm việc ở công ty của một thực tập sinh IT"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://lhsang.me/posts/technique/grpc/"
+                    title="Tìm hiểu gRPC"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="facebook,twitter,linkedin"
+                data-mobile-sites="facebook,twitter,linkedin"></div>
+        </div>
+    </div>
+</nav>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://www.facebook.com/hoangsang135" target="_blank" title="facebook" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-facebook"></i></a></li>
+    <li><a href="https://github.com/lhsang" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy; Sang Le Hoang
+
+
+
+    2020
+    <div class="publishby">
+        Theme by xiaoheiAh
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/powershell.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://lhsang.me/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://lhsang.me/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/lhsang.me\/',
+            CONTENT_URL: 'https:\/\/lhsang.me\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://lhsang.me/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1317935755070864&autoLogAppEvents=1"></script>
+
+  </body>
+</html>
