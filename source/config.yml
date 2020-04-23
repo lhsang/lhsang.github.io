@@ -114,6 +114,7 @@ params:
       links:
         github: https://github.com/lhsang
         facebook: https://www.facebook.com/hoangsang135
+        linkedin: https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/
       link_tooltip: false # enable the social link tooltip, options: true, false
   # Site
   site:

@@ -1,6 +1,6 @@
 ---
 title: "Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?"
-date: 2020-03-04T08:24:17+07:00
+date: 2020-04-03T08:24:17+07:00
 draft: false
 author: "lhsang"
 tags: ["Internship", "Experience"]
