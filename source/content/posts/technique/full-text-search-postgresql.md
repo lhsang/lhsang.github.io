@@ -1,7 +1,7 @@
 ---
 title: "Full-Text Search trong PostgreSQL"
 date: 2020-04-23T10:30:58+07:00
-draft: true
+draft: false
 author: "lhsang"
 tags: ["Technique", "PostgreSQL"]
 categories: ["Kỹ thuật"]
