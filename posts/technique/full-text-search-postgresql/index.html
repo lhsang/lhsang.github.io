@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Full-Text Search trong PostgreSQL - Sang Le Hoang
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
+  <meta name="generator" content="Hugo 0.69.1 with theme pure" />
+  <title>Full-Text Search trong PostgreSQL - Sang Le Hoang</title>
+  
+  
+  <link rel="stylesheet" href="https://www.lhsang.me/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="Full-Text Search trong PostgreSQL" />
+<meta property="og:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" />
+<meta property="article:published_time" content="2020-04-23T10:30:58+07:00" />
+<meta property="article:modified_time" content="2020-04-23T10:30:58+07:00" />
+<meta itemprop="name" content="Full-Text Search trong PostgreSQL">
+<meta itemprop="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.">
+<meta itemprop="datePublished" content="2020-04-23T10:30:58&#43;07:00" />
+<meta itemprop="dateModified" content="2020-04-23T10:30:58&#43;07:00" />
+<meta itemprop="wordCount" content="2244">
+
+
+
+<meta itemprop="keywords" content="Technique,PostgreSQL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Full-Text Search trong PostgreSQL"/>
+<meta name="twitter:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/lhsang" target="_blank">
+            <img class="img-circle img-rotate" src="https://www.lhsang.me/img/profile.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Ho Chi Minh, Viet Nam</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-resume">
+                <a href="/r%C3%A9sume/">
+                    <i class="icon icon-profile"></i>
+                  <span class="menu-title">Résume</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Categories</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">4</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/experience/" class="tag-list-link">experience</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/http/" class="tag-list-link">http</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/internship/" class="tag-list-link">internship</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/interview/" class="tag-list-link">interview</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/message-broker/" class="tag-list-link">message-broker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/nginx/" class="tag-list-link">nginx</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/postgresql/" class="tag-list-link">postgresql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/rpc/" class="tag-list-link">rpc</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/technique/" class="tag-list-link">technique</a><span
+                    class="tag-list-count">4</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/technique/grpc/" class="title">Tìm hiểu gRPC</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/full-text-search-postgresql/"
+    >Full-Text Search trong PostgreSQL</a
+  >
+</h1>
+
+            
+      
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" class="article-date">
+  <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/postgresql/"> PostgreSQL </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/full-text-search-postgresql/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2244words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 11minutes </span>
+      </div>
+      
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p><img src="/img/posts/technique/postgresql/search.png" alt="full text search"></p>
+<h3 id="giới-thiệu-về-full-text-search">Giới thiệu về Full-Text Search</h3>
+<p>Có lẽ chúng ta đều biết và  sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh <strong>LIKE</strong> của SQL.</p>
+<pre><code class="language-sql">SELECT column_name(s)
+FROM table_name
+WHERE column_name LIKE pattern;
+</code></pre>
+<p>Sử dụng <strong>LIKE</strong>, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta
+matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.</p>
+<p>Một giải pháp tìm kiếm đầy đủ, nhanh hơn và linh hoạt hơn đó là Full-text search.
+<strong>Full-text search (FTS)</strong> là một kỹ thuật tìm kiếm kết quả trên cơ sở dữ liệu chứa &ldquo;toàn bộ&rdquo; các kí tự (text) của một hoặc một số tài liệu, bài báo,&hellip;(document), hoặc là của website.</p>
+<h3 id="full-text-search-trong-postgresql">Full-text search trong PostgreSQL</h3>
+<p>PostgreSQL (thời điểm viết bài latest released version là <strong>12.2</strong>) có các toán tử ~, ~*, LIKE, ILIKE để tìm kiếm cho kiểu dữ liệu văn bản, tuy nhiên như đề cập ở trên thì các phương pháp này chó ra kết quả
+không như mong đợi và thời gian query lâu.</p>
+<p>FTS trong postgreql xuất phát từ ý tưởng <strong>tiền xử lý (preprocess)</strong> document ở thời điểm index để tiết kiệm thời gian cho sau này query (cho quá trình tìm kiếm). Tiền xử lý sẽ bao gồm:</p>
+<ul>
+<li><strong>Parsing document to lexemes:</strong> rất hữu ích để phân biệt các loại lexemes (từ vựng) vì các loại lexemes khác nhau có thể được xử lý khác nhau, ví dụ: chữ số, chữ, từ phức, địa chỉ email,&hellip;</li>
+<li><strong>Apply các quy tắc ngôn ngữ</strong> để chuẩn hóa lexeme thành dạng nguyên mẫu, ví dụ: see, saw, seen đều đưa về dạng nguyên mẫu là see để lưu trữ. Stopword - những từ phổ biến, xuất hiện hầu hết trong mỗi document,
+tuy nhiên không thể phân biệt được gì từ chúng, nên postgresql cũng có các bộ từ điển và tự động loại bỏ stopword trước khi lưu.</li>
+</ul>
+<pre><code class="language-sql">SELECT to_tsvector('english','in the list of stop words'); -- english: dùng bộ từ điển tiếng anh (default english)
+----------------------------
+ 'list':3 'stop':5 'word':6
+</code></pre>
+<ul>
+<li><strong>Store document</strong> đã tiền xử lý theo một cách tối ưu để tìm kiếm nhanh hơn. Ví dụ biểu diễn tài liệu dưới dạng một mảng các từ vựng được sắp xếp. Lưu trữ vị ví xuất hiện, tần suất xuất hiện nhằm để xếp hạng (Ranking).</li>
+</ul>
+<p>PostgreSQL là một cơ sở dữ liệu có thể mở rộng, nên nó có thêm datatype mới là <strong>tsvector</strong> dùng cho tiền xử lý và lưu tài liệu, <strong>tsquery</strong> dùng để query. Và thêm operator <strong>@@</strong> được defined cho datatype này. Và đương nhiên FTS cũng có thể
+được tăng tốc khi đánh index.</p>
+<h3 id="text-search-functions">Text search functions</h3>
+<h4 id="1-parsing-documents--tsvector">1. Parsing documents:  tsvector</h4>
+<blockquote>
+<p>to_tsvector([ config regconfig, ] document text)</p>
+</blockquote>
+<p>tsvector là một kiểu dữ liệu dạng document được dùng để tối ưu hóa full text search. chuỗi được phân tách và sắp xếp lại theo thứ tự từ điển, các từ trùng lặp chỉ lưu trữ một lần, đồng thời hàm có sử dụng dictionary (english - default) để loại bỏ những từ ngữ không quan trọng (mạo từ, tobe, &hellip;)
+và chuyển về dạng nguyên mẫu để lưu trữ tiện cho việc tìm kiếm. Kèm theo đó là vị trí xuất hiện trong câu.</p>
+<pre><code class="language-sql">SELECT to_tsvector('english', 'A task was canceled.');
+-----------------------
+ 'cancel':4 'task':2
+</code></pre>
+<p>Ví dụ trên chúng ta thấy câu được tác thành các từ riêng biệt, được sắp xếp theo thứ tự từ điển, kèm theo đó là vị trí xuất hiện trong câu và các dấu câu, stopword bị lọai bỏ (theo từ điển tiếng anh).</p>
+<h4 id="2-parsing-queries-tsquery">2. Parsing queries: tsquery</h4>
+<blockquote>
+<p>to_tsquery([ config regconfig, ] querytext text)</p>
+</blockquote>
+<p>tsquery là một kiểu dữ liệu cho các truy vấn văn bản với sự hỗ trợ của toán tử boolean: &amp; (and), | (or). Tsquery bao gồm các lexemes(từ vựng) và các toán tử boolean ở giữa.</p>
+<pre><code class="language-sql">SELECT plainto_tsquery('english', 'The Fat Rats');
+-----------------
+ 'fat' &amp; 'rat'
+
+SELECT to_tsquery('english', 'The &amp; Fat &amp; Rats');
+---------------
+ 'fat' &amp; 'rat'
+
+SELECT to_tsquery('english', 'The &amp; Fat | Rats');
+---------------
+ 'fat' | 'rat'
+</code></pre>
+<h4 id="3-một-số-hàm-khác">3. Một số hàm khác.</h4>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Return Type</th>
+<th>Description</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>array_to_tsvector(text[])</td>
+<td>tsvector</td>
+<td>convert mảng lexemes thành tsvector</td>
+<td>array_to_tsvector('{fat,cat,rat}'::text[])</td>
+<td>&lsquo;cat&rsquo; &lsquo;fat&rsquo; &lsquo;rat&rsquo;</td>
+</tr>
+<tr>
+<td>plainto_tsquery([ config regconfig , ] query text)</td>
+<td>tsquery</td>
+<td>hàm tsquery bỏ qua dấu câu</td>
+<td>plainto_tsquery(&lsquo;english&rsquo;, &lsquo;The Fat Rats&rsquo;)</td>
+<td>&lsquo;fat&rsquo; &amp; &lsquo;rat&rsquo;</td>
+</tr>
+<tr>
+<td>setweight(vector tsvector, weight &ldquo;char&rdquo;)</td>
+<td>tsvector</td>
+<td>assign weight cho các phần tử trong vector</td>
+<td>setweight(&lsquo;fat:2,4 cat:3 rat:5B&rsquo;::tsvector, &lsquo;A&rsquo;)</td>
+<td>&lsquo;cat&rsquo;:3A &lsquo;fat&rsquo;:2A,4A &lsquo;rat&rsquo;:5A</td>
+</tr>
+<tr>
+<td>get_current_ts_config()</td>
+<td>regconfig</td>
+<td>get config măc định</td>
+<td>get_current_ts_config()</td>
+<td>english</td>
+</tr>
+<tr>
+<td>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ])</td>
+<td>float4</td>
+<td>tính điểm ranking</td>
+<td>ts_rank(textsearch, query)</td>
+<td>0.818</td>
+</tr>
+<tr>
+<td>&hellip;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Mình chỉ đề cập vài hàm hay dùng, để tìm hiểu nhiều hơn mời các bạn đọc tiếp tại <a href="https://www.postgresql.org/docs/9.6/functions-textsearch.html">trang chủ postgres</a></p>
+<h3 id="fts-operator">FTS operator</h3>
+<ul>
+<li>Full text search trong postgresql sử dụng toán tử @@ cho 2 loại dữ liệu tsvector và tsquery. FTS operator còn hỗ trợ các kiểu dữ liệu như text và varchar cho phép setup full-text search đơn giản (nhưng không hỗ trợ ranking).</li>
+</ul>
+<blockquote>
+<p>tsvector @@ tsquery</p>
+</blockquote>
+<blockquote>
+<p>tsquery @@ tsvector</p>
+</blockquote>
+<blockquote>
+<p>text|varchar @@ text|tsquery</p>
+</blockquote>
+<p>Toán tử @@ return <strong>TRUE</strong>  nếu tsvector chứa tsquery.</p>
+<pre><code class="language-sql">SELECT to_tsvector('a fat  cat sat on a mat - it ate a fat rats') @@ to_tsquery('The &amp; Fat &amp; Rats');
+-------
+t
+
+SELECT to_tsvector('a fat  cat sat on a mat - it ate a fat rats') @@ to_tsquery('The &amp; Fat &amp; Dogs');
+--------
+f
+
+SELECT 'a fat  cat sat on a mat - it ate a fat rats' @@ to_tsquery('The &amp; Fat &amp; rat');
+-------
+t
+
+SELECT 'a fat  cat sat on a mat - it ate a fat rats' @@ 'The &amp; Fat &amp; rat';
+-------
+t
+
+</code></pre>
+<ul>
+<li>Toán tử || để nối 2 vector.</li>
+</ul>
+<pre><code class="language-sql">SELECT to_tsvector('xin chao') || to_tsvector('hello world')
+---------------
+ 'chao':2 'hello':3 'world':4 'xin':1
+</code></pre>
+<ul>
+<li>Các toán tử khác (<a href="https://www.postgresql.org/docs/9.6/functions-textsearch.html">Nguồn: Text Search Functions and Operators</a>)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Return Type</th>
+<th>Description</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@@</td>
+<td>boolean</td>
+<td>tsvector matches tsquery ?</td>
+<td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
+<td>t</td>
+</tr>
+<tr>
+<td>@@@</td>
+<td>boolean</td>
+<td>deprecated synonym for @@</td>
+<td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
+<td>t</td>
+</tr>
+<tr>
+<td>||</td>
+<td>tsvector</td>
+<td>concatenate tsvectors</td>
+<td>&lsquo;a:1 b:2&rsquo;::tsvector || &lsquo;c:1 d:2 b:3&rsquo;::tsvector</td>
+<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &lsquo;d&rsquo;:4</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>tsquery</td>
+<td>AND tsquerys together</td>
+<td>&lsquo;fat | rat&rsquo;::tsquery &amp;&amp; &lsquo;cat&rsquo;::tsquery</td>
+<td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) &amp; &lsquo;cat&rsquo;</td>
+</tr>
+<tr>
+<td>||</td>
+<td>tsquery</td>
+<td>OR tsquerys together</td>
+<td>&lsquo;fat | rat&rsquo;::tsquery || &lsquo;cat&rsquo;::tsquery</td>
+<td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) | &lsquo;cat&rsquo;</td>
+</tr>
+<tr>
+<td>!!</td>
+<td>tsquery</td>
+<td>negate a tsquery</td>
+<td>!! &lsquo;cat&rsquo;::tsquery</td>
+<td>!&lsquo;cat&rsquo;</td>
+</tr>
+<tr>
+<td>&lt;-&gt;</td>
+<td>tsquery</td>
+<td>tsquery followed by tsquery</td>
+<td>to_tsquery(&lsquo;fat&rsquo;) &lt;-&gt; to_tsquery(&lsquo;rat&rsquo;)</td>
+<td>&lsquo;fat&rsquo; &lt;-&gt; &lsquo;rat&rsquo;</td>
+</tr>
+<tr>
+<td>@&gt;</td>
+<td>boolean</td>
+<td>tsquery contains another ?</td>
+<td>&lsquo;cat&rsquo;::tsquery @&gt; &lsquo;cat &amp; rat&rsquo;::tsquery</td>
+<td>f</td>
+</tr>
+<tr>
+<td>&lt;@</td>
+<td>boolean</td>
+<td>tsquery is contained in ?</td>
+<td>&lsquo;cat&rsquo;::tsquery &lt;@ &lsquo;cat &amp; rat&rsquo;::tsquery</td>
+<td>t</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ranking-search-results">Ranking search results</h3>
+<p>Ranking nhằm mục đích đo lường mức độ phù hợp của document đối với một query cụ thể. Postgres cung cấp 2 hàm ranking:</p>
+<ul>
+<li>Ranking dựa trên tần số của các từ được match</li>
+</ul>
+<blockquote>
+<p>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p>
+</blockquote>
+<ul>
+<li>Cũng tương tự như <em>ts_rank</em> tuy nhiên hàm còn tính theo mật độ bao phủ của input trong document</li>
+</ul>
+<blockquote>
+<p>ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p>
+</blockquote>
+<p><strong>Ví dụ:</strong></p>
+<pre><code class="language-sql">SELECT ts_rank( to_tsvector('name lastname name lastname'), to_tsquery('name &amp; lastname')); 
+---
+ts_rank: 0,3400053*
+
+SELECT ts_rank_cd( to_tsvector('name lastname name lastname'), to_tsquery('name &amp; lastname'));
+---
+ts_rank_cd: 0,3
+
+SELECT ts_rank_cd( to_tsvector('name lastname abc xyz name lastname'), to_tsquery('name &amp; lastname'));
+---
+ts_rank_cd: 0,233*
+</code></pre>
+<ul>
+<li>Cả 2 hàm trên đều, tham số <strong>weights</strong> là optional, các nhãn</li>
+</ul>
+<blockquote>
+<p>{D-weight, C-weight, B-weight, A-weight}</p>
+</blockquote>
+<p>nếu không chỉ định tham số weights thì trọng số mặc định là:</p>
+<blockquote>
+<p>{0.1, 0.2, 0.4, 1.0}</p>
+</blockquote>
+<h3 id="indexes">Indexes</h3>
+<p>Có 2 loại index có thể dùng để tăng tốc full-text search trong postgres là: <strong>GIN</strong> và <strong>GIST</strong></p>
+<ul>
+<li>
+<p><strong>Gin (Generalized Inverted Indexes)</strong> Loại index này sẽ hữu ích khi một chỉ mục phải ánh xạ tới nhiều giá trị trong cùng một bản ghi,
+trong khi đó <strong>B-Tree</strong> lại chỉ được tối ưu hóa nếu như một bản ghi chỉ có một giá trị khóa duy nhất.
+Chỉ mục GIN cũng rất hữu ích trong việc đánh chỉ mục các giá trị là mảng, hoặc khi phải thực hiện các truy vấn là full-text search.</p>
+</li>
+<li>
+<p><strong>GiST - Generalized Search Tree</strong>: Loại index này cho phép bạn xây dựng cấu trúc cây cân bằng chung, và có thể được sử dụng cho nhiều loại so sánh ngoài hai loại so sánh bằng và so sánh phạm vi.
+Chỉ mục này cũng được sử dụng để đánh chỉ mục cho các kiểu dữ liệu hình học, cũng như thực hiện full-text search.</p>
+</li>
+</ul>
+<p>Vậy chọn GIN hay GiST để dùng?</p>
+<ul>
+<li>GIN tốn thời gian đánh index lâu hơn tuy nhiên lại tìm kiếm nhanh hơn GiST (3 lần)</li>
+<li>GIN update cũng lâu hơn (vừa phải) so với GiST, tuy nhiên sẽ lâu hơn tầm 10 lần nếu vô hiệu hóa fast-update.</li>
+<li>Chi phí về không gian của GIN cũng lớn hơn 2-3 lần so với GiST</li>
+</ul>
+<blockquote>
+<p>Bạn có thể bỏ qua phần phân tích sau nếu thấy bài đã đủ dài và đủ rối :))</p>
+</blockquote>
+<p><strong>Phân tích một chút về BTree và GIN index:</strong></p>
+<p><img src="/img/posts/technique/postgresql/btree-768x727.png" alt="B-Tree implement"></p>
+<p>Trên là B-Tree index (thực ra BTree cũng có 2 loại là B-Tree và B+Tree nhưng ở đây mình giả sử B-Tree có trúc như vậy). Index bao gồm các trang, mỗi trang bao gồm nhiều index tuple và free space.
+Index tuple là cấu trúc bao gồm:</p>
+<ul>
+<li><strong>key datum</strong>: gía trị của cột được đánh index (column). Trên một trang lá (leaf page), key datum chính là con trỏ tham chiếu đến heap tuple (table row).
+Còn các page ở trong thì datatum là con trỏ chỉ đến các cây con được tham chiếu.</li>
+<li><strong>tuple identifier (TID</strong>) - hay còn gọi là <strong>item pointer</strong>: thông tin về địa chỉ vật lý (địa chỉ trên disk) của index tuple hoặc heap tuple được tham chiếu (mỗi row chỉ tham chiếu chính xác bởi một TID)</li>
+</ul>
+<p>Mỗi row của table (table đánh index) đều phải được insert một tuple index vào cây, ngay cả khi một row khác có cùng giá trị khóa (key) đã tồn tại trên đó.
+Việc insert như vậy sẽ gây ra sự phân tách trang (số lượng entry trong 1 page đầy), ảnh hưởng đến trang khác và chiều cao của cây.</p>
+<p><strong>GIN index</strong></p>
+<p>Cấu trúc các trang trong (internal pages) của GIN và B-tree không có gì khác biệt. Điều làm khác biệt giữa chúng là các trang lá (leaf pages).
+Tùy thuộc vào số lượng entries có cùng key thì GIN sẽ có cơ chế:</p>
+<ul>
+<li><strong>Posting list:</strong> nếu số lượng row có cùng key còn ít, thì leaf page là một trang chứa posting list.</li>
+</ul>
+<p><img src="/img/posts/technique/postgresql/gin-768x351.png" alt="Posting list"></p>
+<p>Key bây giờ là duy nhất trên leaf page. Index tuple sẽ không trỏ trực tiếp đến các rows tương ứng mà sẽ trỏ đến một posting list là danh sách chứa các con trỏ (TIDs)
+cho tất cả các row có chứa giá trị tương ứng. Khi insert một row mới mà đã có key entry  trên cây thì nó chỉ cần tìm đến entry và thêm TID của row mới vào posting list,
+làm như vậy sẽ không chia trang trên cây nữa.
+Chú ý rằng các items trong posting list sẽ được sắp xếp tăng dần theo TID.</p>
+<ul>
+<li><strong>Posting tree:</strong></li>
+</ul>
+<p>Tuy đã lưu dạng entry tuple, nhưng khi có quá nhiều row cùng giá trị (entry tuple nhiều trong 1 trang) thì cây riêng lại được tạo ra để chứa các TIDs - cây này gọi là posting tree.</p>
+<p><img src="/img/posts/technique/postgresql/gin_ptree-768x492.png" alt="Posting tree"></p>
+<p>Posting tree cũng là một cấu trúc B-Tree riêng biệt được lưu trữ trên các trang của GIN index, trong trường hợp này TID của row sẽ được dùng làm key (TID vẫn được sắp xếp như trên posting list).</p>
+<p>Có nhiều posting tree trong một GIN index, mỗi cây đại diện cho một giá trị (key) cụ thể. Và một row trong table có thể được tham chiếu bởi nhiều TID được lưu ở các posting list/tree khác nhau.</p>
+<h3 id="áp-dụng-vào-một-dự-án-thực-tế-sẽ-như-thế-nào">Áp dụng vào một dự án thực tế sẽ như thế nào?</h3>
+<ul>
+<li>Cách mình thường hay dùng FTS này là mình sẽ tạo một column để chứa giá trị tsvector (đánh trọng số nếu cần) và đánh index trên nó.
+Sau đó tạo trigger để cập nhật field khi INSERT và UPDATE. Sau đó mọi thứ mình chỉ cần query trên column này một cách nhanh chóng.</li>
+</ul>
+<h3 id="postgresqls-full-text-search-so-với-một-số-giải-pháp-khác">PostgreSQL&rsquo;s full text search so với một số giải pháp khác</h3>
+<p>Tùy vào nhu cầu tìm kiếm, resources mà chúng ta có những lựa chọn như <strong>Elastic</strong>, <strong>Algolia</strong> hay <strong>full text search của postgresql</strong>.
+Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình thường dùng Full text search trong postgresql hơn vì:</p>
+<ul>
+<li>Không cần đến phần mềm hay thư viện nào khác.</li>
+<li>Không cần thêm server riêng cho module tìm kiếm.</li>
+<li>Dùng chính database sử dụng cho application để query tìm kiếm. Nên sẽ dễ kiểm soát và không cần quan tâm đến vấn đề đồng bộ so với giải pháp như Elastic.</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.postgresql.org/docs/9.5/textsearch.html">Chapter 12. Full Text Search</a></li>
+<li><a href="http://www.sai.msu.su/~megera/postgres/fts/fts.pdf">Full-Text Search in PostgreSQL</a></li>
+<li><a href="https://www.cybertec-postgresql.com/en/gin-just-an-index-type/">GIN – JUST A KIND OF INDEX</a></li>
+<li><a href="https://blog.lateral.io/2015/05/full-text-search-in-milliseconds-with-postgresql/">Full text search in milliseconds with PostgreSQL</a></li>
+<li><a href="https://viblo.asia/p/full-text-search-trong-postgresql-phan-1-DZrGNNMVGVB">Full-Text Search trong PostgreSQL - Phần 1</a></li>
+<li><a href="https://www.postgresql.org/docs/current/contrib.html">Additional Supplied Modules</a></li>
+</ul>
+
+    </div>
+    
+    <div class="article-footer">
+
+      
+      <div class="fb-comments" data-href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" data-width="100%" data-numposts="5"></div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.lhsang.me/img/profile.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lhsang" target="_blank"><span class="text-dark">lhsang</span><small class="ml-1x">while(i){ i&#43;&#43;;  }</small></a></h3>
+        <div>Code for Food or Code for Fun?</div>
+      </div>
+    </figure>
+  </div>
+</div>
+    </div>
+    
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.lhsang.me/about/" title="About"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="facebook,twitter,linkedin"
+                data-mobile-sites="facebook,twitter,linkedin"></div>
+        </div>
+    </div>
+</nav>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://www.facebook.com/hoangsang135" target="_blank" title="facebook" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-facebook"></i></a></li>
+    <li><a href="https://github.com/lhsang" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/" target="_blank" title="linkedin" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-linkedin"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy; Sang Le Hoang
+
+
+
+    2020
+    <div class="publishby">
+        Theme by xiaoheiAh
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/powershell.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.lhsang.me/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://www.lhsang.me/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/www.lhsang.me\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.me\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.lhsang.me/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1317935755070864&autoLogAppEvents=1"></script>
+
+  </body>
+</html>

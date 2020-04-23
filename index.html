@@ -143,7 +143,7 @@
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">4</span></li>
             <li class="category-list-item"><a href="https://www.lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
         </ul>
     </div>
@@ -178,6 +178,10 @@
                     class="tag-list-count">1</span></li>
             
             
+            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/postgresql/" class="tag-list-link">postgresql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
             <li class="tag-list-item"><a href="https://www.lhsang.me/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
                     class="tag-list-count">1</span></li>
             
@@ -187,7 +191,7 @@
             
             
             <li class="tag-list-item"><a href="https://www.lhsang.me/tags/technique/" class="tag-list-link">technique</a><span
-                    class="tag-list-count">3</span></li>
+                    class="tag-list-count">4</span></li>
             
         </ul>
 
@@ -198,6 +202,16 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget-body">
         <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
+                    </p>
+                </div>
+            </li>
             <li>
                 <div class="item-inner">
                     <p class="item-title">
@@ -238,16 +252,6 @@
                     </p>
                 </div>
             </li>
-            <li>
-                <div class="item-inner">
-                    <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/technique/rabbitmq/" class="title">RabbitMQ - Demo with python</a>
-                    </p>
-                    <p class="item-date">
-                        <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
-                    </p>
-                </div>
-            </li>
         </ul>
     </div>
 </div>
@@ -263,6 +267,47 @@
     
     
     
+    <article
+      class="article article-type-page"
+      itemscope
+      itemtype="http://schema.org/BlogPosting"
+    >
+      <div class="article-header">
+        <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/full-text-search-postgresql/"
+    >Full-Text Search trong PostgreSQL</a
+  >
+</h1>
+
+      </div>
+      <div class="article-entry text-muted" itemprop="description">
+        Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.
+      </div>
+      <p class="article-meta">
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" class="">
+  <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/postgresql/"> PostgreSQL </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/full-text-search-postgresql/#comments" class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2244words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 11minutes </span>
+      </p>
+    </article>
     <article
       class="article article-type-page"
       itemscope
@@ -423,49 +468,6 @@
         <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/grpc/#comments" class="article-comment-link">Comments</a></span>
 		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 902words</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5minutes </span>
-      </p>
-    </article>
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/technique/rabbitmq/"
-    >RabbitMQ - Demo with python</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        1. Message-boker ?
- Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
-  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.me/posts/technique/rabbitmq/" class="">
-  <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
-    <a class="article-tag-link" href="/tags/message-broker/"> Message broker </a>
-    <a class="article-tag-link" href="/tags/rabbitmq/"> RabbitMQ </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/rabbitmq/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1208words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6minutes </span>
       </p>
     </article></div>
   

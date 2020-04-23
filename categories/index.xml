@@ -5,10 +5,20 @@
     <link>https://www.lhsang.me/categories/</link>
     <description>Recent content in Categories on Sang Le Hoang</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 03 Apr 2020 08:24:17 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 10:30:58 +0700</lastBuildDate>
     
         <atom:link href="https://www.lhsang.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Full-Text Search trong PostgreSQL</title>
+      <link>https://www.lhsang.me/posts/technique/full-text-search-postgresql/</link>
+      <pubDate>Thu, 23 Apr 2020 10:30:58 +0700</pubDate>
+      
+      <guid>https://www.lhsang.me/posts/technique/full-text-search-postgresql/</guid>
+      <description>Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.</description>
+    </item>
     
     <item>
       <title>About</title>
