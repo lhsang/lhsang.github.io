@@ -1,2 +1,2 @@
 # lhsang.github.io
-M
+My blog
