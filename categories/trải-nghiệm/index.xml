@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Trải nghiệm on Sang Le Hoang</title>
-    <link>https://www.lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</link>
+    <link>https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</link>
     <description>Recent content in Trải nghiệm on Sang Le Hoang</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 03 Apr 2020 08:24:17 +0700</lastBuildDate>
     
-        <atom:link href="https://www.lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Full-Text Search trong PostgreSQL</title>
-      <link>https://www.lhsang.me/posts/technique/full-text-search-postgresql/</link>
+      <link>https://www.lhsang.dev/posts/technique/full-text-search-postgresql/</link>
       <pubDate>Thu, 23 Apr 2020 10:30:58 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/technique/full-text-search-postgresql/</guid>
+      <guid>https://www.lhsang.dev/posts/technique/full-text-search-postgresql/</guid>
       <description>Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
 SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://www.lhsang.me/about/</link>
+      <link>https://www.lhsang.dev/about/</link>
       <pubDate>Fri, 17 Apr 2020 19:12:40 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/about/</guid>
+      <guid>https://www.lhsang.dev/about/</guid>
       <description>Hello, World!
 Xin chào, mình là Sang. Hiện tại (1-1-2020) đang sinh viên năm cuối của khoa công nghệ thông tin trường ĐH Khoa Học Tự Nhiên TP HCM.
 Hiện tại chuyên môn của mình là Software engineering, một ít kinh nghiệm, một chút kiến thức và phân tích suy luận theo góc nhìn cá nhân mình với mong muốn chia sẻ được gì cho bạn và củng cố được kiến thức cho mình.</description>
@@ -33,47 +33,47 @@ Hiện tại chuyên môn của mình là Software engineering, một ít kinh n
     
     <item>
       <title>Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</title>
-      <link>https://www.lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</link>
+      <link>https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</link>
       <pubDate>Fri, 03 Apr 2020 08:24:17 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</guid>
+      <guid>https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</guid>
       <description>Từ ghế học đường bước vào môi trường doanh nghiệp là một sự thay đổi không hề nhẹ về thói quen, cách làm việc và kể cả kiến thức mình đã được học. Những thứ trong trường chỉ là những thứ rất cơ bản, chưa đủ đáp ứng cho công việc công ty. Mặc dù làm một trang web, mobile application hay một desktop application hoàn chỉnh thì mình cũng đủ sức để làm ra, nhưng vấn đề tại sao vẫn chưa đáp ứng được cho môi trường doanh nghiệp?</description>
     </item>
     
     <item>
       <title>Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</title>
-      <link>https://www.lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/</link>
+      <link>https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/</link>
       <pubDate>Fri, 21 Feb 2020 08:20:30 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/</guid>
+      <guid>https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/</guid>
       <description>Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn.</description>
     </item>
     
     <item>
       <title>Nginx là gì ? Demo load balancing với nginx</title>
-      <link>https://www.lhsang.me/posts/technique/nginx/</link>
+      <link>https://www.lhsang.dev/posts/technique/nginx/</link>
       <pubDate>Mon, 17 Feb 2020 21:18:58 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/technique/nginx/</guid>
+      <guid>https://www.lhsang.dev/posts/technique/nginx/</guid>
       <description>1. What is Nginx?  Nginx ban đầu được tạo ra như một máy chủ web để giải quyết vấn đề C10k (là một vấn đề liên quan đến vấn đề hiệu suất xử lý 10.000 kết nối cùng lúc), nhưng bây giờ với các tính năng mở rộng Nginx cũng được sử dụng phổ biến như một máy chủ proxy (reverse proxy server), HTTP cache hoặc dùng làm cân bằng tải (load balancer).</description>
     </item>
     
     <item>
       <title>Tìm hiểu gRPC</title>
-      <link>https://www.lhsang.me/posts/technique/grpc/</link>
+      <link>https://www.lhsang.dev/posts/technique/grpc/</link>
       <pubDate>Sat, 15 Feb 2020 08:40:50 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/technique/grpc/</guid>
+      <guid>https://www.lhsang.dev/posts/technique/grpc/</guid>
       <description>gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
   gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice.</description>
     </item>
     
     <item>
       <title>RabbitMQ - Demo with python</title>
-      <link>https://www.lhsang.me/posts/technique/rabbitmq/</link>
+      <link>https://www.lhsang.dev/posts/technique/rabbitmq/</link>
       <pubDate>Sat, 08 Feb 2020 08:31:11 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/technique/rabbitmq/</guid>
+      <guid>https://www.lhsang.dev/posts/technique/rabbitmq/</guid>
       <description>1. Message-boker ?
  Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
   RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).</description>
@@ -81,19 +81,19 @@ Hiện tại chuyên môn của mình là Software engineering, một ít kinh n
     
     <item>
       <title>Ngày làm việc ở công ty của một thực tập sinh IT</title>
-      <link>https://www.lhsang.me/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</link>
+      <link>https://www.lhsang.dev/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</link>
       <pubDate>Wed, 08 Jan 2020 08:13:19 +0700</pubDate>
       
-      <guid>https://www.lhsang.me/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</guid>
+      <guid>https://www.lhsang.dev/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</guid>
       <description>Từ một thằng sinh viên (năm 4) chỉ biết ăn chơi và học, bước ra ngưỡng cửa của xã hội để làm quen, học hỏi và kiếm tiền thì không tránh khỏi những thay đổi về thói quen, công việc,&amp;hellip; Có thể nói đây là lần đầu mình đi thực tập và đi kiếm tiền của thời sinh viên (trước đó có tham gia một startup tuy nhiên sẽ kể ở một câu chuyện khác), vì vậy mình sẽ kể về một ngày làm việc của mình - thực tập sinh công nghệ thông tin, cụ thể là python backend developer tại Teko Viet Nam.</description>
     </item>
     
     <item>
       <title>Résume</title>
-      <link>https://www.lhsang.me/r%C3%A9sume/</link>
+      <link>https://www.lhsang.dev/r%C3%A9sume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://www.lhsang.me/r%C3%A9sume/</guid>
+      <guid>https://www.lhsang.dev/r%C3%A9sume/</guid>
       <description></description>
     </item>
     

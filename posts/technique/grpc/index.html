@@ -25,11 +25,11 @@
   
   <meta name="description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
   gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
-  <meta name="generator" content="Hugo 0.69.1 with theme pure" />
+  <meta name="generator" content="Hugo 0.70.0 with theme pure" />
   <title>Tìm hiểu gRPC - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.me/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
@@ -37,7 +37,7 @@
 <meta property="og:description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
   gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.me/posts/technique/grpc/" />
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/grpc/" />
 <meta property="article:published_time" content="2020-02-15T08:40:50+07:00" />
 <meta property="article:modified_time" content="2020-02-15T08:40:50+07:00" />
 <meta itemprop="name" content="Tìm hiểu gRPC">
@@ -74,7 +74,7 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/lhsang" target="_blank">
-            <img class="img-circle img-rotate" src="https://www.lhsang.me/img/profile.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://www.lhsang.dev/img/profile.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
@@ -155,8 +155,8 @@
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.me/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">4</span></li>
-            <li class="category-list-item"><a href="https://www.lhsang.me/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">4</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
         </ul>
     </div>
 </div>
@@ -166,43 +166,43 @@
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/experience/" class="tag-list-link">experience</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/experience/" class="tag-list-link">experience</a><span
                     class="tag-list-count">3</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/http/" class="tag-list-link">http</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/http/" class="tag-list-link">http</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/internship/" class="tag-list-link">internship</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/internship/" class="tag-list-link">internship</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/interview/" class="tag-list-link">interview</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/interview/" class="tag-list-link">interview</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/message-broker/" class="tag-list-link">message-broker</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/message-broker/" class="tag-list-link">message-broker</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/nginx/" class="tag-list-link">nginx</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/postgresql/" class="tag-list-link">postgresql</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/postgresql/" class="tag-list-link">postgresql</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/rpc/" class="tag-list-link">rpc</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rpc/" class="tag-list-link">rpc</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.me/tags/technique/" class="tag-list-link">technique</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
                     class="tag-list-count">4</span></li>
             
         </ul>
@@ -217,7 +217,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                        <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
@@ -227,7 +227,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
@@ -237,7 +237,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
@@ -247,7 +247,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
@@ -257,7 +257,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.me/posts/technique/grpc/" class="title">Tìm hiểu gRPC</a>
+                        <a href="https://www.lhsang.dev/posts/technique/grpc/" class="title">Tìm hiểu gRPC</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
@@ -299,7 +299,7 @@
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.me/posts/technique/grpc/" class="article-date">
+<a href="https://www.lhsang.dev/posts/technique/grpc/" class="article-date">
   <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
 </a>
 </span>
@@ -431,7 +431,7 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://www.lhsang.me/img/profile.jpg" class="img-rounded w-full" alt="">
+          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -451,12 +451,12 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.lhsang.me/posts/technique/rabbitmq/" title="RabbitMQ - Demo with python"><i
+                <a href="https://www.lhsang.dev/posts/technique/rabbitmq/" title="RabbitMQ - Demo with python"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
             </li>
             <li class="next">
-                <a href="https://www.lhsang.me/posts/technique/nginx/"
+                <a href="https://www.lhsang.dev/posts/technique/nginx/"
                     title="Nginx là gì ? Demo load balancing với nginx"><span>Newer&nbsp;&nbsp;</span><i
                         class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
@@ -525,8 +525,8 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.me/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
-<script src="https://www.lhsang.me/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+<script src="https://www.lhsang.dev/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://www.lhsang.dev/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
 
 <script>
     (function (window) {
@@ -538,13 +538,13 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            ROOT_URL: 'https:\/\/www.lhsang.me\/',
-            CONTENT_URL: 'https:\/\/www.lhsang.me\/\/searchindex.json ',
+            ROOT_URL: 'https:\/\/www.lhsang.dev\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.dev\/\/searchindex.json ',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.me/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({
