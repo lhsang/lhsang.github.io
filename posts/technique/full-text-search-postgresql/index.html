@@ -25,7 +25,7 @@
   
   <meta name="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
 SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
-  <meta name="generator" content="Hugo 0.70.0 with theme pure" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
   <title>Full-Text Search trong PostgreSQL - Sang Le Hoang</title>
   
   
@@ -43,13 +43,14 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụ
 <meta itemprop="name" content="Full-Text Search trong PostgreSQL">
 <meta itemprop="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
 SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.">
-<meta itemprop="datePublished" content="2020-04-23T10:30:58&#43;07:00" />
-<meta itemprop="dateModified" content="2020-04-23T10:30:58&#43;07:00" />
+<meta itemprop="datePublished" content="2020-04-23T10:30:58+07:00" />
+<meta itemprop="dateModified" content="2020-04-23T10:30:58+07:00" />
 <meta itemprop="wordCount" content="2244">
 
 
 
-<meta itemprop="keywords" content="Technique,PostgreSQL," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Technique,PostgreSQL," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Full-Text Search trong PostgreSQL"/>
 <meta name="twitter:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
 SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."/>
@@ -507,7 +508,7 @@ t
 <td>tsvector</td>
 <td>concatenate tsvectors</td>
 <td>&lsquo;a:1 b:2&rsquo;::tsvector || &lsquo;c:1 d:2 b:3&rsquo;::tsvector</td>
-<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &lsquo;d&rsquo;:4</td>
+<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &rsquo;d&rsquo;:4</td>
 </tr>
 <tr>
 <td>&amp;&amp;</td>

@@ -48,11 +48,12 @@ __3. Tại sao dùng RabbitMQ ?__
 * __Problems:__
     - Đối với các hệ thống sử dụng kiến trúc microservice thì việc gọi chéo giữa các service quá nhiều khiến luồng xử lý khá phức tạp.
     - Mức độ trao đổi data giữa các thành phần tăng lên khiến cho việc lập trình trở nên khó khăn (maintain).
-    - Khi phát triển làm sao để dev tập trung vào các domain, business logic thay vì các công việc trao đổi ở tầng infrastructure.
+    - Khi phát triển làm sao để dev tập trung vào business logic thay vì các công việc trao đổi ở tầng infrastructure.
     - Với các hệ thống phân tán, khi việc giao tiếp giữa các thành phần đòi hỏi chúng phải biết nhau. Nhưng điều này rắc rối cho việc viết code.
       Một thành phần phải viết quá nhiều đâm ra rất khó maintain, debug
 
 * __Sử dụng RabbitMQ:__
+    - Theo dõi được message và có thể retry (service ngừng hoạt động thì message vẫn còn trong queue).
     - Một producer không cần phải biết comsumer. Nó chỉ việc gởi message đến các queue trong message-boker. Consumer chỉ việc đăng ký nhận message từ queue này.
     - Vì producer giao tiếp với consumer trung gian qua message broker nên dù producer và consumer có khác biệt nhau về ngôn ngữ thì giao tiếp vẫn thành công.(Hiện nay rabbitmq   đã hỗ trợ rất nhiều ngôn ngữ khác nhau).
     - Một đặc tính của rabbitmq là bất đồng bộ(asynchronous). Producer không thể biết khi nào message đến được consumer hay khi nào message được consumer xử lý xong. Đối với producer, đẩy message đến message broker là xong việc. Consumer sẽ lấy message về khi nó muốn. Đặc tính này có thể được tận dụng để xây dựng các hệ thống lưu trữ và xử lý log.

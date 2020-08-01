@@ -26,7 +26,7 @@
   <meta name="description" content="1. Message-boker ?
  Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
   RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)." />
-  <meta name="generator" content="Hugo 0.70.0 with theme pure" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
   <title>RabbitMQ - Demo with python - Sang Le Hoang</title>
   
   
@@ -46,13 +46,14 @@
 <meta itemprop="description" content="1. Message-boker ?
  Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
   RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).">
-<meta itemprop="datePublished" content="2020-02-08T08:31:11&#43;07:00" />
-<meta itemprop="dateModified" content="2020-02-08T08:31:11&#43;07:00" />
-<meta itemprop="wordCount" content="1208">
+<meta itemprop="datePublished" content="2020-02-08T08:31:11+07:00" />
+<meta itemprop="dateModified" content="2020-02-08T08:31:11+07:00" />
+<meta itemprop="wordCount" content="1224">
 
 
 
-<meta itemprop="keywords" content="Technique,Message broker,RabbitMQ," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Technique,Message broker,RabbitMQ," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RabbitMQ - Demo with python"/>
 <meta name="twitter:description" content="1. Message-boker ?
  Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
@@ -320,7 +321,7 @@
 
         <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/rabbitmq/#comments"
             class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1208words</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1224words</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6minutes </span>
       </div>
       
@@ -375,7 +376,7 @@ Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng
 <ul>
 <li>Đối với các hệ thống sử dụng kiến trúc microservice thì việc gọi chéo giữa các service quá nhiều khiến luồng xử lý khá phức tạp.</li>
 <li>Mức độ trao đổi data giữa các thành phần tăng lên khiến cho việc lập trình trở nên khó khăn (maintain).</li>
-<li>Khi phát triển làm sao để dev tập trung vào các domain, business logic thay vì các công việc trao đổi ở tầng infrastructure.</li>
+<li>Khi phát triển làm sao để dev tập trung vào business logic thay vì các công việc trao đổi ở tầng infrastructure.</li>
 <li>Với các hệ thống phân tán, khi việc giao tiếp giữa các thành phần đòi hỏi chúng phải biết nhau. Nhưng điều này rắc rối cho việc viết code.
 Một thành phần phải viết quá nhiều đâm ra rất khó maintain, debug</li>
 </ul>
@@ -383,6 +384,7 @@ Một thành phần phải viết quá nhiều đâm ra rất khó maintain, deb
 <li>
 <p><strong>Sử dụng RabbitMQ:</strong></p>
 <ul>
+<li>Theo dõi được message và có thể retry (service ngừng hoạt động thì message vẫn còn trong queue).</li>
 <li>Một producer không cần phải biết comsumer. Nó chỉ việc gởi message đến các queue trong message-boker. Consumer chỉ việc đăng ký nhận message từ queue này.</li>
 <li>Vì producer giao tiếp với consumer trung gian qua message broker nên dù producer và consumer có khác biệt nhau về ngôn ngữ thì giao tiếp vẫn thành công.(Hiện nay rabbitmq   đã hỗ trợ rất nhiều ngôn ngữ khác nhau).</li>
 <li>Một đặc tính của rabbitmq là bất đồng bộ(asynchronous). Producer không thể biết khi nào message đến được consumer hay khi nào message được consumer xử lý xong. Đối với producer, đẩy message đến message broker là xong việc. Consumer sẽ lấy message về khi nó muốn. Đặc tính này có thể được tận dụng để xây dựng các hệ thống lưu trữ và xử lý log.</li>
@@ -390,7 +392,7 @@ Một thành phần phải viết quá nhiều đâm ra rất khó maintain, deb
 </li>
 </ul>
 <p><strong>4. Exchange</strong></p>
-<p>Mặc định exchange là chuỗi &ldquo;&quot;. Một exchange có thể có nhiều queue.<!-- raw HTML omitted -->
+<p>Mặc định exchange là chuỗi &ldquo;&rdquo;. Một exchange có thể có nhiều queue.<!-- raw HTML omitted -->
 Exchange có 4 loại:<!-- raw HTML omitted --></p>
 <ul>
 <li><strong>Fanout</strong>: Một Fanout exchange sẽ đẩy message đến toàn bộ hàng đợi gắn với nó. <!-- raw HTML omitted --></li>
