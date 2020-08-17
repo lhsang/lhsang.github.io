@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Crawl data - cào dữ liệu có gì khó - Sang Le Hoang
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>Crawl data - cào dữ liệu có gì khó - Sang Le Hoang</title>
+  
+  
+  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="Crawl data - cào dữ liệu có gì khó" />
+<meta property="og:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" />
+<meta property="article:published_time" content="2020-08-17T18:31:34+07:00" />
+<meta property="article:modified_time" content="2020-08-17T18:31:34+07:00" />
+<meta itemprop="name" content="Crawl data - cào dữ liệu có gì khó">
+<meta itemprop="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)">
+<meta itemprop="datePublished" content="2020-08-17T18:31:34+07:00" />
+<meta itemprop="dateModified" content="2020-08-17T18:31:34+07:00" />
+<meta itemprop="wordCount" content="1694">
+
+
+
+<meta itemprop="keywords" content="Technique,crawler,thesis," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Crawl data - cào dữ liệu có gì khó"/>
+<meta name="twitter:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)"/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/lhsang" target="_blank">
+            <img class="img-circle img-rotate" src="https://www.lhsang.dev/img/profile.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Ho Chi Minh, Viet Nam</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-categories">
+                <a href="/categories/">
+                    <i class="icon icon-folder"></i>
+                  <span class="menu-title">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-resume">
+                <a href="/r%C3%A9sume/">
+                    <i class="icon icon-profile"></i>
+                  <span class="menu-title">Résume</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Categories</h3>
+    <div class="widget-body">
+        <ul class="category-list">
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+        </ul>
+    </div>
+</div>
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/crawler/" class="tag-list-link">crawler</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/experience/" class="tag-list-link">experience</a><span
+                    class="tag-list-count">3</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/http/" class="tag-list-link">http</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/internship/" class="tag-list-link">internship</a><span
+                    class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/interview/" class="tag-list-link">interview</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/message-broker/" class="tag-list-link">message-broker</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/postgresql/" class="tag-list-link">postgresql</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rpc/" class="tag-list-link">rpc</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
+                    class="tag-list-count">5</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/thesis/" class="tag-list-link">thesis</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
+
+    </div>
+</div>
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/scraping-data-from-websites/"
+    >Crawl data - cào dữ liệu có gì khó</a
+  >
+</h1>
+
+            
+      
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="article-date">
+  <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/crawler/"> crawler </a>
+    <a class="article-tag-link" href="/tags/thesis/"> thesis </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/scraping-data-from-websites/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1694words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8minutes </span>
+      </div>
+      
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p><img src="/img/posts/technique/crawl/crawl.jpg" alt="Crawl data"></p>
+<p>Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)</p>
+<p>Cào ở dữ liệu ở đây mình đề cập là xây dựng một tool để đi thu thập dữ liệu ở một số website mà chúng ta cần, đơn thuần cũng chỉ là gởi một request HTTP/HTTPS trực tiếp hoặc dùng một browser driver truy cập đến trang đích để lấy nội dung trang về rồi tiến hành parse nội dung để lấy dữ liệu. Hầu hết các trang web đều không thể ngăn cấm việc bot ghé thăm vì trong đó có bot của các search engine như google, bing,&hellip; tuy nhiên họ cũng không thể nào cho phép truy cập thỏa mái vì điều này làm giảm hiệu năng hoặc thậm chí sập cả server. Chính vì vậy đa số các website đều quy định và tìm cách hạn chế, ngăn chặn việc crawler quá mức, thậm chí có cả bẫy (traps) để chặn crawler khiến cho việc thu thập dữ liệu của chúng ta cũng gặp không ít khó khăn.</p>
+<p>Trước hết mình sẽ giới thiệu qua một số tool/lib/framework phổ biến để thực hiện thu thập dữ liệu, mặc dù việc cào dữ liệu chỉ đơn thuần là gởi request để lấy nội dung nhưng bạn cũng nên dùng thư viện sẵn có để thu thập (trừ khi các bạn muốn phát triển 1 thư viện mới) thay vì tự gởi request bằng thư viện HTTP trong các ngôn ngữ sẵn có vì các bạn sẽ phải handle rất nhiều thứ từ đa luồng, kiểm soát request, parsing,&hellip; rất tốn thời gian để viết lại. Sử dụng các thư viện sẵn có thì bạn cũng không cần lo về khả năng mở rộng, tùy biến của mình, các thư viện đa số đã thiết kế theo kiến trúc mở cung cấp các middlewares, pipelines cho người dùng tùy biến.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Scrapy</th>
+<th>Selenium</th>
+<th>Cheerio</th>
+<th>Puppeteer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Advantages</td>
+<td>- Bất đồng bộ chính là thứ giúp cho scrapy có hiệu năng tuyệt vời. <!-- raw HTML omitted -->- Sử dụng rất ít RAM, CPU.<!-- raw HTML omitted -->- Tài liệu đầy đủ, plugins rất nhiều.<!-- raw HTML omitted -->- Thiết kế theo một kiến trúc khá tốt, dev có thể dễ dàng tùy chỉnh middlewares, pipelines và thêm các function tùy ý.</td>
+<td>- Dễ tiếp cận cho beginer<!-- raw HTML omitted -->- Có thể lấy được nội dung trang render bằng javascript<!-- raw HTML omitted -->- Có thể thao tác như một người dùng</td>
+<td>- Hỗ trợ parse DOM giống như jquery<!-- raw HTML omitted -->- Bất đồng bộ, khá nhanh</td>
+<td>- Giống như selenium, puppeteer cũng sử dụng browser driver để lấy nội dung trang nên có thể lấy được nội dung các trang render bằng js và thao tác như mooujt người dùng.</td>
+</tr>
+<tr>
+<td>Disadvantages</td>
+<td>- Hơi phức tạp cho beginer<!-- raw HTML omitted -->- Quá dư thừa chức năng nếu chỉ dùng cho 1 project nhỏ và đơn giản<!-- raw HTML omitted -->- Không thể lấy nội dung trang được render bằng js, tuy nhiên chúng ta có thể kết hợp với Splash.</td>
+<td>- Tiêu tốn nhiều tài nguyên vì nó cần đến một browser driver (tưởng tượng như bạn mở 1 tab chrome thì sẽ tốn bao nhiêu RAM, CPU)<!-- raw HTML omitted -->- Rất chậm, nên selenium không phù hợp với một project cào dữ liệu lớn.</td>
+<td>- Chỉ đơn thuần là trình phân tích (parser)<!-- raw HTML omitted -->- Không thể lấy nội dung trang được render bằng js</td>
+<td>- Tiêu tốn RAM, CPU<!-- raw HTML omitted -->- Chậm</td>
+</tr>
+</tbody>
+</table>
+<p>Hầu hết các ngôn ngữ lập trình đều có những thư viện hỗ trợ thu thập dữ liệu, tuy nhiên Python sẽ là ngôn ngữ  mà mình gợi ý các bạn nên chọn cho dự án thu thập dữ liệu của mình, Scrapy là một framework trong python hỗ trợ thu thập dữ liệu cực mạnh, hơn nữa python có hỗ trợ khá nhiều thư viện để xử lý dữ liệu.</p>
+<p>Nhập môn thu thập dữ liệu, kiến trúc chung của một crawler sẽ gồm 3 phần: queue chứa URL, downloader, parser. Luồng hoạt động sẽ diễn ra như sau:</p>
+<ul>
+<li>Cung cấp một URL để start (hoặc một list URL)</li>
+<li>Downloader tiến hành tải xuống nội dung trang</li>
+<li>Parser rút trích dữ liệu (store nếu cần) và đồng thời rút trích ra URL kế tiếp và thêm vào queue URL</li>
+<li>Quá trình sẽ lặp lại cho đến hết URL trong queue</li>
+</ul>
+<p><img src="/img/posts/technique/crawl/crawler_simple.png" alt="Crawl data"></p>
+<p>Để làm quen với việc thu thập dữ liệu, mình khuyên các bạn nên làm qua 10 bài thực hành trên trang scrapingclub.com (Learn Web Scraping Using Python For Free) theo bất kỳ thư viện hỗ trợ thu thập dữ liệu nào bạn muốn, solutions thì mình cũng đã làm từ lúc mình học cơ bản <a href="https://github.com/lhsang/Spiders">https://github.com/lhsang/Spiders</a> (sử dụng scrapy) các bạn có thể tham khảo.</p>
+<p>Về vấn đề thu thập thông tin để tránh vi phạm các tiêu chuẩn, quy định thì các bạn nên phân tích file domain.com/robots.txt trước khi cào, file robots.txt sẽ quy cho biết Crawler của bạn được truy cập những trang nào, không được truy cập trang nào và thời gian delay mỗi request. Ngoài ra user-agent là một header bạn có thể tùy ý, tuy nhiên về vấn đề đạo đức nghề nghiệp các bạn không nên fake giá trị này.</p>
+<p>Phần tiếp theo mình sẽ nói về một số khó khăn đã gặp và giải pháp trong quá trình thu thập dữ liệu phục vụ cho luận văn tốt nghiệp.</p>
+<ul>
+<li>Các trang hạn chế số lượng truy cập trong một khoảng thời gian: để tránh tấn công DDoS, các trang thường phải giới hạn số request của một IP trong một phút (thường sẽ họ sẽ cho biết thời gian deplay mỗi request trong file robots.txt), có một số lượng lớn trang cần thu thập thì môi phút vài request thì quá ít cho nhu cầu của mình và thậm chí nên gửi nhiều hơn quy định, crawler còn có thể bị ban trong vài phút. Giải pháp là mình đã sử dụng thêm proxy server, giá proxy cũng không quá mắc (tầm $0.4 IP/tháng, khuyến cáo không nên mua của các nhà cung cấp từ Việt Nam - người từng trải), mỗi request mình sẽ đổi IP liên tục thì sẽ tránh được ban IP. Nếu không ần thiết phải đổi IP thì ban có thể tăng thời gian delay để cách biệt các request, giảm concurrent (số request mỗi phút) và có thể cheat nhẹ user-agent bất chấp đạo đức :))</li>
+<li>Nội dung trang render bằng Javascript: vì nhu cầu mình crawl nhiều nên mình chọn Scrapy, tuy nhiên scrapy lại không hỗ trợ lấy dữ liệu ở các trang render bằng js (Ajax, React,&hellip;) để biết rằng trang này có render bằng js ra nội dung không, bạn chỉ cần Ctrl+U rồi xem có nội dung html như hiển thị không, hay chỉ là một thẻ body rồi js chèn vào sau. Như đã đề cập scrapy có thể sử dụng kèm với headless browser như Splash để chờ trang web render ra nội dung và cookie, việc này làm tốn thêm một ít thời gian chờ nhưng vẫn nhanh hơn các lựa chọn khác scrapy.</li>
+<li>Cấu trúc trang thay đổi: đôi lúc sites thay đôỉ cấu trúc (HTML tags thay đổi), chúng ta phải xác định đúng thẻ thì mới lấy được dữ liệu. Nên phái cài đặt cho crawler cơ chế phát hiện cấu trúc thay đổi và thông báo để chúng ta biết và chỉnh sửa hoặc áp dụng cấu trúc mới để parse đúng dữ liệu.</li>
+<li>Required đủ cookie, headers: đa số các trang đều yêu cầu một số headers và cookie là phải có trong request, chúng ta có thể dùng Chrome DevTools để xem các header và cookie này, tuy nhiên ở nhiều trang headers, cookie này không được set ngay từ đầu mà trong quá trình request sẽ gởi request đến một URL khác để lấy thông tin headers, cookie hoặc ngay địa chỉ URL của bạn nhưng lần đầu là để lấy headers, cookie lần sau mới lấy nội dung (trường hợp này, nếu không có đủ headers server sẽ buộc crawler request vô hạn). Giải pháp là chúng ta phải biết quan sát mà lấy headers, cookie phù hợp để gắn vào request thôi =))</li>
+<li>Bất đồng bộ và multithread vẫn chưa đủ: mỗi ngày mình phải gởi hơn 11 triệu request, scrapy hỗ trợ bất đồng bộ, tuy nhiên một process chưa đủ đáp ứng nhu cầu lớn như vậy trong một ngày, giải pháp là tăng số process lên, liên quan đến vấn đề xử lý song song các bạn phải tính toán để chia URL ra cho các process hợp lý nhất.</li>
+<li>Lưu trữ dữ liệu: tùy nhu cầu bạn sẽ chọn hệ quản trị cơ sở dữ liệu phù hợp, với project của mình vì nhu cầu lưu trữ lớn (hơn 11 triệu record mỗi ngày đổ vào database) và cần tốc độ truy vẫn nhanh thì mình chọn mongodb.MongoDB thuộc loại NoSQL lưu trữ theo dạng document (BSON), schema linh hoạt, không phải join, kết hợp với đánh indexes thì tốc độ khá là nhanh (dữ liệu 1 tỷ record mình có thể truy vấn dưới 1s) hơn nữa mongodb còn thiết kế để đáp ứng nhu cầu phân tán nên có thể sharding hay replication để mở rộng và đảm bảo tính available cho hệ thống. Vấn đề lưu xuống liên tục cũng có thể quá tải database, bạn có thể cache tạm một nơi rồi insert_many thay vì insert_one.</li>
+</ul>
+<p>Trên là những chia sẻ mà mình rút trích được từ những vấn đề gặp phải trong quá trình làm luận văn mà mình gặp phải, ngoài ra vẫn còn kha khá issue mà mình chưa gặp phải nữa nếu biết các bạn có thể chia sẻ thêm dưới phần bình luận.</p>
+
+    </div>
+    
+    <div class="article-footer">
+
+      
+      <div class="fb-comments" data-href="https://www.lhsang.me/blog/technique/scrapping-data-from-websites" data-width="100%" data-numposts="5"></div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lhsang" target="_blank"><span class="text-dark">lhsang</span><small class="ml-1x">while(i){ i&#43;&#43;;  }</small></a></h3>
+        <div>Code for Food or Code for Fun?</div>
+      </div>
+    </figure>
+  </div>
+</div>
+    </div>
+    
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" title="Full-Text Search trong PostgreSQL"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="facebook,twitter,linkedin"
+                data-mobile-sites="facebook,twitter,linkedin"></div>
+        </div>
+    </div>
+</nav>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://www.facebook.com/hoangsang135" target="_blank" title="facebook" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-facebook"></i></a></li>
+    <li><a href="https://github.com/lhsang" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/" target="_blank" title="linkedin" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-linkedin"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy; Sang Le Hoang
+
+
+
+    2020
+    <div class="publishby">
+        Theme by xiaoheiAh
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/javascript.min.js" defer></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/powershell.min.js" defer></script><script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://www.lhsang.dev/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://www.lhsang.dev/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/www.lhsang.dev\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.dev\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1317935755070864&autoLogAppEvents=1"></script>
+
+  </body>
+</html>

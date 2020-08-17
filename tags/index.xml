@@ -5,10 +5,19 @@
     <link>https://www.lhsang.dev/tags/</link>
     <description>Recent content in Tags on Sang Le Hoang</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 23 Apr 2020 10:30:58 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 18:31:34 +0700</lastBuildDate>
     
         <atom:link href="https://www.lhsang.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Crawl data - cào dữ liệu có gì khó</title>
+      <link>https://www.lhsang.dev/posts/technique/scraping-data-from-websites/</link>
+      <pubDate>Mon, 17 Aug 2020 18:31:34 +0700</pubDate>
+      
+      <guid>https://www.lhsang.dev/posts/technique/scraping-data-from-websites/</guid>
+      <description>Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)</description>
+    </item>
     
     <item>
       <title>Full-Text Search trong PostgreSQL</title>
