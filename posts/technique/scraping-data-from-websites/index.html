@@ -42,7 +42,7 @@
 <meta itemprop="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong qua trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)">
 <meta itemprop="datePublished" content="2020-08-17T18:31:34+07:00" />
 <meta itemprop="dateModified" content="2020-08-17T18:31:34+07:00" />
-<meta itemprop="wordCount" content="1694">
+<meta itemprop="wordCount" content="1702">
 
 
 
@@ -321,7 +321,7 @@
 
         <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/scraping-data-from-websites/#comments"
             class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1694words</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1702words</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8minutes </span>
       </div>
       
@@ -344,17 +344,17 @@
 <tbody>
 <tr>
 <td>Advantages</td>
-<td>- Bất đồng bộ chính là thứ giúp cho scrapy có hiệu năng tuyệt vời. <!-- raw HTML omitted -->- Sử dụng rất ít RAM, CPU.<!-- raw HTML omitted -->- Tài liệu đầy đủ, plugins rất nhiều.<!-- raw HTML omitted -->- Thiết kế theo một kiến trúc khá tốt, dev có thể dễ dàng tùy chỉnh middlewares, pipelines và thêm các function tùy ý.</td>
-<td>- Dễ tiếp cận cho beginer<!-- raw HTML omitted -->- Có thể lấy được nội dung trang render bằng javascript<!-- raw HTML omitted -->- Có thể thao tác như một người dùng</td>
-<td>- Hỗ trợ parse DOM giống như jquery<!-- raw HTML omitted -->- Bất đồng bộ, khá nhanh</td>
-<td>- Giống như selenium, puppeteer cũng sử dụng browser driver để lấy nội dung trang nên có thể lấy được nội dung các trang render bằng js và thao tác như mooujt người dùng.</td>
+<td>- Bất đồng bộ chính là thứ giúp cho scrapy có hiệu năng tuyệt vời. Sử dụng rất ít RAM, CPU. Tài liệu đầy đủ, plugins rất nhiều. Thiết kế theo một kiến trúc khá tốt, dev có thể dễ dàng tùy chỉnh middlewares, pipelines và thêm các function tùy ý.</td>
+<td>- Dễ tiếp cận cho beginer. Có thể lấy được nội dung trang render bằng javascript Có thể thao tác như một người dùng</td>
+<td>- Hỗ trợ parse DOM giống như jquery. Bất đồng bộ, khá nhanh</td>
+<td>- Giống như selenium, puppeteer cũng sử dụng browser driver để lấy nội dung trang nên có thể lấy được nội dung các trang render bằng js và thao tác như một người dùng.</td>
 </tr>
 <tr>
 <td>Disadvantages</td>
-<td>- Hơi phức tạp cho beginer<!-- raw HTML omitted -->- Quá dư thừa chức năng nếu chỉ dùng cho 1 project nhỏ và đơn giản<!-- raw HTML omitted -->- Không thể lấy nội dung trang được render bằng js, tuy nhiên chúng ta có thể kết hợp với Splash.</td>
-<td>- Tiêu tốn nhiều tài nguyên vì nó cần đến một browser driver (tưởng tượng như bạn mở 1 tab chrome thì sẽ tốn bao nhiêu RAM, CPU)<!-- raw HTML omitted -->- Rất chậm, nên selenium không phù hợp với một project cào dữ liệu lớn.</td>
-<td>- Chỉ đơn thuần là trình phân tích (parser)<!-- raw HTML omitted -->- Không thể lấy nội dung trang được render bằng js</td>
-<td>- Tiêu tốn RAM, CPU<!-- raw HTML omitted -->- Chậm</td>
+<td>- Hơi phức tạp cho beginer. Quá dư thừa chức năng nếu chỉ dùng cho 1 project nhỏ và đơn giản. Không thể lấy nội dung trang được render bằng js, tuy nhiên chúng ta có thể kết hợp với Splash.</td>
+<td>- Tiêu tốn nhiều tài nguyên vì nó cần đến một browser driver (tưởng tượng như bạn mở 1 tab chrome thì sẽ tốn bao nhiêu RAM, CPU). Rất chậm, nên selenium không phù hợp với một project cào dữ liệu lớn.</td>
+<td>- Chỉ đơn thuần là trình phân tích (parser). Không thể lấy nội dung trang được render bằng js</td>
+<td>- Tiêu tốn RAM, CPU. Chậm</td>
 </tr>
 </tbody>
 </table>
@@ -376,9 +376,9 @@
 <li>Cấu trúc trang thay đổi: đôi lúc sites thay đôỉ cấu trúc (HTML tags thay đổi), chúng ta phải xác định đúng thẻ thì mới lấy được dữ liệu. Nên phái cài đặt cho crawler cơ chế phát hiện cấu trúc thay đổi và thông báo để chúng ta biết và chỉnh sửa hoặc áp dụng cấu trúc mới để parse đúng dữ liệu.</li>
 <li>Required đủ cookie, headers: đa số các trang đều yêu cầu một số headers và cookie là phải có trong request, chúng ta có thể dùng Chrome DevTools để xem các header và cookie này, tuy nhiên ở nhiều trang headers, cookie này không được set ngay từ đầu mà trong quá trình request sẽ gởi request đến một URL khác để lấy thông tin headers, cookie hoặc ngay địa chỉ URL của bạn nhưng lần đầu là để lấy headers, cookie lần sau mới lấy nội dung (trường hợp này, nếu không có đủ headers server sẽ buộc crawler request vô hạn). Giải pháp là chúng ta phải biết quan sát mà lấy headers, cookie phù hợp để gắn vào request thôi =))</li>
 <li>Bất đồng bộ và multithread vẫn chưa đủ: mỗi ngày mình phải gởi hơn 11 triệu request, scrapy hỗ trợ bất đồng bộ, tuy nhiên một process chưa đủ đáp ứng nhu cầu lớn như vậy trong một ngày, giải pháp là tăng số process lên, liên quan đến vấn đề xử lý song song các bạn phải tính toán để chia URL ra cho các process hợp lý nhất.</li>
-<li>Lưu trữ dữ liệu: tùy nhu cầu bạn sẽ chọn hệ quản trị cơ sở dữ liệu phù hợp, với project của mình vì nhu cầu lưu trữ lớn (hơn 11 triệu record mỗi ngày đổ vào database) và cần tốc độ truy vẫn nhanh thì mình chọn mongodb.MongoDB thuộc loại NoSQL lưu trữ theo dạng document (BSON), schema linh hoạt, không phải join, kết hợp với đánh indexes thì tốc độ khá là nhanh (dữ liệu 1 tỷ record mình có thể truy vấn dưới 1s) hơn nữa mongodb còn thiết kế để đáp ứng nhu cầu phân tán nên có thể sharding hay replication để mở rộng và đảm bảo tính available cho hệ thống. Vấn đề lưu xuống liên tục cũng có thể quá tải database, bạn có thể cache tạm một nơi rồi insert_many thay vì insert_one.</li>
+<li>Lưu trữ dữ liệu: tùy nhu cầu bạn sẽ chọn hệ quản trị cơ sở dữ liệu phù hợp, với project của mình vì nhu cầu lưu trữ lớn (hơn 11 triệu record mỗi ngày đổ vào database) và cần tốc độ truy vẫn nhanh thì mình chọn mongodb. MongoDB thuộc loại NoSQL lưu trữ theo dạng document (BSON), schema linh hoạt, không phải join, kết hợp với đánh indexes thì tốc độ khá là nhanh (dữ liệu 1 tỷ record mình có thể truy vấn dưới 1s) hơn nữa mongodb còn thiết kế để đáp ứng nhu cầu phân tán nên có thể sharding hay replication để mở rộng và đảm bảo tính available cho hệ thống. Vấn đề lưu xuống liên tục cũng có thể quá tải database, bạn có thể cache tạm một nơi rồi insert_many thay vì insert_one.</li>
 </ul>
-<p>Trên là những chia sẻ mà mình rút trích được từ những vấn đề gặp phải trong quá trình làm luận văn mà mình gặp phải, ngoài ra vẫn còn kha khá issue mà mình chưa gặp phải nữa nếu biết các bạn có thể chia sẻ thêm dưới phần bình luận.</p>
+<p>Trên là những chia sẻ mà mình rút trích được từ những vấn đề gặp phải trong quá trình làm luận văn mà mình gặp phải, ngoài ra vẫn còn kha khá issues mà mình chưa gặp phải nữa nếu biết các bạn có thể chia sẻ thêm dưới phần bình luận để cùng tranh luận, cảm ơn các bạn.</p>
 
     </div>
     
