@@ -5,7 +5,7 @@
     <link>https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</link>
     <description>Recent content in Trải nghiệm on Sang Le Hoang</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 03 Apr 2020 08:24:17 +0700</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 15:12:42 +0700</lastBuildDate>
     
         <atom:link href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,6 +17,25 @@
       
       <guid>https://www.lhsang.dev/posts/technique/scraping-data-from-websites/</guid>
       <description>Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)</description>
+    </item>
+    
+    <item>
+      <title>Mutithreading Concurrency Problems</title>
+      <link>https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/</link>
+      <pubDate>Fri, 07 Aug 2020 15:24:23 +0700</pubDate>
+      
+      <guid>https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/</guid>
+      <description>Process và Thread Process là một thực thể hoạt động của một chương trình, có vùng nhớ riêng và các process hoạt động riêng lẻ không tác động lẫn nhau. Thread là một luồng nằm trong process, trong một process có thể có nhiều thread, các Thread này dùng chung vùng nhớ trong process và có thể chia sẻ tài nguyên. Đương nhiên khi dùng chung vùng nhớ sẽ xảy ra một số vấn đề, bài này mình sẽ trình bày một số vấn đề khi lập trình đa luồng (Multithreading programing) chúng ta thường hay gặp.</description>
+    </item>
+    
+    <item>
+      <title>Microservices Communication</title>
+      <link>https://www.lhsang.dev/posts/technique/microservice-communication/</link>
+      <pubDate>Sun, 02 Aug 2020 15:12:42 +0700</pubDate>
+      
+      <guid>https://www.lhsang.dev/posts/technique/microservice-communication/</guid>
+      <description>Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
+Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:</description>
     </item>
     
     <item>
@@ -36,8 +55,8 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụ
       
       <guid>https://www.lhsang.dev/about/</guid>
       <description>Hello, World!
-Xin chào, mình là Sang. Hiện tại (1-1-2020) đang sinh viên năm cuối của khoa công nghệ thông tin trường ĐH Khoa Học Tự Nhiên TP HCM.
-Hiện tại chuyên môn của mình là Software engineering, một ít kinh nghiệm, một chút kiến thức và phân tích suy luận theo góc nhìn cá nhân mình với mong muốn chia sẻ được gì cho bạn và củng cố được kiến thức cho mình.</description>
+Xin chào, mình là Sang. Hiện đang là sinh viên năm cuối của khoa công nghệ thông tin trường ĐH Khoa Học Tự Nhiên TP HCM.
+Hiện tại chuyên môn của mình là Software Engineering, một ít kinh nghiệm, một chút kiến thức và phân tích suy luận theo góc nhìn cá nhân mình với mong muốn chia sẻ được gì cho bạn và củng cố được kiến thức cho mình.</description>
     </item>
     
     <item>

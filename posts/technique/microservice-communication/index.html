@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Sang Le Hoang</title>
+        Microservices Communication - Sang Le Hoang
+      </title>
     <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -22,26 +23,37 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  
+  <meta name="description" content="Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
+Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:" />
   <meta name="generator" content="Hugo 0.78.2 with theme pure" />
-  <title>Sang Le Hoang</title>
+  <title>Microservices Communication - Sang Le Hoang</title>
   
-  <link rel="alternate" type="application/rss+xml" href="https://www.lhsang.dev/index.xml" title="Sang Le Hoang" />
   
   <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-  <meta property="og:title" content="Sang Le Hoang" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.lhsang.dev/" />
-<meta property="og:updated_time" content="2020-08-17T18:31:34+07:00" />
-<meta itemprop="name" content="Sang Le Hoang">
-<meta itemprop="description" content="">
+  <meta property="og:title" content="Microservices Communication" />
+<meta property="og:description" content="Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
+Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/microservice-communication/" />
+<meta property="article:published_time" content="2020-08-02T15:12:42+07:00" />
+<meta property="article:modified_time" content="2020-08-02T15:12:42+07:00" />
+<meta itemprop="name" content="Microservices Communication">
+<meta itemprop="description" content="Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
+Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:">
+<meta itemprop="datePublished" content="2020-08-02T15:12:42+07:00" />
+<meta itemprop="dateModified" content="2020-08-02T15:12:42+07:00" />
+<meta itemprop="wordCount" content="77">
+
+
+
+<meta itemprop="keywords" content="Technique,Microservices," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Sang Le Hoang"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Microservices Communication"/>
+<meta name="twitter:description" content="Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
+Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:"/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -58,7 +70,7 @@
   
   
 
-  <body class="main-center theme-black main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3V4606YCG"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -285,232 +297,135 @@
 
     
     
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
 
-<main class="main" role="main">
-  
-  <div class="content article-list">
-    
-    
-    
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/experience/intern-fresher-ntd-hoi-gi/"
-    >Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn.
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="">
-  <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/"> Trải nghiệm </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/experience/"> Experience </a>
-    <a class="article-tag-link" href="/tags/interview/"> Interview </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/experience/intern-fresher-ntd-hoi-gi/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 993words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5minutes </span>
-      </p>
-    </article>
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/technique/nginx/"
-    >Nginx là gì ? Demo load balancing với nginx</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        1. What is Nginx?  Nginx ban đầu được tạo ra như một máy chủ web để giải quyết vấn đề C10k (là một vấn đề liên quan đến vấn đề hiệu suất xử lý 10.000 kết nối cùng lúc), nhưng bây giờ với các tính năng mở rộng Nginx cũng được sử dụng phổ biến như một máy chủ proxy (reverse proxy server), HTTP cache hoặc dùng làm cân bằng tải (load balancer).
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/nginx/" class="">
-  <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
-    <a class="article-tag-link" href="/tags/nginx/"> Nginx </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/nginx/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 613words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3minutes </span>
-      </p>
-    </article>
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/technique/grpc/"
-    >Tìm hiểu gRPC</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
-  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice.
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/grpc/" class="">
-  <time datetime="2020-02-15 08:40:50 &#43;0700 &#43;07" itemprop="datePublished">2020-02-15</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
-    <a class="article-tag-link" href="/tags/rpc/"> RPC </a>
-    <a class="article-tag-link" href="/tags/http/"> HTTP </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/grpc/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 902words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5minutes </span>
-      </p>
-    </article>
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/technique/rabbitmq/"
-    >RabbitMQ - Demo with python</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        1. Message-boker ?
- Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là:  Publish và Subscribe (Topics) Point-to-Point (Queues)    2. RabbitMQ là gì ?
-  RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message).
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/rabbitmq/" class="">
-  <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
-    <a class="article-tag-link" href="/tags/message-broker/"> Message broker </a>
-    <a class="article-tag-link" href="/tags/rabbitmq/"> RabbitMQ </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/technique/rabbitmq/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1224words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6minutes </span>
-      </p>
-    </article>
-    <article
-      class="article article-type-page"
-      itemscope
-      itemtype="http://schema.org/BlogPosting"
-    >
-      <div class="article-header">
-        <h1 itemprop="name">
-  <a
-    class="article-title"
-    href="/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/"
-    >Ngày làm việc ở công ty của một thực tập sinh IT</a
-  >
-</h1>
-
-      </div>
-      <div class="article-entry text-muted" itemprop="description">
-        Từ một thằng sinh viên (năm 4) chỉ biết ăn chơi và học, bước ra ngưỡng cửa của xã hội để làm quen, học hỏi và kiếm tiền thì không tránh khỏi những thay đổi về thói quen, công việc,&hellip; Có thể nói đây là lần đầu mình đi thực tập và đi kiếm tiền của thời sinh viên (trước đó có tham gia một startup tuy nhiên sẽ kể ở một câu chuyện khác), vì vậy mình sẽ kể về một ngày làm việc của mình - thực tập sinh công nghệ thông tin, cụ thể là python backend developer tại Teko Viet Nam.
-      </div>
-      <p class="article-meta">
-<span class="article-date">
-  <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/" class="">
-  <time datetime="2020-01-08 08:13:19 &#43;0700 &#43;07" itemprop="datePublished">2020-01-08</time>
-</a>
-</span>
-<span class="article-category">
-  <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/"> Trải nghiệm </a>
-</span>  
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/experience/"> Experience </a>
-    <a class="article-tag-link" href="/tags/internship/"> internship </a>
-  </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> &nbsp;<a href="/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/#comments" class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 794words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4minutes </span>
-      </p>
-    </article></div>
-  
-<nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
-    <ul class="pager pull-left"><li class="prev">
-        <a href="/">
-          <i class="icon icon-angle-left"></i>Prev
-          
-        </a>
-      </li>
-    </ul>
-    <div class="total-article bar-right">
-      Page:2/2
-    </div>
+    </nav>
   </div>
+</aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/posts/technique/microservice-communication/"
+    >Microservices Communication</a
+  >
+</h1>
+
+            
+      
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://www.lhsang.dev/posts/technique/microservice-communication/" class="article-date">
+  <time datetime="2020-08-02 15:12:42 &#43;0700 &#43;07" itemprop="datePublished">2020-08-02</time>
+</a>
+</span>
+<span class="article-category">
+  <i class="icon icon-folder"></i>&nbsp;
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+  <a class="article-category-link" href="/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/"> Trải nghiệm </a>
+  <a class="article-category-link" href="/categories/vi%E1%BA%BFt-vu-v%C6%A1/"> Viết vu vơ </a>
+  <a class="article-category-link" href="/categories/b%C3%A0i-vi%E1%BA%BFt-hay-t%E1%BB%AB-di%E1%BB%85n-%C4%91%C3%A0n/"> Bài viết hay từ diễn đàn </a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
+    <a class="article-tag-link" href="/tags/microservices/"> Microservices </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/microservice-communication/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 77words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1minutes </span>
+      </div>
+      
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.</p>
+<p>Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:</p>
+<ul>
+<li>HTTP Commutnication.</li>
+<li>Message Communication.</li>
+<li>Event-driven Communication.</li>
+</ul>
+
+    </div>
+    
+    <div class="article-footer">
+
+      
+      <div class="fb-comments" data-href="http://www.lhsang.me/blog/technique/microservices-communication" data-width="100%" data-numposts="5"></div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/lhsang" target="_blank"><span class="text-dark">lhsang</span><small class="ml-1x">while(i){ i&#43;&#43;;  }</small></a></h3>
+        <div>Code for Food or Code for Fun?</div>
+      </div>
+    </figure>
+  </div>
+</div>
+    </div>
+    
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" title="Full-Text Search trong PostgreSQL"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/"
+                    title="Mutithreading Concurrency Problems"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="facebook,twitter,linkedin"
+                data-mobile-sites="facebook,twitter,linkedin"></div>
+        </div>
+    </div>
 </nav>
 
 </main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -593,6 +508,7 @@
         hasInnerContainers: true,
     });
 </script>
+
 
 
 
