@@ -1,4 +1,5 @@
 <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    {{- partial "googleanalytics.html" . }}
     <div class="slimContent">
       <div class="navbar-header">
         {{- if and (.Site.Params.profile) (.Site.Params.profile.enabled)}}
