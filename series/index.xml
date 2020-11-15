@@ -19,25 +19,6 @@
     </item>
     
     <item>
-      <title>Mutithreading Concurrency Problems</title>
-      <link>https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/</link>
-      <pubDate>Fri, 07 Aug 2020 15:24:23 +0700</pubDate>
-      
-      <guid>https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/</guid>
-      <description>Process và Thread Process là một thực thể hoạt động của một chương trình, có vùng nhớ riêng và các process hoạt động riêng lẻ không tác động lẫn nhau. Thread là một luồng nằm trong process, trong một process có thể có nhiều thread, các Thread này dùng chung vùng nhớ trong process và có thể chia sẻ tài nguyên. Đương nhiên khi dùng chung vùng nhớ sẽ xảy ra một số vấn đề, bài này mình sẽ trình bày một số vấn đề khi lập trình đa luồng (Multithreading programing) chúng ta thường hay gặp.</description>
-    </item>
-    
-    <item>
-      <title>Microservices Communication</title>
-      <link>https://www.lhsang.dev/posts/technique/microservice-communication/</link>
-      <pubDate>Sun, 02 Aug 2020 15:12:42 +0700</pubDate>
-      
-      <guid>https://www.lhsang.dev/posts/technique/microservice-communication/</guid>
-      <description>Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.
-Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:</description>
-    </item>
-    
-    <item>
       <title>Full-Text Search trong PostgreSQL</title>
       <link>https://www.lhsang.dev/posts/technique/full-text-search-postgresql/</link>
       <pubDate>Thu, 23 Apr 2020 10:30:58 +0700</pubDate>

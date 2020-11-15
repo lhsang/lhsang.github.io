@@ -66,55 +66,6 @@
   </url>
   
   <url>
-    <loc>https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/</loc>
-    <lastmod>2020-08-07T15:24:23+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/categories/threading/</loc>
-    <lastmod>2020-08-07T15:24:23+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/categories/b%C3%A0i-vi%E1%BA%BFt-hay-t%E1%BB%AB-di%E1%BB%85n-%C4%91%C3%A0n/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/tags/microservices/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/posts/technique/microservice-communication/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.dev/categories/vi%E1%BA%BFt-vu-v%C6%A1/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://www.lhsang.dev/posts/technique/full-text-search-postgresql/</loc>
     <lastmod>2020-04-23T10:30:58+07:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -151,6 +102,13 @@
   
   <url>
     <loc>https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</loc>
+    <lastmod>2020-04-03T08:24:17+07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</loc>
     <lastmod>2020-04-03T08:24:17+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
