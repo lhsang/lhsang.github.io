@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher? - Sang Le Hoang
+        Behind a SELECT Query - Sang Le Hoang
       </title>
     <head>
   <meta charset="utf-8">
@@ -23,33 +23,33 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn." />
+  <meta name="description" content="Câu truy vấn SELECT thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm Run chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự." />
   <meta name="generator" content="Hugo 0.80.0 with theme pure" />
-  <title>Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher? - Sang Le Hoang</title>
+  <title>Behind a SELECT Query - Sang Le Hoang</title>
   
   
   <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-  <meta property="og:title" content="Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?" />
-<meta property="og:description" content="Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn." />
+  <meta property="og:title" content="Behind a SELECT Query" />
+<meta property="og:description" content="Câu truy vấn SELECT thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm Run chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" />
-<meta property="article:published_time" content="2020-02-21T08:20:30+07:00" />
-<meta property="article:modified_time" content="2020-02-21T08:20:30+07:00" />
-<meta itemprop="name" content="Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?">
-<meta itemprop="description" content="Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn.">
-<meta itemprop="datePublished" content="2020-02-21T08:20:30+07:00" />
-<meta itemprop="dateModified" content="2020-02-21T08:20:30+07:00" />
-<meta itemprop="wordCount" content="993">
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/behind-a-select-query/" />
+<meta property="article:published_time" content="2020-12-05T17:37:43+07:00" />
+<meta property="article:modified_time" content="2020-12-05T17:37:43+07:00" />
+<meta itemprop="name" content="Behind a SELECT Query">
+<meta itemprop="description" content="Câu truy vấn SELECT thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm Run chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự.">
+<meta itemprop="datePublished" content="2020-12-05T17:37:43+07:00" />
+<meta itemprop="dateModified" content="2020-12-05T17:37:43+07:00" />
+<meta itemprop="wordCount" content="251">
 
 
 
-<meta itemprop="keywords" content="Experience,Interview," />
+<meta itemprop="keywords" content="Technique," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?"/>
-<meta name="twitter:description" content="Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn."/>
+<meta name="twitter:title" content="Behind a SELECT Query"/>
+<meta name="twitter:description" content="Câu truy vấn SELECT thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm Run chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự."/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -161,8 +161,13 @@
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">5</span></li>
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/b%C3%A0i-vi%E1%BA%BFt-hay-t%E1%BB%AB-di%E1%BB%85n-%C4%91%C3%A0n/" class="category-list-link">bài-viết-hay-từ-diễn-đàn</a><span class="category-list-count">2</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/database/" class="category-list-link">database</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">8</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/postgresql/" class="category-list-link">postgresql</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/threading/" class="category-list-link">threading</a><span class="category-list-count">1</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">4</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/vi%E1%BA%BFt-vu-v%C6%A1/" class="category-list-link">viết-vu-vơ</a><span class="category-list-count">1</span></li>
         </ul>
     </div>
 </div>
@@ -196,6 +201,10 @@
                     class="tag-list-count">1</span></li>
             
             
+            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/microservices/" class="tag-list-link">microservices</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
             <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
                     class="tag-list-count">1</span></li>
             
@@ -213,7 +222,7 @@
             
             
             <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
-                    class="tag-list-count">5</span></li>
+                    class="tag-list-count">8</span></li>
             
             
             <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/thesis/" class="tag-list-link">thesis</a><span
@@ -231,6 +240,16 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/behind-a-select-query/" class="title">Behind a SELECT Query</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-12-05 17:37:43 &#43;0700 &#43;07" itemprop="datePublished">2020-12-05</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
                         <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
                     </p>
                     <p class="item-date">
@@ -241,40 +260,30 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/mutithreading-concurrency-problems/" class="title">Mutithreading Concurrency Problems</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 15:24:23 &#43;0700 &#43;07" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://www.lhsang.dev/posts/technique/microservice-communication/" class="title">Microservices Communication</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-02 15:12:42 &#43;0700 &#43;07" itemprop="datePublished">2020-08-02</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
                         <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="item-inner">
-                    <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
-                    </p>
-                    <p class="item-date">
-                        <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="item-inner">
-                    <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
-                    </p>
-                    <p class="item-date">
-                        <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
-                    </p>
-                </div>
-            </li>
-            <li>
-                <div class="item-inner">
-                    <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
-                    </p>
-                    <p class="item-date">
-                        <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
                     </p>
                 </div>
             </li>
@@ -302,8 +311,8 @@
       <h1 itemprop="name">
   <a
     class="article-title"
-    href="/posts/experience/intern-fresher-ntd-hoi-gi/"
-    >Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a
+    href="/posts/technique/behind-a-select-query/"
+    >Behind a SELECT Query</a
   >
 </h1>
 
@@ -313,128 +322,59 @@
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="article-date">
-  <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
+<a href="https://www.lhsang.dev/posts/technique/behind-a-select-query/" class="article-date">
+  <time datetime="2020-12-05 17:37:43 &#43;0700 &#43;07" itemprop="datePublished">2020-12-05</time>
 </a>
 </span>
 <span class="article-category">
   <i class="icon icon-folder"></i>&nbsp;
-  <a class="article-category-link" href="/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/"> Trải nghiệm </a>
+  <a class="article-category-link" href="/categories/k%E1%BB%B9-thu%E1%BA%ADt/"> Kỹ thuật </a>
+  <a class="article-category-link" href="/categories/b%C3%A0i-vi%E1%BA%BFt-hay-t%E1%BB%AB-di%E1%BB%85n-%C4%91%C3%A0n/"> Bài viết hay từ diễn đàn </a>
+  <a class="article-category-link" href="/categories/database/"> Database </a>
+  <a class="article-category-link" href="/categories/postgresql/"> PostgreSQL </a>
 </span>  
   <span class="article-tag">
     <i class="icon icon-tags"></i>&nbsp;
-    <a class="article-tag-link" href="/tags/experience/"> Experience </a>
-    <a class="article-tag-link" href="/tags/interview/"> Interview </a>
+    <a class="article-tag-link" href="/tags/technique/"> Technique </a>
   </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/experience/intern-fresher-ntd-hoi-gi/#comments"
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/posts/technique/behind-a-select-query/#comments"
             class="article-comment-link">Comments</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 993words</span>
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5minutes </span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 251words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2minutes </span>
       </div>
       
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
-      <p>Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn. Mình vẫn là sinh viên, đến thời điểm này mình đã đi phỏng vấn ở 2 công ty (tuy nhiên bạn bè mình có mặt ở khá nhiều công ty nên kinh nghiệm phỏng vấn thì mình cũng học được rất nhiều họ) và mình chỉ chia sẻ những thứ thuộc phạm trù của mình nên thiếu sót thì sẽ không tránh khỏi. Nếu có gì hay cần bổ sung mời các bạn comment xuống dưới, mình sẵn sàng tranh luận và tiếp thu :D</p>
-<p>Bài này thực tế cần hơn khi đi phỏng vấn ở một số công ty mà họ không quan tâm technical skills của bạn về thứ cụ thể mà họ đang làm, có nghĩa là họ cần một người vững kiến thức nền và sau đó họ sẽ đào tạo lại. Nhưng dù là vị trí cao thấp hay công ty nhỏ lớn gì thì những kiến thức như vậy mình nghĩ chúng ta cần nắm vững, không phải chỉ để trả lời phỏng vấn mà là nó rất cơ bản chúng ta phải biết nếu học ngành này.</p>
-<p>Thường thì các công ty có quy trình, chương trình <strong>rõ ràng</strong> cho intern, fresher thì sẽ chia ra ít nhất 2 vòng với 2 loại câu hỏi (Culture fit - Technical)</p>
-<h2 id="culture-fit-interview">Culture fit interview</h2>
-<p>Đơn giản culture fit là một buổi phỏng vấn về văn hoá và giao tiếp, nơi cả công ty và ứng viên cùng check xem liệu mình và đối phương có phải một “good match” hay không.
-Phần này sẽ được phòng nhân sự hỏi, có thể được hỏi trong một buổi riêng hoặc hỏi chung ở đầu, sau khi phỏng vấn technical.</p>
-<p>Nhà tuyển dụng (NTD) sẽ có một số câu hỏi hoặc đặt một tình huống hỏi mình giải quyết như thế nào. Tất cả những gì chúng ta cần là chuẩn bị một tâm thế chân thành và thoải mái để vượt qua phần này. Sau 2 lần đi phỏng vấn thì rút ra một số câu mình được hỏi sẽ rơi vào những phạm trù sau:</p>
+      <p>Câu truy vấn <strong>SELECT</strong> thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm <strong>Run</strong> chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự.</p>
+<h3 id="i-kiến-trúc-cơ-bản-của-postgresql-db">I. Kiến trúc cơ bản của PostgreSQL DB</h3>
+<p><img src="/img/posts/technique/behind-a-select-query/postgresql-architecture.jpg" alt="Postgres architecture"></p>
+<p>PostgreSQL sử dụng kiến trúc client/server. Giống như một ứng dụng client/server như chúng ta biết, client và server có thể nằm ở khác hosts. Chúng kết nối thông qua TCP/IP</p>
 <ul>
-<li>Teamwork</li>
-<li>Management</li>
-<li>Motivation</li>
-<li>Desired working culture</li>
+<li>A server-side: quản lý các database files, các connection giữa client và database</li>
+<li>Front-end applications: có thể là một ứng dụng, web server hoặc là một tool quản lý database.</li>
 </ul>
-<p>Chẳng hạn:</p>
+<p>PostgreSQL server có thể handle đồng thời nhiều requests từ client. Để làm được điều này, nó sẽ nhân bản (fork) một process cho mỗi request. Clietn và server sẽ giao tiếp qua đó, không qua process gốc (original process) nữa.</p>
+<h3 id="ii-luồng-đi-của-một-câu-query-the-path-of-a-query">II. Luồng đi của một câu query (The Path of a Query)</h3>
+<h4 id="1-thiết-lập-connection-truyền-query-và-chờ-kết-quả">1. Thiết lập Connection, truyền query và chờ kết quả</h4>
+<h4 id="2-phân-tích-câu-queryn-parsing-the-query">2. Phân tích câu queryn (Parsing the query)</h4>
+<h4 id="3-xử-lý-lại-câu-query--the-rewrite">3. Xử lý lại câu query ( The Rewrite)</h4>
+<h4 id="4-lên-kế-hoạch-truy-vấn-the-query-plan">4. Lên kế hoạch truy vấn (The query plan)</h4>
+<h4 id="5-thực-thi-executor">5. Thực thi (Executor)</h4>
+<h3 id="references">References.</h3>
 <ul>
-<li>Khi làm việc nhóm em thường gặp những vấn đề gì khó khăn và em đã giải quyết như thế nào?</li>
-<li>Khi được giao một công việc, bạn sẽ hoàn thành nó như thế nào? Bạn sẽ làm gì khi không thể hoàn thành deadline?</li>
-<li>Kể một lần sai lầm và bị chỉ trích, bạn phản ứng về điều đó như thế nào?</li>
-<li>Mức lương mong muốn của em là bao nhiêu cho vị trí này?</li>
+<li><a href="https://www.postgresql.org/docs/9.1/tutorial-arch.html">Architectural Fundamentals</a></li>
+<li><a href="https://towardsdatascience.com/whats-behind-a-simple-sql-query-c78e3ded8321">What’s behind a simple SQL query?</a></li>
+<li><a href="https://medium.com/swlh/architecture-of-postgresql-db-d6b1ac4cc231">Architecture of PostgreSQL DB</a></li>
+<li><a href="https://www.slideshare.net/oddbjorn/Get-to-know-PostgreSQL">Get to know PostgreSQL!</a></li>
 </ul>
-<p>Đừng quên chuẩn bị một bài giới thiệu thật hoành tráng (tôi là ai, điểm mạnh điểm yếu như nào, mục tiêu định hướng rõ ràng, &hellip;)</p>
-<h2 id="technical">Technical</h2>
-<p>Phần này công ty có thể sẽ cho chúng ta test trước 1 bài trắc nghiệm hay code trên một số trang luyện thuật toán để sàng lọc rôì mới gặp phỏng vấn trực tiếp. Với mức độ bài test ở mức độ trung bình, đạt &gt; range(50%, 70%) là pass (tùy). So với kiến thức hỏi trực tiếp thì bài test hỏi rộng hơn do là trắc nghiệm, rộng nhưng không sâu.</p>
-<p>Phỏng vấn technical trực tiếp thì có thể có 1, 2, 3 người, tùy công ty. Kiến thức sẽ rơi vào những môn được học từ năm nhất tới năm 3, có thể hỏi vài câu thực tế liên quan đến vị trí mình apply hoặc liên quan đến công việc cũ của mình (nếu có):</p>
-<ul>
-<li>
-<p><strong>Cấu trúc dữ liệu và thuật toán:</strong> sẽ hỏi những câu cơ bản và kèm theo một câu hỏi ứng dụng, hoặc so sánh 2 cấu trúc liên quan.</p>
-<ul>
-<li>Mảng, danh sách liên kết (đơn, đôi vòng)</li>
-<li>Stack &amp; queue</li>
-<li>Sort, search.</li>
-<li>Tree (binary, AVL, B-tree)</li>
-<li>Graph</li>
-<li>Đệ qui, quy hoạch động</li>
-<li>Cấu trúc heap, hashtable, hashmap</li>
-</ul>
-</li>
-<li>
-<p><strong>Lập trình hướng đối tượng:</strong></p>
-<ul>
-<li>4 tính chất</li>
-<li>Phân biệt interface vs abstract, class vs object</li>
-<li>destructor and constructor</li>
-<li>design pattern (nhóm, biết những loại nào, khi nào dùng, ví dụ trong thực tế)</li>
-</ul>
-</li>
-<li>
-<p><strong>Cơ sở dữ liệu:</strong></p>
-<ul>
-<li>indexes (cơ chế, các loại index)</li>
-<li>Delete và Truncate</li>
-<li>Transaction (các thuộc tính, bài toán thực tế liên quan như 2 user cùng đặt 1 sp nhưng chỉ còn 1 sp)</li>
-<li>DDL - DML - DCL - TCL. <a href="https://stackoverflow.com/questions/2578194/what-is-ddl-and-dml">What is DDL and DML?</a></li>
-</ul>
-<p><img src="/img/posts/technique/intern/ddl-and-dml.png" alt="ddl and dml"></p>
-<ul>
-<li>Câu hỏi ngẫu nhiên về version và điểm mạnh điểm yếu các csdl hay viết một truy vấn để lấy record cao thứ n từ bảng chẳng hạn.</li>
-</ul>
-</li>
-<li>
-<p><strong>Mạng máy tính:</strong></p>
-<ul>
-<li>TCP vs UDP (so sánh, ứng dụng)</li>
-<li>HTTP vs HTTPS</li>
-<li>DNS, DHCP</li>
-<li>LAN, WAN, MAN</li>
-</ul>
-</li>
-<li>
-<p><strong>Hệ điều hành:</strong></p>
-<ul>
-<li>Các thuật toán lập lịch</li>
-<li>Thread vs process</li>
-<li><a href="https://tech.bizflycloud.vn/race-condition-la-gi-lam-sao-de-khai-thac-20180116193609705.htm">Race condition</a></li>
-<li>Deadlock vs lock</li>
-<li>Một số lệnh cơ bản linux</li>
-<li>Vùng nhớ heap và stack</li>
-</ul>
-</li>
-<li>
-<p><strong>Kiến thức back-end:</strong></p>
-<ul>
-<li>Các phương thức trong RESTful</li>
-<li>Các thuật toán cache</li>
-<li>Cookie, session, localstorage</li>
-<li>Một số kỹ thuật bảo mật</li>
-<li>Ít nhiều nên có kiến thức về kiến trúc</li>
-</ul>
-</li>
-</ul>
-<p>Mình chỉ liệt kê ra nội dung NTD sẽ hỏi để tham khảo đương nhiên tương ứng với mỗi câu trả lời của bạn thì NTD sẽ bổ sung và hỏi sâu theo hướng nào, bạn cố gắng tìm hiểu, hệ thống lại và trả lời một cách đầy đủ, thông minh nhất có thể.</p>
-<p>Trên là những phần mình đã được hỏi khi đi phỏng vấn hy vọng ít nhiều cũng giúp được các bạn đạt được vị trí mong muốn ở công ty mình ước ao &lt;3</p>
-<p><strong>Good luck!</strong></p>
 
     </div>
     
     <div class="article-footer">
 
       
-      <div class="fb-comments" data-href="http://www.lhsang.me/blog/trai-nghiem/intern-fresher-ntd-hoi-gi" data-width="100%" data-numposts="5"></div>
+      <div class="fb-comments" data-href="https://www.lhsang.me/posts/technique/behind-a-select-query/" data-width="100%" data-numposts="5"></div>
       
 
 
@@ -473,14 +413,9 @@ Phần này sẽ được phòng nhân sự hỏi, có thể được hỏi tron
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.lhsang.dev/posts/technique/nginx/" title="Nginx là gì ? Demo load balancing với nginx"><i
+                <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" title="Crawl data - cào dữ liệu có gì khó?"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
-            </li>
-            <li class="next">
-                <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/"
-                    title="Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?"><span>Newer&nbsp;&nbsp;</span><i
-                        class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
             
             <li class="toggle-toc">
