@@ -24,36 +24,31 @@
   
   
   <meta name="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
-  <meta name="generator" content="Hugo 0.80.0 with theme pure" />
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
+  <meta name="generator" content="Hugo 0.109.0 with theme pure" />
   <title>Full-Text Search trong PostgreSQL - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
   <meta property="og:title" content="Full-Text Search trong PostgreSQL" />
 <meta property="og:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" />
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-04-23T10:30:58+07:00" />
 <meta property="article:modified_time" content="2020-04-23T10:30:58+07:00" />
 <meta itemprop="name" content="Full-Text Search trong PostgreSQL">
 <meta itemprop="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi.">
-<meta itemprop="datePublished" content="2020-04-23T10:30:58+07:00" />
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."><meta itemprop="datePublished" content="2020-04-23T10:30:58+07:00" />
 <meta itemprop="dateModified" content="2020-04-23T10:30:58+07:00" />
 <meta itemprop="wordCount" content="2244">
-
-
-
-<meta itemprop="keywords" content="Technique,PostgreSQL," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Technique,PostgreSQL," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Full-Text Search trong PostgreSQL"/>
 <meta name="twitter:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern;  Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."/>
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -413,14 +408,14 @@ SELECT to_tsquery('english', 'The &amp; Fat | Rats');
 <td>array_to_tsvector(text[])</td>
 <td>tsvector</td>
 <td>convert mảng lexemes thành tsvector</td>
-<td>array_to_tsvector('{fat,cat,rat}'::text[])</td>
+<td>array_to_tsvector(&rsquo;{fat,cat,rat}&rsquo;::text[])</td>
 <td>&lsquo;cat&rsquo; &lsquo;fat&rsquo; &lsquo;rat&rsquo;</td>
 </tr>
 <tr>
 <td>plainto_tsquery([ config regconfig , ] query text)</td>
 <td>tsquery</td>
 <td>hàm tsquery bỏ qua dấu câu</td>
-<td>plainto_tsquery(&lsquo;english&rsquo;, &lsquo;The Fat Rats&rsquo;)</td>
+<td>plainto_tsquery(&rsquo;english&rsquo;, &lsquo;The Fat Rats&rsquo;)</td>
 <td>&lsquo;fat&rsquo; &amp; &lsquo;rat&rsquo;</td>
 </tr>
 <tr>
@@ -525,7 +520,7 @@ t
 <td>tsvector</td>
 <td>concatenate tsvectors</td>
 <td>&lsquo;a:1 b:2&rsquo;::tsvector || &lsquo;c:1 d:2 b:3&rsquo;::tsvector</td>
-<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &rsquo;d':4</td>
+<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &rsquo;d&rsquo;:4</td>
 </tr>
 <tr>
 <td>&amp;&amp;</td>
@@ -767,7 +762,7 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
 
 
 
-    2021
+    2023
     <div class="publishby">
         Theme by xiaoheiAh
     </div>
@@ -800,8 +795,8 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.dev/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
-<script src="https://www.lhsang.dev/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+<script src="https://www.lhsang.dev/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
+<script src="https://www.lhsang.dev/js/plugin.min.738a460bf4317fac61717f1bca393e53d00973db9754d9f0a81c7312d5874840.js"></script>
 
 <script>
     (function (window) {
@@ -819,7 +814,7 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({

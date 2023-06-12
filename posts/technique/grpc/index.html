@@ -24,36 +24,31 @@
   
   
   <meta name="description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
-  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
-  <meta name="generator" content="Hugo 0.80.0 with theme pure" />
+gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
+  <meta name="generator" content="Hugo 0.109.0 with theme pure" />
   <title>Tìm hiểu gRPC - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.7dc20efbc53647d41aa9ddea0c48e59300223d084e66ea0cbe7c30bd88903acc.css">
+  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
   <meta property="og:title" content="Tìm hiểu gRPC" />
 <meta property="og:description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
-  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
+gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/technique/grpc/" />
+<meta property="og:url" content="https://www.lhsang.dev/posts/technique/grpc/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-02-15T08:40:50+07:00" />
 <meta property="article:modified_time" content="2020-02-15T08:40:50+07:00" />
 <meta itemprop="name" content="Tìm hiểu gRPC">
 <meta itemprop="description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
-  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice.">
-<meta itemprop="datePublished" content="2020-02-15T08:40:50+07:00" />
+gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice."><meta itemprop="datePublished" content="2020-02-15T08:40:50+07:00" />
 <meta itemprop="dateModified" content="2020-02-15T08:40:50+07:00" />
 <meta itemprop="wordCount" content="902">
-
-
-
-<meta itemprop="keywords" content="Technique,RPC,HTTP," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Technique,RPC,HTTP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tìm hiểu gRPC"/>
 <meta name="twitter:description" content="gRPC là gì ? Trong thời điểm hiện tại thì JSON REST API vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên protocol buffers và HTTP/2 của Google có tên là gRPC
-  gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice."/>
+gRPC là một RPC platform được phát triển bởi Google nhằm tối ưu hoá và tăng tốc việc giao tiếp giữa các service với nhau trong kiến trúc microservice."/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -510,7 +505,7 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
 
 
 
-    2021
+    2023
     <div class="publishby">
         Theme by xiaoheiAh
     </div>
@@ -543,8 +538,8 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.dev/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
-<script src="https://www.lhsang.dev/js/plugin.min.51ff8c7317566f82259170fa36e09c4493adc9b9378b427a01ad3f017ebac7dd.js"></script>
+<script src="https://www.lhsang.dev/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
+<script src="https://www.lhsang.dev/js/plugin.min.738a460bf4317fac61717f1bca393e53d00973db9754d9f0a81c7312d5874840.js"></script>
 
 <script>
     (function (window) {
@@ -562,7 +557,7 @@ Thêm một cách để tối ưu tốc độ loading của website, thay vì ph
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({
