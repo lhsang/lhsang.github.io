@@ -1,4 +1,7 @@
 <!-- Analytics -->
-{{- if and (not .Site.IsServer) .Site.GoogleAnalytics -}}
-  {{ template "_internal/google_analytics_async.html" . }}
+{{- if .Site.GoogleAnalytics -}}
+  {{/* The following line was causing errors */}}
+  {{/* template "_internal/google_analytics_async.html" . */}}
+
+  <!-- You can add your own analytics code here if needed -->
 {{- end -}}
