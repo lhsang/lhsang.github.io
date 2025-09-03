@@ -2,62 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sang Le Hoang</title>
-    <link>http://localhost:1313/</link>
+    <link>https://www.lhsang.github.io/</link>
     <description>Recent content on Sang Le Hoang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 05 Dec 2020 17:37:43 +0700</lastBuildDate>
     
-        <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.lhsang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Behind a SELECT Query</title>
-      <link>http://localhost:1313/posts/technique/behind-a-select-query/</link>
-      <pubDate>Sat, 05 Dec 2020 17:37:43 +0700</pubDate>
-      
-      <guid>http://localhost:1313/posts/technique/behind-a-select-query/</guid>
-      <description>&lt;p&gt;Câu truy vấn &lt;strong&gt;SELECT&lt;/strong&gt; thường xuyên dùng, liệu rằng chúng ta đã hiểu nó hoạt động như thế nào khi bấm &lt;strong&gt;Run&lt;/strong&gt; chưa? Bài viết này mình vô tình đọc được từ medium nên hôm nay mình sẽ vietsub lại đồng thời tìm hiểu và bổ sung thêm. Mình sẽ chọn PostgreSQL để phân tích như bài viết, cơ bản thì các cơ sở dữ liệu quan hệ khác cũng tương tự.&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>Crawl data - cào dữ liệu có gì khó?</title>
-      <link>http://localhost:1313/posts/technique/scraping-data-from-websites/</link>
+      <link>https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/</link>
       <pubDate>Mon, 17 Aug 2020 18:31:34 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/technique/scraping-data-from-websites/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/posts/technique/crawl/crawl.jpg&#34; alt=&#34;Crawl data&#34;&gt;&lt;/p&gt;
+      <guid>https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.lhsang.github.io/img/posts/technique/crawl/crawl.jpg&#34; alt=&#34;Crawl data&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Mutithreading Concurrency Problems</title>
-      <link>http://localhost:1313/posts/technique/mutithreading-concurrency-problems/</link>
-      <pubDate>Fri, 07 Aug 2020 15:24:23 +0700</pubDate>
-      
-      <guid>http://localhost:1313/posts/technique/mutithreading-concurrency-problems/</guid>
-      <description>&lt;h3 id=&#34;process-và-thread&#34;&gt;Process và Thread&lt;/h3&gt;
-&lt;p&gt;Process là một thực thể hoạt động của một chương trình, có vùng nhớ riêng và các process hoạt động riêng lẻ không tác động lẫn nhau.
-Thread là một luồng nằm trong process, trong một process có thể có nhiều thread, các Thread này dùng chung vùng nhớ trong process và có thể chia sẻ tài nguyên. Đương nhiên khi dùng chung vùng nhớ sẽ xảy ra một số vấn đề, bài này mình sẽ trình bày một số vấn đề khi lập trình đa luồng (Multithreading programing) chúng ta thường hay gặp.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Microservices Communication</title>
-      <link>http://localhost:1313/posts/technique/microservice-communication/</link>
-      <pubDate>Sun, 02 Aug 2020 15:12:42 +0700</pubDate>
-      
-      <guid>http://localhost:1313/posts/technique/microservice-communication/</guid>
-      <description>&lt;p&gt;Microservices - một hệ thống gồm nhiều services. Từ kiến trúc monolithic chuyển sang Microservices thì việc giao tiếp là một thách thức khá lớn, các modules không còn chung một service trong một process và nằm trên một server nữa mà là các services riêng lẽ theo mô hình distributed service.&lt;/p&gt;
-&lt;p&gt;Phụ thuộc vào tính chất của mỗi service thì sẽ có phương pháp để giao tiếp khác nhau như:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Full-Text Search trong PostgreSQL</title>
-      <link>http://localhost:1313/posts/technique/full-text-search-postgresql/</link>
+      <link>https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/</link>
       <pubDate>Thu, 23 Apr 2020 10:30:58 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/technique/full-text-search-postgresql/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/posts/technique/postgresql/search.png&#34; alt=&#34;full text search&#34;&gt;&lt;/p&gt;
+      <guid>https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.lhsang.github.io/img/posts/technique/postgresql/search.png&#34; alt=&#34;full text search&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;giới-thiệu-về-full-text-search&#34;&gt;Giới thiệu về Full-Text Search&lt;/h3&gt;
 &lt;p&gt;Có lẽ chúng ta đều biết và  sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh &lt;strong&gt;LIKE&lt;/strong&gt; của SQL.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;column_name&lt;/span&gt;(s)
@@ -69,10 +39,10 @@ matching pattern cho từng chuỗi của từng rows của column tương ứng
     
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://www.lhsang.github.io/about/</link>
       <pubDate>Fri, 17 Apr 2020 19:12:40 +0700</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://www.lhsang.github.io/about/</guid>
       <description>&lt;p&gt;Hello, World!&lt;/p&gt;
 &lt;p&gt;Xin chào, mình là Sang. Hiện đang là sinh viên năm cuối của khoa công nghệ thông tin trường ĐH Khoa Học Tự Nhiên TP HCM.&lt;/p&gt;
 &lt;p&gt;Hiện tại chuyên môn của mình là Software Engineering, một ít kinh nghiệm, một chút kiến thức và phân tích suy luận theo góc nhìn cá nhân mình với mong muốn chia sẻ được gì cho bạn và củng cố được kiến thức cho mình.
@@ -82,29 +52,29 @@ Nội dung trên blog xoay quanh về một số trải nghiệm, một số cô
     
     <item>
       <title>Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</title>
-      <link>http://localhost:1313/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</link>
+      <link>https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</link>
       <pubDate>Fri, 03 Apr 2020 08:24:17 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</guid>
+      <guid>https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</guid>
       <description>&lt;p&gt;Từ ghế học đường bước vào môi trường doanh nghiệp là một sự thay đổi không hề nhẹ về thói quen, cách làm việc và kể cả kiến thức mình đã được học. Những thứ trong trường chỉ là những thứ rất cơ bản, chưa đủ đáp ứng cho công việc công ty. Mặc dù làm một trang web, mobile application hay một desktop application hoàn chỉnh thì mình cũng đủ sức để làm ra, nhưng vấn đề tại sao vẫn chưa đáp ứng được cho môi trường doanh nghiệp?&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</title>
-      <link>http://localhost:1313/posts/experience/intern-fresher-ntd-hoi-gi/</link>
+      <link>https://www.lhsang.github.io/posts/experience/intern-fresher-ntd-hoi-gi/</link>
       <pubDate>Fri, 21 Feb 2020 08:20:30 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/experience/intern-fresher-ntd-hoi-gi/</guid>
+      <guid>https://www.lhsang.github.io/posts/experience/intern-fresher-ntd-hoi-gi/</guid>
       <description>&lt;p&gt;Ngay thời điểm chuẩn bị để đi phỏng vấn một công ty mới thì mình ngồi hệ thống lại một số câu hỏi mà mình đã được hỏi trong các cuộc phỏng vấn trước đây và những câu hỏi basic nhất mà mình nghĩ nhà tuyển dụng sẽ hỏi thì sẵn tiện mình release luôn bài này khi cần thì coi lại để chuẩn bị tốt nhất trong buổi phỏng vấn. Mình vẫn là sinh viên, đến thời điểm này mình đã đi phỏng vấn ở 2 công ty (tuy nhiên bạn bè mình có mặt ở khá nhiều công ty nên kinh nghiệm phỏng vấn thì mình cũng học được rất nhiều họ) và mình chỉ chia sẻ những thứ thuộc phạm trù của mình nên thiếu sót thì sẽ không tránh khỏi. Nếu có gì hay cần bổ sung mời các bạn comment xuống dưới, mình sẵn sàng tranh luận và tiếp thu :D&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Nginx là gì ? Demo load balancing với nginx</title>
-      <link>http://localhost:1313/posts/technique/nginx/</link>
+      <link>https://www.lhsang.github.io/posts/technique/nginx/</link>
       <pubDate>Mon, 17 Feb 2020 21:18:58 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/technique/nginx/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/posts/technique/nginx/nginx.png&#34; alt=&#34;Nginx&#34;&gt;&lt;/p&gt;
+      <guid>https://www.lhsang.github.io/posts/technique/nginx/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.lhsang.github.io/img/posts/technique/nginx/nginx.png&#34; alt=&#34;Nginx&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;1-what-is-nginx&#34;&gt;1. What is Nginx?&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Nginx ban đầu được tạo ra như một máy chủ web để giải quyết vấn đề &lt;strong&gt;C10k&lt;/strong&gt; (là một vấn đề liên quan đến vấn đề hiệu suất xử lý 10.000 kết nối cùng lúc), nhưng bây giờ với các tính năng mở rộng Nginx cũng được sử dụng phổ biến như một máy chủ proxy (reverse proxy server), HTTP cache hoặc dùng làm cân bằng tải (load balancer).&lt;/li&gt;
@@ -122,15 +92,15 @@ Nội dung trên blog xoay quanh về một số trải nghiệm, một số cô
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/posts/technique/nginx/architecture.png&#34; alt=&#34;Architecture&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://www.lhsang.github.io/img/posts/technique/nginx/architecture.png&#34; alt=&#34;Architecture&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Tìm hiểu gRPC</title>
-      <link>http://localhost:1313/posts/technique/grpc/</link>
+      <link>https://www.lhsang.github.io/posts/technique/grpc/</link>
       <pubDate>Sat, 15 Feb 2020 08:40:50 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/technique/grpc/</guid>
+      <guid>https://www.lhsang.github.io/posts/technique/grpc/</guid>
       <description>&lt;h2 id=&#34;grpc-là-gì-&#34;&gt;gRPC là gì ?&lt;/h2&gt;
 &lt;p&gt;Trong thời điểm hiện tại thì &lt;strong&gt;JSON REST API&lt;/strong&gt; vẫn đang rất phổ biến và phổ thông bởi tính dễ sử dụng. Tuy nhiên để nâng cao hiệu năng cho trang web, chúng ta sẽ tìm hiểu vê một framework RPC mới dựa trên &lt;strong&gt;protocol buffers&lt;/strong&gt; và HTTP/2 của &lt;strong&gt;Google&lt;/strong&gt; có tên là &lt;strong&gt;gRPC&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -140,11 +110,11 @@ Nội dung trên blog xoay quanh về một số trải nghiệm, một số cô
     
     <item>
       <title>RabbitMQ - Demo with python</title>
-      <link>http://localhost:1313/posts/technique/rabbitmq/</link>
+      <link>https://www.lhsang.github.io/posts/technique/rabbitmq/</link>
       <pubDate>Sat, 08 Feb 2020 08:31:11 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/technique/rabbitmq/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/img/posts/technique/rabbitmq/rabbitMQ.png&#34; alt=&#34;rabbitMQ&#34;&gt;&lt;/p&gt;
+      <guid>https://www.lhsang.github.io/posts/technique/rabbitmq/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://www.lhsang.github.io/img/posts/technique/rabbitmq/rabbitMQ.png&#34; alt=&#34;rabbitMQ&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1. Message-boker ?&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever.&lt;/li&gt;
@@ -164,19 +134,19 @@ Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng
     
     <item>
       <title>Ngày làm việc ở công ty của một thực tập sinh IT</title>
-      <link>http://localhost:1313/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</link>
+      <link>https://www.lhsang.github.io/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</link>
       <pubDate>Wed, 08 Jan 2020 08:13:19 +0700</pubDate>
       
-      <guid>http://localhost:1313/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</guid>
+      <guid>https://www.lhsang.github.io/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/</guid>
       <description>&lt;p&gt;Từ một thằng sinh viên (năm 4) chỉ biết ăn chơi và học, bước ra ngưỡng cửa của xã hội để làm quen, học hỏi và kiếm tiền thì không tránh khỏi những thay đổi về thói quen, công việc,&amp;hellip; Có thể nói đây là lần đầu mình đi thực tập và đi kiếm tiền của thời sinh viên (trước đó có tham gia một startup tuy nhiên sẽ kể ở một câu chuyện khác), vì vậy mình sẽ kể về một ngày làm việc của mình - thực tập sinh công nghệ thông tin, cụ thể là python backend developer tại &lt;strong&gt;Teko Viet Nam&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Résume</title>
-      <link>http://localhost:1313/r%C3%A9sume/</link>
+      <link>https://www.lhsang.github.io/r%C3%A9sume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/r%C3%A9sume/</guid>
+      <guid>https://www.lhsang.github.io/r%C3%A9sume/</guid>
       <description></description>
     </item>
     
