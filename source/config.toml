@@ -1,0 +1,13 @@
+# ...existing code...
+baseURL = "https://lhsang.github.io/"
+# Remove deprecated: paginate = 10
+pagination = { pagerSize = 10 }
+
+# Suppress goldmark raw HTML warning (optional – or enable unsafe)
+ignoreLogs = ['warning-goldmark-raw-html']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+# ...existing code...

@@ -1,0 +1,5 @@
+/* Entry point for Hugo Pipes.
+   If the theme already has /static/css/style.min.css you can import it: */
+@import "/css/style.min.css";
+/* Add site-specific overrides below */
+

@@ -9,3 +9,6 @@
 
 - Generate HTML without draft posts
 > hugo
+
+- Test locally with production URL
+> hugo server --baseURL="https://lhsang.github.io" --appendPort=false

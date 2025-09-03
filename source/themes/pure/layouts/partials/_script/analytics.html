@@ -1,7 +1,3 @@
-<!-- Analytics -->
-{{- if .Site.Config.Services.GoogleAnalytics.ID -}}
-  {{/* The following line was causing errors */}}
-  {{/* template "_internal/google_analytics_async.html" . */}}
+{{/* Disabled analytics – no GA configured.
+     Prevents errors on .Site.GoogleAnalytics field lookups. */}}
 
-  <!-- You can add your own analytics code here if needed -->
-{{- end -}}

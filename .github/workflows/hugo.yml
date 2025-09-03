@@ -1,0 +1,7 @@
+# ...existing code...
+      - name: Build
+        run: |
+          hugo --minify
+# (Do NOT force a wrong --baseURL; rely on config.toml)
+# ...existing code...
+
