@@ -23,36 +23,47 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="1. Message-boker ?
+  <meta name="description" content="
+1. Message-boker ?
 Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là: Publish và Subscribe (Topics) Point-to-Point (Queues) 2. RabbitMQ là gì ?
-RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)." />
-  <meta name="generator" content="Hugo 0.109.0 with theme pure" />
+RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message). Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối tới để bỏ message vào và gửi message dựa trên nó.
+" />
+  <meta name="generator" content="Hugo 0.148.2 with theme pure" />
   <title>RabbitMQ - Demo with python - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css">
+  <link rel="stylesheet" href="https://www.lhsang.github.io/css/style.min.4a6938d82a2f044144682e6d19362a86e911d8ff2ea5a6a17d0b5ed932a1847e.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-  <meta property="og:title" content="RabbitMQ - Demo with python" />
-<meta property="og:description" content="1. Message-boker ?
+  <meta property="og:url" content="https://www.lhsang.github.io/posts/technique/rabbitmq/">
+  <meta property="og:site_name" content="Sang Le Hoang">
+  <meta property="og:title" content="RabbitMQ - Demo with python">
+  <meta property="og:description" content="1. Message-boker ?
 Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là: Publish và Subscribe (Topics) Point-to-Point (Queues) 2. RabbitMQ là gì ?
-RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/technique/rabbitmq/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-02-08T08:31:11+07:00" />
-<meta property="article:modified_time" content="2020-02-08T08:31:11+07:00" />
-<meta itemprop="name" content="RabbitMQ - Demo with python">
-<meta itemprop="description" content="1. Message-boker ?
+RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message). Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối tới để bỏ message vào và gửi message dựa trên nó.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-02-08T08:31:11+07:00">
+    <meta property="article:modified_time" content="2020-02-08T08:31:11+07:00">
+    <meta property="article:tag" content="Technique">
+    <meta property="article:tag" content="Message Broker">
+    <meta property="article:tag" content="RabbitMQ">
+
+  <meta itemprop="name" content="RabbitMQ - Demo with python">
+  <meta itemprop="description" content="1. Message-boker ?
 Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là: Publish và Subscribe (Topics) Point-to-Point (Queues) 2. RabbitMQ là gì ?
-RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)."><meta itemprop="datePublished" content="2020-02-08T08:31:11+07:00" />
-<meta itemprop="dateModified" content="2020-02-08T08:31:11+07:00" />
-<meta itemprop="wordCount" content="1230">
-<meta itemprop="keywords" content="Technique,Message broker,RabbitMQ," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="RabbitMQ - Demo with python"/>
-<meta name="twitter:description" content="1. Message-boker ?
+RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message). Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối tới để bỏ message vào và gửi message dựa trên nó.">
+  <meta itemprop="datePublished" content="2020-02-08T08:31:11+07:00">
+  <meta itemprop="dateModified" content="2020-02-08T08:31:11+07:00">
+  <meta itemprop="wordCount" content="1230">
+  <meta itemprop="keywords" content="Technique,Message Broker,RabbitMQ">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RabbitMQ - Demo with python">
+  <meta name="twitter:description" content="1. Message-boker ?
 Là chương trình đóng vai trò trung gian lưu trữ cũng như điều phối (valadating, transforming, routing messages) các yêu cầu (message) giữa sender và reciever. Mesage-boker có 2 hình thức giao tiếp cơ bản là: Publish và Subscribe (Topics) Point-to-Point (Queues) 2. RabbitMQ là gì ?
-RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message)."/>
+RabbitMQ là một message boker (message-oriented middleware) hay còn gọi là phần mềm quản lý hàng đợi message (thường được gọi là môi giới message hay trình quản lý message). Nói đơn giản đây là phần mềm định nghĩa hàng đợi một ứng dụng khác có thể kết nối tới để bỏ message vào và gửi message dựa trên nó.">
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -83,7 +94,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/lhsang" target="_blank">
-            <img class="img-circle img-rotate" src="https://www.lhsang.dev/img/profile.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://www.lhsang.github.io/img/profile.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
@@ -164,8 +175,8 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">5</span></li>
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ thuật</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải nghiệm</a><span class="category-list-count">3</span></li>
         </ul>
     </div>
 </div>
@@ -175,51 +186,51 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/crawler/" class="tag-list-link">crawler</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/crawler/" class="tag-list-link">crawler</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/experience/" class="tag-list-link">experience</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/experience/" class="tag-list-link">experience</a><span
                     class="tag-list-count">3</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/http/" class="tag-list-link">http</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/http/" class="tag-list-link">http</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/internship/" class="tag-list-link">internship</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/internship/" class="tag-list-link">internship</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/interview/" class="tag-list-link">interview</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/interview/" class="tag-list-link">interview</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/message-broker/" class="tag-list-link">message-broker</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/message-broker/" class="tag-list-link">message broker</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/nginx/" class="tag-list-link">nginx</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/postgresql/" class="tag-list-link">postgresql</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/postgresql/" class="tag-list-link">postgresql</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rpc/" class="tag-list-link">rpc</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rpc/" class="tag-list-link">rpc</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/technique/" class="tag-list-link">technique</a><span
                     class="tag-list-count">5</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/thesis/" class="tag-list-link">thesis</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/thesis/" class="tag-list-link">thesis</a><span
                     class="tag-list-count">1</span></li>
             
         </ul>
@@ -234,7 +245,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
@@ -244,7 +255,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
@@ -254,7 +265,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
@@ -264,7 +275,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
@@ -274,7 +285,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
@@ -316,7 +327,7 @@ RabbitMQ là một message boker (message-oriented middleware) hay còn gọi l�
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/rabbitmq/" class="article-date">
+<a href="https://www.lhsang.github.io/posts/technique/rabbitmq/" class="article-date">
   <time datetime="2020-02-08 08:31:11 &#43;0700 &#43;07" itemprop="datePublished">2020-02-08</time>
 </a>
 </span>
@@ -431,63 +442,59 @@ Consumer có thể đăng ký những topic mà nó quan tâm. Cú pháp đượ
 <ul>
 <li>Tạo một service gởi - sender.py: với queue tên &lsquo;demo&rsquo;, exchange &rsquo;logs&rsquo; đẩy msg đến toàn bộ queue (exchange_type=&lsquo;fanout&rsquo;). Bắn msg với routing_keys=&lsquo;key1&rsquo;, nội dung trong body</li>
 </ul>
-<pre><code class="language-python">import pika
-
-# using CloudAMQP (https://www.cloudamqp.com/)
-CLOUDAMQP_URL = 'amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja'
-
-# establish a connection with RabbitMQ server.
-params = pika.URLParameters(CLOUDAMQP_URL)
-connection = pika.BlockingConnection(params)
-channel = connection.channel()
-
-# create queue with name 'demo'
-channel.queue_declare(queue='demo')
-channel.exchange_declare(exchange='logs', exchange_type='fanout')
-
-# Ready to send a message
-channel.basic_publish(exchange='logs',
-                      routing_key='key1',
-                      body='Hello world!')
-
-print(&quot; Sent message&quot;)
-# close connection
-connection.close()
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pika
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># using CloudAMQP (https://www.cloudamqp.com/)</span>
+</span></span><span style="display:flex;"><span>CLOUDAMQP_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># establish a connection with RabbitMQ server.</span>
+</span></span><span style="display:flex;"><span>params <span style="color:#f92672">=</span> pika<span style="color:#f92672">.</span>URLParameters(CLOUDAMQP_URL)
+</span></span><span style="display:flex;"><span>connection <span style="color:#f92672">=</span> pika<span style="color:#f92672">.</span>BlockingConnection(params)
+</span></span><span style="display:flex;"><span>channel <span style="color:#f92672">=</span> connection<span style="color:#f92672">.</span>channel()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create queue with name &#39;demo&#39;</span>
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>queue_declare(queue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;demo&#39;</span>)
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>exchange_declare(exchange<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;logs&#39;</span>, exchange_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;fanout&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ready to send a message</span>
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>basic_publish(exchange<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;logs&#39;</span>,
+</span></span><span style="display:flex;"><span>                      routing_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;key1&#39;</span>,
+</span></span><span style="display:flex;"><span>                      body<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Hello world!&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34; Sent message&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># close connection</span>
+</span></span><span style="display:flex;"><span>connection<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><ul>
 <li>Service nhận message- receiver.py. Đăng ký nhận msg ở queue &lsquo;demo&rsquo;</li>
 </ul>
-<pre><code class="language-python">import pika
-
-CLOUDAMQP_URL = 'amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja'
-
-# Access the CLODUAMQP_URL environment variable and parse it (fallback to localhost)
-params = pika.URLParameters(CLOUDAMQP_URL)
-connection = pika.BlockingConnection(params)
-channel = connection.channel()  # start a channel
-channel.queue_declare(queue='demo')  # Declare a queue
-
-
-def callback(ch, method, properties, body):
-    print(&quot; [x] Received &quot; + str(body))
-
-
-channel.basic_consume('hello',
-                      callback,
-                      auto_ack=True)
-
-print(' [*] Waiting for messages:')
-channel.start_consuming()
-connection.close()
-
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pika
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CLOUDAMQP_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;amqp://vvrzbnja:2xdFFhXnVM2o0QyeU6ynPHrgr9V5C8rK@woodpecker.rmq.cloudamqp.com/vvrzbnja&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Access the CLODUAMQP_URL environment variable and parse it (fallback to localhost)</span>
+</span></span><span style="display:flex;"><span>params <span style="color:#f92672">=</span> pika<span style="color:#f92672">.</span>URLParameters(CLOUDAMQP_URL)
+</span></span><span style="display:flex;"><span>connection <span style="color:#f92672">=</span> pika<span style="color:#f92672">.</span>BlockingConnection(params)
+</span></span><span style="display:flex;"><span>channel <span style="color:#f92672">=</span> connection<span style="color:#f92672">.</span>channel()  <span style="color:#75715e"># start a channel</span>
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>queue_declare(queue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;demo&#39;</span>)  <span style="color:#75715e"># Declare a queue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">callback</span>(ch, method, properties, body):
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34; [x] Received &#34;</span> <span style="color:#f92672">+</span> str(body))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>basic_consume(<span style="color:#e6db74">&#39;hello&#39;</span>,
+</span></span><span style="display:flex;"><span>                      callback,
+</span></span><span style="display:flex;"><span>                      auto_ack<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39; [*] Waiting for messages:&#39;</span>)
+</span></span><span style="display:flex;"><span>channel<span style="color:#f92672">.</span>start_consuming()
+</span></span><span style="display:flex;"><span>connection<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><ul>
 <li><strong>Run</strong></li>
 </ul>
-<pre><code class="language-shell">    $ python sender.py
-    $ python receiver.py
-</code></pre>
-<p><img src="/img/posts/technique/rabbitmq/sender.png" alt="Sender"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    $ python sender.py
+</span></span><span style="display:flex;"><span>    $ python receiver.py
+</span></span></code></pre></div><p><img src="/img/posts/technique/rabbitmq/sender.png" alt="Sender"></p>
 <p><img src="/img/posts/technique/rabbitmq/result.png" alt="Result"></p>
 <p><strong>References:</strong><!-- raw HTML omitted -->
 <a href="https://www.cloudamqp.com/blog/2015-05-18-part1-rabbitmq-for-beginners-what-is-rabbitmq.html">RabbitMQ for beginners - What is RabbitMQ?</a> <!-- raw HTML omitted -->
@@ -518,7 +525,7 @@ connection.close()
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
+          <img src="https://www.lhsang.github.io/img/profile.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -538,12 +545,12 @@ connection.close()
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.lhsang.dev/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/" title="Ngày làm việc ở công ty của một thực tập sinh IT"><i
+                <a href="https://www.lhsang.github.io/posts/experience/mot-ngay-lam-viec-cua-thuc-tap-sinh-it/" title="Ngày làm việc ở công ty của một thực tập sinh IT"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
             </li>
             <li class="next">
-                <a href="https://www.lhsang.dev/posts/technique/grpc/"
+                <a href="https://www.lhsang.github.io/posts/technique/grpc/"
                     title="Tìm hiểu gRPC"><span>Newer&nbsp;&nbsp;</span><i
                         class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
@@ -579,7 +586,7 @@ connection.close()
 
 
 
-    2023
+    2025
     <div class="publishby">
         Theme by xiaoheiAh
     </div>
@@ -599,7 +606,7 @@ connection.close()
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    window.jQuery || document.write('\x3Cscript src="js/jquery.min.js"><\/script>')
 </script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
@@ -612,8 +619,8 @@ connection.close()
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.dev/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
-<script src="https://www.lhsang.dev/js/plugin.min.738a460bf4317fac61717f1bca393e53d00973db9754d9f0a81c7312d5874840.js"></script>
+<script src="https://www.lhsang.github.io/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
+<script src="https://www.lhsang.github.io/js/plugin.min.61b81a55e6f5fc0ed07e513381c46849929d4e89f95d72c54f3f7ec9624af40c.js"></script>
 
 <script>
     (function (window) {
@@ -625,13 +632,13 @@ connection.close()
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            ROOT_URL: 'https:\/\/www.lhsang.dev\/',
-            CONTENT_URL: 'https:\/\/www.lhsang.dev\/\/searchindex.json ',
+            ROOT_URL: 'https:\/\/www.lhsang.github.io\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.github.io\/\/searchindex.json ',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.github.io/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({

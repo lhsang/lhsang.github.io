@@ -1,6 +1,6 @@
 # Awesome Blog
 
-## uild commands
+## build commands
 - New post
 > hugo new posts/new-post.md
 

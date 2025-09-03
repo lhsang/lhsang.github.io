@@ -4,10 +4,13 @@ title: Sang Le Hoang
 defaultContentLanguage: en  # en/zh/...
 footnoteReturnLinkContents: ↩
 hasCJKLanguage: true
-paginate: 5
+pagination:
+  pagerSize: 10
 enableEmoji: true
 PygmentsCodeFences: false
-googleAnalytics: ""      # UA-XXXXXXXX-X 
+services:
+  googleAnalytics:
+    id: ""
 publishDir: ../
 #permalinks:
 #  posts: /:year/:month/:filename/

@@ -23,32 +23,42 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
-  <meta name="generator" content="Hugo 0.109.0 with theme pure" />
+  <meta name="description" content="
+Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.
+" />
+  <meta name="generator" content="Hugo 0.148.2 with theme pure" />
   <title>Full-Text Search trong PostgreSQL - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css">
+  <link rel="stylesheet" href="https://www.lhsang.github.io/css/style.min.4a6938d82a2f044144682e6d19362a86e911d8ff2ea5a6a17d0b5ed932a1847e.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-  <meta property="og:title" content="Full-Text Search trong PostgreSQL" />
-<meta property="og:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-04-23T10:30:58+07:00" />
-<meta property="article:modified_time" content="2020-04-23T10:30:58+07:00" />
-<meta itemprop="name" content="Full-Text Search trong PostgreSQL">
-<meta itemprop="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."><meta itemprop="datePublished" content="2020-04-23T10:30:58+07:00" />
-<meta itemprop="dateModified" content="2020-04-23T10:30:58+07:00" />
-<meta itemprop="wordCount" content="2244">
-<meta itemprop="keywords" content="Technique,PostgreSQL," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Full-Text Search trong PostgreSQL"/>
-<meta name="twitter:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
-SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi."/>
+  <meta property="og:url" content="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/">
+  <meta property="og:site_name" content="Sang Le Hoang">
+  <meta property="og:title" content="Full-Text Search trong PostgreSQL">
+  <meta property="og:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-23T10:30:58+07:00">
+    <meta property="article:modified_time" content="2020-04-23T10:30:58+07:00">
+    <meta property="article:tag" content="Technique">
+    <meta property="article:tag" content="PostgreSQL">
+
+  <meta itemprop="name" content="Full-Text Search trong PostgreSQL">
+  <meta itemprop="description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.">
+  <meta itemprop="datePublished" content="2020-04-23T10:30:58+07:00">
+  <meta itemprop="dateModified" content="2020-04-23T10:30:58+07:00">
+  <meta itemprop="wordCount" content="2244">
+  <meta itemprop="keywords" content="Technique,PostgreSQL">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Full-Text Search trong PostgreSQL">
+  <meta name="twitter:description" content="Giới thiệu về Full-Text Search Có lẽ chúng ta đều biết và sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh LIKE của SQL.
+SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụng LIKE, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.">
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -79,7 +89,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/lhsang" target="_blank">
-            <img class="img-circle img-rotate" src="https://www.lhsang.dev/img/profile.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://www.lhsang.github.io/img/profile.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
@@ -160,8 +170,8 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">5</span></li>
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ thuật</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải nghiệm</a><span class="category-list-count">3</span></li>
         </ul>
     </div>
 </div>
@@ -171,51 +181,51 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/crawler/" class="tag-list-link">crawler</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/crawler/" class="tag-list-link">crawler</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/experience/" class="tag-list-link">experience</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/experience/" class="tag-list-link">experience</a><span
                     class="tag-list-count">3</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/http/" class="tag-list-link">http</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/http/" class="tag-list-link">http</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/internship/" class="tag-list-link">internship</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/internship/" class="tag-list-link">internship</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/interview/" class="tag-list-link">interview</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/interview/" class="tag-list-link">interview</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/message-broker/" class="tag-list-link">message-broker</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/message-broker/" class="tag-list-link">message broker</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/nginx/" class="tag-list-link">nginx</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/postgresql/" class="tag-list-link">postgresql</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/postgresql/" class="tag-list-link">postgresql</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rpc/" class="tag-list-link">rpc</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rpc/" class="tag-list-link">rpc</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/technique/" class="tag-list-link">technique</a><span
                     class="tag-list-count">5</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/thesis/" class="tag-list-link">thesis</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/thesis/" class="tag-list-link">thesis</a><span
                     class="tag-list-count">1</span></li>
             
         </ul>
@@ -230,7 +240,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
@@ -240,7 +250,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
@@ -250,7 +260,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
@@ -260,7 +270,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
@@ -270,7 +280,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
@@ -312,7 +322,7 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="article-date">
+<a href="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/" class="article-date">
   <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
 </a>
 </span>
@@ -337,11 +347,10 @@ SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern; Sử dụn
       <p><img src="/img/posts/technique/postgresql/search.png" alt="full text search"></p>
 <h3 id="giới-thiệu-về-full-text-search">Giới thiệu về Full-Text Search</h3>
 <p>Có lẽ chúng ta đều biết và  sử dụng qua một kỹ thuật tìm kiếm rất cơ bản, đó là thông qua câu lệnh <strong>LIKE</strong> của SQL.</p>
-<pre><code class="language-sql">SELECT column_name(s)
-FROM table_name
-WHERE column_name LIKE pattern;
-</code></pre>
-<p>Sử dụng <strong>LIKE</strong>, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">column_name</span>(s)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#66d9ef">table_name</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> <span style="color:#66d9ef">column_name</span> <span style="color:#66d9ef">LIKE</span> pattern;
+</span></span></code></pre></div><p>Sử dụng <strong>LIKE</strong>, chúng ta chỉ tìm kiếm ở column đã định trước, do đó không gian tìm kiếm bị giới hạn hơn. Về tốc độ, câu lệnh LIKE cũng tương đương với lệnh chúng ta
 matching pattern cho từng chuỗi của từng rows của column tương ứng thì bạn cũng hiểu tốc độ sẽ như thế nào rồi. Kết quả tìm kiếm có độ nhiễu cao và gặp vấn đề về từ đồng nghĩa.</p>
 <p>Một giải pháp tìm kiếm đầy đủ, nhanh hơn và linh hoạt hơn đó là Full-text search.
 <strong>Full-text search (FTS)</strong> là một kỹ thuật tìm kiếm kết quả trên cơ sở dữ liệu chứa &ldquo;toàn bộ&rdquo; các kí tự (text) của một hoặc một số tài liệu, bài báo,&hellip;(document), hoặc là của website.</p>
@@ -354,11 +363,10 @@ không như mong đợi và thời gian query lâu.</p>
 <li><strong>Apply các quy tắc ngôn ngữ</strong> để chuẩn hóa lexeme thành dạng nguyên mẫu, ví dụ: see, saw, seen đều đưa về dạng nguyên mẫu là see để lưu trữ. Stopword - những từ phổ biến, xuất hiện hầu hết trong mỗi document,
 tuy nhiên không thể phân biệt được gì từ chúng, nên postgresql cũng có các bộ từ điển và tự động loại bỏ stopword trước khi lưu.</li>
 </ul>
-<pre><code class="language-sql">SELECT to_tsvector('english','in the list of stop words'); -- english: dùng bộ từ điển tiếng anh (default english)
-----------------------------
- 'list':3 'stop':5 'word':6
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsvector(<span style="color:#e6db74">&#39;english&#39;</span>,<span style="color:#e6db74">&#39;in the list of stop words&#39;</span>); <span style="color:#75715e">-- english: dùng bộ từ điển tiếng anh (default english)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">----------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;list&#39;</span>:<span style="color:#ae81ff">3</span> <span style="color:#e6db74">&#39;stop&#39;</span>:<span style="color:#ae81ff">5</span> <span style="color:#e6db74">&#39;word&#39;</span>:<span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><ul>
 <li><strong>Store document</strong> đã tiền xử lý theo một cách tối ưu để tìm kiếm nhanh hơn. Ví dụ biểu diễn tài liệu dưới dạng một mảng các từ vựng được sắp xếp. Lưu trữ vị ví xuất hiện, tần suất xuất hiện nhằm để xếp hạng (Ranking).</li>
 </ul>
 <p>PostgreSQL là một cơ sở dữ liệu có thể mở rộng, nên nó có thêm datatype mới là <strong>tsvector</strong> dùng cho tiền xử lý và lưu tài liệu, <strong>tsquery</strong> dùng để query. Và thêm operator <strong>@@</strong> được defined cho datatype này. Và đương nhiên FTS cũng có thể
@@ -366,87 +374,83 @@ tuy nhiên không thể phân biệt được gì từ chúng, nên postgresql c
 <h3 id="text-search-functions">Text search functions</h3>
 <h4 id="1-parsing-documents--tsvector">1. Parsing documents:  tsvector</h4>
 <blockquote>
-<p>to_tsvector([ config regconfig, ] document text)</p>
-</blockquote>
+<p>to_tsvector([ config regconfig, ] document text)</p></blockquote>
 <p>tsvector là một kiểu dữ liệu dạng document được dùng để tối ưu hóa full text search. chuỗi được phân tách và sắp xếp lại theo thứ tự từ điển, các từ trùng lặp chỉ lưu trữ một lần, đồng thời hàm có sử dụng dictionary (english - default) để loại bỏ những từ ngữ không quan trọng (mạo từ, tobe, &hellip;)
 và chuyển về dạng nguyên mẫu để lưu trữ tiện cho việc tìm kiếm. Kèm theo đó là vị trí xuất hiện trong câu.</p>
-<pre><code class="language-sql">SELECT to_tsvector('english', 'A task was canceled.');
------------------------
- 'cancel':4 'task':2
-</code></pre>
-<p>Ví dụ trên chúng ta thấy câu được tác thành các từ riêng biệt, được sắp xếp theo thứ tự từ điển, kèm theo đó là vị trí xuất hiện trong câu và các dấu câu, stopword bị lọai bỏ (theo từ điển tiếng anh).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsvector(<span style="color:#e6db74">&#39;english&#39;</span>, <span style="color:#e6db74">&#39;A task was canceled.&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-----------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;cancel&#39;</span>:<span style="color:#ae81ff">4</span> <span style="color:#e6db74">&#39;task&#39;</span>:<span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>Ví dụ trên chúng ta thấy câu được tác thành các từ riêng biệt, được sắp xếp theo thứ tự từ điển, kèm theo đó là vị trí xuất hiện trong câu và các dấu câu, stopword bị lọai bỏ (theo từ điển tiếng anh).</p>
 <h4 id="2-parsing-queries-tsquery">2. Parsing queries: tsquery</h4>
 <blockquote>
-<p>to_tsquery([ config regconfig, ] querytext text)</p>
-</blockquote>
+<p>to_tsquery([ config regconfig, ] querytext text)</p></blockquote>
 <p>tsquery là một kiểu dữ liệu cho các truy vấn văn bản với sự hỗ trợ của toán tử boolean: &amp; (and), | (or). Tsquery bao gồm các lexemes(từ vựng) và các toán tử boolean ở giữa.</p>
-<pre><code class="language-sql">SELECT plainto_tsquery('english', 'The Fat Rats');
------------------
- 'fat' &amp; 'rat'
-
-SELECT to_tsquery('english', 'The &amp; Fat &amp; Rats');
----------------
- 'fat' &amp; 'rat'
-
-SELECT to_tsquery('english', 'The &amp; Fat | Rats');
----------------
- 'fat' | 'rat'
-</code></pre>
-<h4 id="3-một-số-hàm-khác">3. Một số hàm khác.</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> plainto_tsquery(<span style="color:#e6db74">&#39;english&#39;</span>, <span style="color:#e6db74">&#39;The Fat Rats&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-----------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;fat&#39;</span> <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;rat&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsquery(<span style="color:#e6db74">&#39;english&#39;</span>, <span style="color:#e6db74">&#39;The &amp; Fat &amp; Rats&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;fat&#39;</span> <span style="color:#f92672">&amp;</span> <span style="color:#e6db74">&#39;rat&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsquery(<span style="color:#e6db74">&#39;english&#39;</span>, <span style="color:#e6db74">&#39;The &amp; Fat | Rats&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;fat&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;rat&#39;</span>
+</span></span></code></pre></div><h4 id="3-một-số-hàm-khác">3. Một số hàm khác.</h4>
 <table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Return Type</th>
-<th>Description</th>
-<th>Example</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>array_to_tsvector(text[])</td>
-<td>tsvector</td>
-<td>convert mảng lexemes thành tsvector</td>
-<td>array_to_tsvector(&rsquo;{fat,cat,rat}&rsquo;::text[])</td>
-<td>&lsquo;cat&rsquo; &lsquo;fat&rsquo; &lsquo;rat&rsquo;</td>
-</tr>
-<tr>
-<td>plainto_tsquery([ config regconfig , ] query text)</td>
-<td>tsquery</td>
-<td>hàm tsquery bỏ qua dấu câu</td>
-<td>plainto_tsquery(&rsquo;english&rsquo;, &lsquo;The Fat Rats&rsquo;)</td>
-<td>&lsquo;fat&rsquo; &amp; &lsquo;rat&rsquo;</td>
-</tr>
-<tr>
-<td>setweight(vector tsvector, weight &ldquo;char&rdquo;)</td>
-<td>tsvector</td>
-<td>assign weight cho các phần tử trong vector</td>
-<td>setweight(&lsquo;fat:2,4 cat:3 rat:5B&rsquo;::tsvector, &lsquo;A&rsquo;)</td>
-<td>&lsquo;cat&rsquo;:3A &lsquo;fat&rsquo;:2A,4A &lsquo;rat&rsquo;:5A</td>
-</tr>
-<tr>
-<td>get_current_ts_config()</td>
-<td>regconfig</td>
-<td>get config măc định</td>
-<td>get_current_ts_config()</td>
-<td>english</td>
-</tr>
-<tr>
-<td>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ])</td>
-<td>float4</td>
-<td>tính điểm ranking</td>
-<td>ts_rank(textsearch, query)</td>
-<td>0.818</td>
-</tr>
-<tr>
-<td>&hellip;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Function</th>
+          <th>Return Type</th>
+          <th>Description</th>
+          <th>Example</th>
+          <th>Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>array_to_tsvector(text[])</td>
+          <td>tsvector</td>
+          <td>convert mảng lexemes thành tsvector</td>
+          <td>array_to_tsvector(&rsquo;{fat,cat,rat}&rsquo;::text[])</td>
+          <td>&lsquo;cat&rsquo; &lsquo;fat&rsquo; &lsquo;rat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>plainto_tsquery([ config regconfig , ] query text)</td>
+          <td>tsquery</td>
+          <td>hàm tsquery bỏ qua dấu câu</td>
+          <td>plainto_tsquery(&rsquo;english&rsquo;, &lsquo;The Fat Rats&rsquo;)</td>
+          <td>&lsquo;fat&rsquo; &amp; &lsquo;rat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>setweight(vector tsvector, weight &ldquo;char&rdquo;)</td>
+          <td>tsvector</td>
+          <td>assign weight cho các phần tử trong vector</td>
+          <td>setweight(&lsquo;fat:2,4 cat:3 rat:5B&rsquo;::tsvector, &lsquo;A&rsquo;)</td>
+          <td>&lsquo;cat&rsquo;:3A &lsquo;fat&rsquo;:2A,4A &lsquo;rat&rsquo;:5A</td>
+      </tr>
+      <tr>
+          <td>get_current_ts_config()</td>
+          <td>regconfig</td>
+          <td>get config măc định</td>
+          <td>get_current_ts_config()</td>
+          <td>english</td>
+      </tr>
+      <tr>
+          <td>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ])</td>
+          <td>float4</td>
+          <td>tính điểm ranking</td>
+          <td>ts_rank(textsearch, query)</td>
+          <td>0.818</td>
+      </tr>
+      <tr>
+          <td>&hellip;</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
 </table>
 <p>Mình chỉ đề cập vài hàm hay dùng, để tìm hiểu nhiều hơn mời các bạn đọc tiếp tại <a href="https://www.postgresql.org/docs/9.6/functions-textsearch.html">trang chủ postgres</a></p>
 <h3 id="fts-operator">FTS operator</h3>
@@ -454,117 +458,111 @@ SELECT to_tsquery('english', 'The &amp; Fat | Rats');
 <li>Full text search trong postgresql sử dụng toán tử @@ cho 2 loại dữ liệu tsvector và tsquery. FTS operator còn hỗ trợ các kiểu dữ liệu như text và varchar cho phép setup full-text search đơn giản (nhưng không hỗ trợ ranking).</li>
 </ul>
 <blockquote>
-<p>tsvector @@ tsquery</p>
-</blockquote>
+<p>tsvector @@ tsquery</p></blockquote>
 <blockquote>
-<p>tsquery @@ tsvector</p>
-</blockquote>
+<p>tsquery @@ tsvector</p></blockquote>
 <blockquote>
-<p>text|varchar @@ text|tsquery</p>
-</blockquote>
+<p>text|varchar @@ text|tsquery</p></blockquote>
 <p>Toán tử @@ return <strong>TRUE</strong>  nếu tsvector chứa tsquery.</p>
-<pre><code class="language-sql">SELECT to_tsvector('a fat  cat sat on a mat - it ate a fat rats') @@ to_tsquery('The &amp; Fat &amp; Rats');
--------
-t
-
-SELECT to_tsvector('a fat  cat sat on a mat - it ate a fat rats') @@ to_tsquery('The &amp; Fat &amp; Dogs');
---------
-f
-
-SELECT 'a fat  cat sat on a mat - it ate a fat rats' @@ to_tsquery('The &amp; Fat &amp; rat');
--------
-t
-
-SELECT 'a fat  cat sat on a mat - it ate a fat rats' @@ 'The &amp; Fat &amp; rat';
--------
-t
-
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsvector(<span style="color:#e6db74">&#39;a fat  cat sat on a mat - it ate a fat rats&#39;</span>) <span style="color:#f92672">@@</span> to_tsquery(<span style="color:#e6db74">&#39;The &amp; Fat &amp; Rats&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>t
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsvector(<span style="color:#e6db74">&#39;a fat  cat sat on a mat - it ate a fat rats&#39;</span>) <span style="color:#f92672">@@</span> to_tsquery(<span style="color:#e6db74">&#39;The &amp; Fat &amp; Dogs&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">--------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;a fat  cat sat on a mat - it ate a fat rats&#39;</span> <span style="color:#f92672">@@</span> to_tsquery(<span style="color:#e6db74">&#39;The &amp; Fat &amp; rat&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>t
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#e6db74">&#39;a fat  cat sat on a mat - it ate a fat rats&#39;</span> <span style="color:#f92672">@@</span> <span style="color:#e6db74">&#39;The &amp; Fat &amp; rat&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>t
+</span></span></code></pre></div><ul>
 <li>Toán tử || để nối 2 vector.</li>
 </ul>
-<pre><code class="language-sql">SELECT to_tsvector('xin chao') || to_tsvector('hello world')
----------------
- 'chao':2 'hello':3 'world':4 'xin':1
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> to_tsvector(<span style="color:#e6db74">&#39;xin chao&#39;</span>) <span style="color:#f92672">||</span> to_tsvector(<span style="color:#e6db74">&#39;hello world&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---------------
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#e6db74">&#39;chao&#39;</span>:<span style="color:#ae81ff">2</span> <span style="color:#e6db74">&#39;hello&#39;</span>:<span style="color:#ae81ff">3</span> <span style="color:#e6db74">&#39;world&#39;</span>:<span style="color:#ae81ff">4</span> <span style="color:#e6db74">&#39;xin&#39;</span>:<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><ul>
 <li>Các toán tử khác (<a href="https://www.postgresql.org/docs/9.6/functions-textsearch.html">Nguồn: Text Search Functions and Operators</a>)</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>Operator</th>
-<th>Return Type</th>
-<th>Description</th>
-<th>Example</th>
-<th>Result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@@</td>
-<td>boolean</td>
-<td>tsvector matches tsquery ?</td>
-<td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
-<td>t</td>
-</tr>
-<tr>
-<td>@@@</td>
-<td>boolean</td>
-<td>deprecated synonym for @@</td>
-<td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
-<td>t</td>
-</tr>
-<tr>
-<td>||</td>
-<td>tsvector</td>
-<td>concatenate tsvectors</td>
-<td>&lsquo;a:1 b:2&rsquo;::tsvector || &lsquo;c:1 d:2 b:3&rsquo;::tsvector</td>
-<td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &rsquo;d&rsquo;:4</td>
-</tr>
-<tr>
-<td>&amp;&amp;</td>
-<td>tsquery</td>
-<td>AND tsquerys together</td>
-<td>&lsquo;fat | rat&rsquo;::tsquery &amp;&amp; &lsquo;cat&rsquo;::tsquery</td>
-<td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) &amp; &lsquo;cat&rsquo;</td>
-</tr>
-<tr>
-<td>||</td>
-<td>tsquery</td>
-<td>OR tsquerys together</td>
-<td>&lsquo;fat | rat&rsquo;::tsquery || &lsquo;cat&rsquo;::tsquery</td>
-<td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) | &lsquo;cat&rsquo;</td>
-</tr>
-<tr>
-<td>!!</td>
-<td>tsquery</td>
-<td>negate a tsquery</td>
-<td>!! &lsquo;cat&rsquo;::tsquery</td>
-<td>!&lsquo;cat&rsquo;</td>
-</tr>
-<tr>
-<td>&lt;-&gt;</td>
-<td>tsquery</td>
-<td>tsquery followed by tsquery</td>
-<td>to_tsquery(&lsquo;fat&rsquo;) &lt;-&gt; to_tsquery(&lsquo;rat&rsquo;)</td>
-<td>&lsquo;fat&rsquo; &lt;-&gt; &lsquo;rat&rsquo;</td>
-</tr>
-<tr>
-<td>@&gt;</td>
-<td>boolean</td>
-<td>tsquery contains another ?</td>
-<td>&lsquo;cat&rsquo;::tsquery @&gt; &lsquo;cat &amp; rat&rsquo;::tsquery</td>
-<td>f</td>
-</tr>
-<tr>
-<td>&lt;@</td>
-<td>boolean</td>
-<td>tsquery is contained in ?</td>
-<td>&lsquo;cat&rsquo;::tsquery &lt;@ &lsquo;cat &amp; rat&rsquo;::tsquery</td>
-<td>t</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Operator</th>
+          <th>Return Type</th>
+          <th>Description</th>
+          <th>Example</th>
+          <th>Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>@@</td>
+          <td>boolean</td>
+          <td>tsvector matches tsquery ?</td>
+          <td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
+          <td>t</td>
+      </tr>
+      <tr>
+          <td>@@@</td>
+          <td>boolean</td>
+          <td>deprecated synonym for @@</td>
+          <td>to_tsvector(&lsquo;fat cats ate rats&rsquo;) @@@ to_tsquery(&lsquo;cat &amp; rat&rsquo;)</td>
+          <td>t</td>
+      </tr>
+      <tr>
+          <td>||</td>
+          <td>tsvector</td>
+          <td>concatenate tsvectors</td>
+          <td>&lsquo;a:1 b:2&rsquo;::tsvector || &lsquo;c:1 d:2 b:3&rsquo;::tsvector</td>
+          <td>&lsquo;a&rsquo;:1 &lsquo;b&rsquo;:2,5 &lsquo;c&rsquo;:3 &rsquo;d&rsquo;:4</td>
+      </tr>
+      <tr>
+          <td>&amp;&amp;</td>
+          <td>tsquery</td>
+          <td>AND tsquerys together</td>
+          <td>&lsquo;fat | rat&rsquo;::tsquery &amp;&amp; &lsquo;cat&rsquo;::tsquery</td>
+          <td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) &amp; &lsquo;cat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>||</td>
+          <td>tsquery</td>
+          <td>OR tsquerys together</td>
+          <td>&lsquo;fat | rat&rsquo;::tsquery || &lsquo;cat&rsquo;::tsquery</td>
+          <td>( &lsquo;fat&rsquo; | &lsquo;rat&rsquo; ) | &lsquo;cat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>!!</td>
+          <td>tsquery</td>
+          <td>negate a tsquery</td>
+          <td>!! &lsquo;cat&rsquo;::tsquery</td>
+          <td>!&lsquo;cat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>&lt;-&gt;</td>
+          <td>tsquery</td>
+          <td>tsquery followed by tsquery</td>
+          <td>to_tsquery(&lsquo;fat&rsquo;) &lt;-&gt; to_tsquery(&lsquo;rat&rsquo;)</td>
+          <td>&lsquo;fat&rsquo; &lt;-&gt; &lsquo;rat&rsquo;</td>
+      </tr>
+      <tr>
+          <td>@&gt;</td>
+          <td>boolean</td>
+          <td>tsquery contains another ?</td>
+          <td>&lsquo;cat&rsquo;::tsquery @&gt; &lsquo;cat &amp; rat&rsquo;::tsquery</td>
+          <td>f</td>
+      </tr>
+      <tr>
+          <td>&lt;@</td>
+          <td>boolean</td>
+          <td>tsquery is contained in ?</td>
+          <td>&lsquo;cat&rsquo;::tsquery &lt;@ &lsquo;cat &amp; rat&rsquo;::tsquery</td>
+          <td>t</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="ranking-search-results">Ranking search results</h3>
 <p>Ranking nhằm mục đích đo lường mức độ phù hợp của document đối với một query cụ thể. Postgres cung cấp 2 hàm ranking:</p>
@@ -572,37 +570,32 @@ t
 <li>Ranking dựa trên tần số của các từ được match</li>
 </ul>
 <blockquote>
-<p>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p>
-</blockquote>
+<p>ts_rank([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p></blockquote>
 <ul>
 <li>Cũng tương tự như <em>ts_rank</em> tuy nhiên hàm còn tính theo mật độ bao phủ của input trong document</li>
 </ul>
 <blockquote>
-<p>ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p>
-</blockquote>
+<p>ts_rank_cd([ weights float4[], ] vector tsvector, query tsquery [, normalization integer ]) returns float4</p></blockquote>
 <p><strong>Ví dụ:</strong></p>
-<pre><code class="language-sql">SELECT ts_rank( to_tsvector('name lastname name lastname'), to_tsquery('name &amp; lastname')); 
----
-ts_rank: 0,3400053*
-
-SELECT ts_rank_cd( to_tsvector('name lastname name lastname'), to_tsquery('name &amp; lastname'));
----
-ts_rank_cd: 0,3
-
-SELECT ts_rank_cd( to_tsvector('name lastname abc xyz name lastname'), to_tsquery('name &amp; lastname'));
----
-ts_rank_cd: 0,233*
-</code></pre>
-<ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ts_rank( to_tsvector(<span style="color:#e6db74">&#39;name lastname name lastname&#39;</span>), to_tsquery(<span style="color:#e6db74">&#39;name &amp; lastname&#39;</span>)); 
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ts_rank: <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">3400053</span><span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ts_rank_cd( to_tsvector(<span style="color:#e6db74">&#39;name lastname name lastname&#39;</span>), to_tsquery(<span style="color:#e6db74">&#39;name &amp; lastname&#39;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ts_rank_cd: <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ts_rank_cd( to_tsvector(<span style="color:#e6db74">&#39;name lastname abc xyz name lastname&#39;</span>), to_tsquery(<span style="color:#e6db74">&#39;name &amp; lastname&#39;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#75715e">---
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ts_rank_cd: <span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">233</span><span style="color:#f92672">*</span>
+</span></span></code></pre></div><ul>
 <li>Cả 2 hàm trên đều, tham số <strong>weights</strong> là optional, các nhãn</li>
 </ul>
 <blockquote>
-<p>{D-weight, C-weight, B-weight, A-weight}</p>
-</blockquote>
+<p>{D-weight, C-weight, B-weight, A-weight}</p></blockquote>
 <p>nếu không chỉ định tham số weights thì trọng số mặc định là:</p>
 <blockquote>
-<p>{0.1, 0.2, 0.4, 1.0}</p>
-</blockquote>
+<p>{0.1, 0.2, 0.4, 1.0}</p></blockquote>
 <h3 id="indexes">Indexes</h3>
 <p>Có 2 loại index có thể dùng để tăng tốc full-text search trong postgres là: <strong>GIN</strong> và <strong>GIST</strong></p>
 <ul>
@@ -623,8 +616,7 @@ Chỉ mục này cũng được sử dụng để đánh chỉ mục cho các ki
 <li>Chi phí về không gian của GIN cũng lớn hơn 2-3 lần so với GiST</li>
 </ul>
 <blockquote>
-<p>Bạn có thể bỏ qua phần phân tích sau nếu thấy bài đã đủ dài và đủ rối :))</p>
-</blockquote>
+<p>Bạn có thể bỏ qua phần phân tích sau nếu thấy bài đã đủ dài và đủ rối :))</p></blockquote>
 <p><strong>Phân tích một chút về BTree và GIN index:</strong></p>
 <p><img src="/img/posts/technique/postgresql/btree-768x727.png" alt="B-Tree implement"></p>
 <p>Trên là B-Tree index (thực ra BTree cũng có 2 loại là B-Tree và B+Tree nhưng ở đây mình giả sử B-Tree có trúc như vậy). Index bao gồm các trang, mỗi trang bao gồm nhiều index tuple và free space.
@@ -701,7 +693,7 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
+          <img src="https://www.lhsang.github.io/img/profile.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -721,12 +713,12 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.lhsang.dev/about/" title="About"><i
+                <a href="https://www.lhsang.github.io/about/" title="About"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
             </li>
             <li class="next">
-                <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/"
+                <a href="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/"
                     title="Crawl data - cào dữ liệu có gì khó?"><span>Newer&nbsp;&nbsp;</span><i
                         class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
@@ -762,7 +754,7 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
 
 
 
-    2023
+    2025
     <div class="publishby">
         Theme by xiaoheiAh
     </div>
@@ -782,7 +774,7 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    window.jQuery || document.write('\x3Cscript src="js/jquery.min.js"><\/script>')
 </script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
@@ -795,8 +787,8 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.dev/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
-<script src="https://www.lhsang.dev/js/plugin.min.738a460bf4317fac61717f1bca393e53d00973db9754d9f0a81c7312d5874840.js"></script>
+<script src="https://www.lhsang.github.io/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
+<script src="https://www.lhsang.github.io/js/plugin.min.61b81a55e6f5fc0ed07e513381c46849929d4e89f95d72c54f3f7ec9624af40c.js"></script>
 
 <script>
     (function (window) {
@@ -808,13 +800,13 @@ Tuy nhiên với mình, những project có quy mô vừa và nhỏ thì mình t
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            ROOT_URL: 'https:\/\/www.lhsang.dev\/',
-            CONTENT_URL: 'https:\/\/www.lhsang.dev\/\/searchindex.json ',
+            ROOT_URL: 'https:\/\/www.lhsang.github.io\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.github.io\/\/searchindex.json ',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.github.io/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({

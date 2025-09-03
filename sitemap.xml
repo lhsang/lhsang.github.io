@@ -3,48 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.lhsang.github.io/categories/b%C3%A0i-vi%E1%BA%BFt-hay-t%E1%BB%AB-di%E1%BB%85n-%C4%91%C3%A0n/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/posts/technique/behind-a-select-query/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/database/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/k%E1%BB%B9-thu%E1%BA%ADt/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/postgresql/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://www.lhsang.github.io/posts/</loc>
     <lastmod>2020-12-05T17:37:43+07:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -59,15 +17,8 @@
   </url>
   
   <url>
-    <loc>https://www.lhsang.github.io/tags/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/tags/technique/</loc>
-    <lastmod>2020-12-05T17:37:43+07:00</lastmod>
+    <loc>https://www.lhsang.github.io/categories/</loc>
+    <lastmod>2020-08-17T18:31:34+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -87,50 +38,29 @@
   </url>
   
   <url>
-    <loc>https://www.lhsang.github.io/tags/thesis/</loc>
+    <loc>https://www.lhsang.github.io/categories/k%E1%BB%B9-thu%E1%BA%ADt/</loc>
     <lastmod>2020-08-17T18:31:34+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.lhsang.github.io/posts/technique/mutithreading-concurrency-problems/</loc>
-    <lastmod>2020-08-07T15:24:23+07:00</lastmod>
+    <loc>https://www.lhsang.github.io/tags/</loc>
+    <lastmod>2020-08-17T18:31:34+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.lhsang.github.io/categories/threading/</loc>
-    <lastmod>2020-08-07T15:24:23+07:00</lastmod>
+    <loc>https://www.lhsang.github.io/tags/technique/</loc>
+    <lastmod>2020-08-17T18:31:34+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.lhsang.github.io/tags/microservices/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/posts/technique/microservice-communication/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.lhsang.github.io/categories/vi%E1%BA%BFt-vu-v%C6%A1/</loc>
-    <lastmod>2020-08-02T15:12:42+07:00</lastmod>
+    <loc>https://www.lhsang.github.io/tags/thesis/</loc>
+    <lastmod>2020-08-17T18:31:34+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -172,6 +102,13 @@
   
   <url>
     <loc>https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/</loc>
+    <lastmod>2020-04-03T08:24:17+07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.lhsang.github.io/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/</loc>
     <lastmod>2020-04-03T08:24:17+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

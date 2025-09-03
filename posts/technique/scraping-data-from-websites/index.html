@@ -23,28 +23,39 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)" />
-  <meta name="generator" content="Hugo 0.109.0 with theme pure" />
+  <meta name="description" content="
+Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)
+" />
+  <meta name="generator" content="Hugo 0.148.2 with theme pure" />
   <title>Crawl data - cào dữ liệu có gì khó? - Sang Le Hoang</title>
   
   
-  <link rel="stylesheet" href="https://www.lhsang.dev/css/style.min.c58e22f1aa6179cd5cb60b9e08421a2b9a9c9fe9352d095e051b51aae209e5c0.css">
+  <link rel="stylesheet" href="https://www.lhsang.github.io/css/style.min.4a6938d82a2f044144682e6d19362a86e911d8ff2ea5a6a17d0b5ed932a1847e.css">
   
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css" async>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
-  <meta property="og:title" content="Crawl data - cào dữ liệu có gì khó?" />
-<meta property="og:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-08-17T18:31:34+07:00" />
-<meta property="article:modified_time" content="2020-08-17T18:31:34+07:00" />
-<meta itemprop="name" content="Crawl data - cào dữ liệu có gì khó?">
-<meta itemprop="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)"><meta itemprop="datePublished" content="2020-08-17T18:31:34+07:00" />
-<meta itemprop="dateModified" content="2020-08-17T18:31:34+07:00" />
-<meta itemprop="wordCount" content="1718">
-<meta itemprop="keywords" content="Technique,crawler,thesis," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Crawl data - cào dữ liệu có gì khó?"/>
-<meta name="twitter:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)"/>
+  <meta property="og:url" content="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/">
+  <meta property="og:site_name" content="Sang Le Hoang">
+  <meta property="og:title" content="Crawl data - cào dữ liệu có gì khó?">
+  <meta property="og:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-08-17T18:31:34+07:00">
+    <meta property="article:modified_time" content="2020-08-17T18:31:34+07:00">
+    <meta property="article:tag" content="Technique">
+    <meta property="article:tag" content="Crawler">
+    <meta property="article:tag" content="Thesis">
+
+  <meta itemprop="name" content="Crawl data - cào dữ liệu có gì khó?">
+  <meta itemprop="description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)">
+  <meta itemprop="datePublished" content="2020-08-17T18:31:34+07:00">
+  <meta itemprop="dateModified" content="2020-08-17T18:31:34+07:00">
+  <meta itemprop="wordCount" content="1718">
+  <meta itemprop="keywords" content="Technique,Crawler,Thesis">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Crawl data - cào dữ liệu có gì khó?">
+  <meta name="twitter:description" content="Vai trò của dữ liệu thì chúng ta không cần bàn luận nữa. Hôm nay mình sẻ chia sẻ một vài phương pháp và khó khăn khi cào dữ liệu (crawl data) từ những phương pháp, công cụ mình đã ứng dụng và một số vấn đề gặp phải trong quá trình làm luận văn. (có 2 khái niệm là data crawling và data scraping nhưng mình chỉ nói nôn na là thu thập dữ liệu, các bạn có thể đọc thêm để phân biệt)">
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -75,7 +86,7 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/lhsang" target="_blank">
-            <img class="img-circle img-rotate" src="https://www.lhsang.dev/img/profile.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://www.lhsang.github.io/img/profile.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">lhsang</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">while(i){ i&#43;&#43;;  }</h3>
@@ -156,8 +167,8 @@
     <h3 class="widget-title"> Categories</h3>
     <div class="widget-body">
         <ul class="category-list">
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ-thuật</a><span class="category-list-count">5</span></li>
-            <li class="category-list-item"><a href="https://www.lhsang.dev/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải-nghiệm</a><span class="category-list-count">3</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/k%E1%BB%B9-thu%E1%BA%ADt/" class="category-list-link">kỹ thuật</a><span class="category-list-count">5</span></li>
+            <li class="category-list-item"><a href="https://www.lhsang.github.io/categories/tr%E1%BA%A3i-nghi%E1%BB%87m/" class="category-list-link">trải nghiệm</a><span class="category-list-count">3</span></li>
         </ul>
     </div>
 </div>
@@ -167,51 +178,51 @@
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/crawler/" class="tag-list-link">crawler</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/crawler/" class="tag-list-link">crawler</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/experience/" class="tag-list-link">experience</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/experience/" class="tag-list-link">experience</a><span
                     class="tag-list-count">3</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/http/" class="tag-list-link">http</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/http/" class="tag-list-link">http</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/internship/" class="tag-list-link">internship</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/internship/" class="tag-list-link">internship</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/interview/" class="tag-list-link">interview</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/interview/" class="tag-list-link">interview</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/message-broker/" class="tag-list-link">message-broker</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/message-broker/" class="tag-list-link">message broker</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/nginx/" class="tag-list-link">nginx</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/nginx/" class="tag-list-link">nginx</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/postgresql/" class="tag-list-link">postgresql</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/postgresql/" class="tag-list-link">postgresql</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rabbitmq/" class="tag-list-link">rabbitmq</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/rpc/" class="tag-list-link">rpc</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/rpc/" class="tag-list-link">rpc</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/technique/" class="tag-list-link">technique</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/technique/" class="tag-list-link">technique</a><span
                     class="tag-list-count">5</span></li>
             
             
-            <li class="tag-list-item"><a href="https://www.lhsang.dev/tags/thesis/" class="tag-list-link">thesis</a><span
+            <li class="tag-list-item"><a href="https://www.lhsang.github.io/tags/thesis/" class="tag-list-link">thesis</a><span
                     class="tag-list-count">1</span></li>
             
         </ul>
@@ -226,7 +237,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/" class="title">Crawl data - cào dữ liệu có gì khó?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
@@ -236,7 +247,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/" class="title">Full-Text Search trong PostgreSQL</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-23 10:30:58 &#43;0700 &#43;07" itemprop="datePublished">2020-04-23</time>
@@ -246,7 +257,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/ngoai-kien-thuc-minh-con-hoc-duoc-gi-khi-thuc-tap/" class="title">Ngoài kiến thức thì mình còn học được những gì trong kỳ thực tập?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-04-03 08:24:17 &#43;0700 &#43;07" itemprop="datePublished">2020-04-03</time>
@@ -256,7 +267,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
+                        <a href="https://www.lhsang.github.io/posts/experience/intern-fresher-ntd-hoi-gi/" class="title">Sinh viên IT &#34;bị&#34; hỏi những gì trong những lần đi phỏng vấn vị trí intern, fresher?</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-21 08:20:30 &#43;0700 &#43;07" itemprop="datePublished">2020-02-21</time>
@@ -266,7 +277,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://www.lhsang.dev/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
+                        <a href="https://www.lhsang.github.io/posts/technique/nginx/" class="title">Nginx là gì ? Demo load balancing với nginx</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-02-17 21:18:58 &#43;0700 &#43;07" itemprop="datePublished">2020-02-17</time>
@@ -308,7 +319,7 @@
         
 <span class="article-date">
   <i class="icon icon-calendar-check"></i>&nbsp;
-<a href="https://www.lhsang.dev/posts/technique/scraping-data-from-websites/" class="article-date">
+<a href="https://www.lhsang.github.io/posts/technique/scraping-data-from-websites/" class="article-date">
   <time datetime="2020-08-17 18:31:34 &#43;0700 &#43;07" itemprop="datePublished">2020-08-17</time>
 </a>
 </span>
@@ -336,31 +347,31 @@
 <p>Cào ở dữ liệu ở đây mình đề cập là xây dựng một tool để đi thu thập dữ liệu ở một số website mà chúng ta cần, đơn thuần cũng chỉ là gởi một request HTTP/HTTPS trực tiếp hoặc dùng một browser driver truy cập đến trang đích để lấy nội dung trang về rồi tiến hành parse nội dung để lấy dữ liệu. Hầu hết các trang web đều không thể ngăn cấm việc bot ghé thăm vì trong đó có bot của các search engine như google, bing,&hellip; tuy nhiên họ cũng không thể nào cho phép truy cập thỏa mái vì điều này làm giảm hiệu năng hoặc thậm chí sập cả server. Chính vì vậy đa số các website đều quy định và tìm cách hạn chế, ngăn chặn việc crawler quá mức, thậm chí có cả bẫy (traps) để chặn crawler khiến cho việc thu thập dữ liệu của chúng ta cũng gặp không ít khó khăn.</p>
 <p>Trước hết mình sẽ giới thiệu qua một số tool/lib/framework phổ biến để thực hiện thu thập dữ liệu, mặc dù việc cào dữ liệu chỉ đơn thuần là gởi request để lấy nội dung nhưng bạn cũng nên dùng thư viện sẵn có để thu thập (trừ khi các bạn muốn phát triển 1 thư viện mới) thay vì tự gởi request bằng thư viện HTTP trong các ngôn ngữ sẵn có vì các bạn sẽ phải handle rất nhiều thứ từ đa luồng, kiểm soát request, parsing,&hellip; rất tốn thời gian để viết lại. Sử dụng các thư viện sẵn có thì bạn cũng không cần lo về khả năng mở rộng, tùy biến của mình, các thư viện đa số đã thiết kế theo kiến trúc mở cung cấp các middlewares, pipelines cho người dùng tùy biến.</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th>Scrapy</th>
-<th>Selenium</th>
-<th>Cheerio</th>
-<th>Puppeteer</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Advantages</td>
-<td>- Bất đồng bộ chính là thứ giúp cho scrapy có hiệu năng tuyệt vời. Sử dụng rất ít RAM, CPU. Tài liệu đầy đủ, plugins rất nhiều. Thiết kế theo một kiến trúc khá tốt, dev có thể dễ dàng tùy chỉnh middlewares, pipelines và thêm các function tùy ý.</td>
-<td>- Dễ tiếp cận cho beginer. Có thể lấy được nội dung trang render bằng javascript. Có thể thao tác như một người dùng</td>
-<td>- Hỗ trợ parse DOM giống như jquery. Bất đồng bộ, khá nhanh</td>
-<td>- Giống như selenium, puppeteer cũng sử dụng browser driver để lấy nội dung trang nên có thể lấy được nội dung các trang render bằng js và thao tác như một người dùng.</td>
-</tr>
-<tr>
-<td>Disadvantages</td>
-<td>- Hơi phức tạp cho beginer. Quá dư thừa chức năng nếu chỉ dùng cho 1 project nhỏ và đơn giản. Không thể lấy nội dung trang được render bằng js, tuy nhiên chúng ta có thể kết hợp với Splash.</td>
-<td>- Tiêu tốn nhiều tài nguyên vì nó cần đến một browser driver (tưởng tượng như bạn mở 1 tab chrome thì sẽ tốn bao nhiêu RAM, CPU). Rất chậm, nên selenium không phù hợp với một project cào dữ liệu lớn.</td>
-<td>- Chỉ đơn thuần là trình phân tích (parser). Không thể lấy nội dung trang được render bằng js</td>
-<td>- Tiêu tốn RAM, CPU. Chậm</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Scrapy</th>
+          <th>Selenium</th>
+          <th>Cheerio</th>
+          <th>Puppeteer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Advantages</td>
+          <td>- Bất đồng bộ chính là thứ giúp cho scrapy có hiệu năng tuyệt vời. Sử dụng rất ít RAM, CPU. Tài liệu đầy đủ, plugins rất nhiều. Thiết kế theo một kiến trúc khá tốt, dev có thể dễ dàng tùy chỉnh middlewares, pipelines và thêm các function tùy ý.</td>
+          <td>- Dễ tiếp cận cho beginer. Có thể lấy được nội dung trang render bằng javascript. Có thể thao tác như một người dùng</td>
+          <td>- Hỗ trợ parse DOM giống như jquery. Bất đồng bộ, khá nhanh</td>
+          <td>- Giống như selenium, puppeteer cũng sử dụng browser driver để lấy nội dung trang nên có thể lấy được nội dung các trang render bằng js và thao tác như một người dùng.</td>
+      </tr>
+      <tr>
+          <td>Disadvantages</td>
+          <td>- Hơi phức tạp cho beginer. Quá dư thừa chức năng nếu chỉ dùng cho 1 project nhỏ và đơn giản. Không thể lấy nội dung trang được render bằng js, tuy nhiên chúng ta có thể kết hợp với Splash.</td>
+          <td>- Tiêu tốn nhiều tài nguyên vì nó cần đến một browser driver (tưởng tượng như bạn mở 1 tab chrome thì sẽ tốn bao nhiêu RAM, CPU). Rất chậm, nên selenium không phù hợp với một project cào dữ liệu lớn.</td>
+          <td>- Chỉ đơn thuần là trình phân tích (parser). Không thể lấy nội dung trang được render bằng js</td>
+          <td>- Tiêu tốn RAM, CPU. Chậm</td>
+      </tr>
+  </tbody>
 </table>
 <p>Hầu hết các ngôn ngữ lập trình đều có những thư viện hỗ trợ thu thập dữ liệu, tuy nhiên Python sẽ là ngôn ngữ  mà mình gợi ý các bạn nên chọn cho dự án thu thập dữ liệu của mình, Scrapy là một framework trong python hỗ trợ thu thập dữ liệu cực mạnh, hơn nữa python có hỗ trợ khá nhiều thư viện để xử lý dữ liệu.</p>
 <p><strong>Nhập môn thu thập dữ liệu,</strong> kiến trúc chung của một crawler sẽ gồm 3 phần: queue chứa URL, downloader, parser. Luồng hoạt động sẽ diễn ra như sau:</p>
@@ -408,7 +419,7 @@
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/lhsang" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://www.lhsang.dev/img/profile.jpg" class="img-rounded w-full" alt="">
+          <img src="https://www.lhsang.github.io/img/profile.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -428,7 +439,7 @@
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://www.lhsang.dev/posts/technique/full-text-search-postgresql/" title="Full-Text Search trong PostgreSQL"><i
+                <a href="https://www.lhsang.github.io/posts/technique/full-text-search-postgresql/" title="Full-Text Search trong PostgreSQL"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
             </li>
@@ -464,7 +475,7 @@
 
 
 
-    2023
+    2025
     <div class="publishby">
         Theme by xiaoheiAh
     </div>
@@ -484,7 +495,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    window.jQuery || document.write('\x3Cscript src="js/jquery.min.js"><\/script>')
 </script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
 <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/python.min.js" defer></script>
@@ -497,8 +508,8 @@
     })
     hljs.initHighlightingOnLoad();
 </script>
-<script src="https://www.lhsang.dev/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
-<script src="https://www.lhsang.dev/js/plugin.min.738a460bf4317fac61717f1bca393e53d00973db9754d9f0a81c7312d5874840.js"></script>
+<script src="https://www.lhsang.github.io/js/application.min.e4989ab4dc212027af8773861b05b6bc333a1217f6b0a1b3377a3a3dbd454483.js"></script>
+<script src="https://www.lhsang.github.io/js/plugin.min.61b81a55e6f5fc0ed07e513381c46849929d4e89f95d72c54f3f7ec9624af40c.js"></script>
 
 <script>
     (function (window) {
@@ -510,13 +521,13 @@
                 TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
-            ROOT_URL: 'https:\/\/www.lhsang.dev\/',
-            CONTENT_URL: 'https:\/\/www.lhsang.dev\/\/searchindex.json ',
+            ROOT_URL: 'https:\/\/www.lhsang.github.io\/',
+            CONTENT_URL: 'https:\/\/www.lhsang.github.io\/\/searchindex.json ',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
 </script>
-<script type="text/javascript" src="https://www.lhsang.dev/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
+<script type="text/javascript" src="https://www.lhsang.github.io/js/insight.min.716b0c6a00b68ccc31a2b65345f3412f4246ffa94a90f8e25d525528b4504f9937880692bbe619023233caba5d0a17ebe23d7cfb57cd3a88f23ea337ad5e4d00.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
 <script>
     tocbot.init({
