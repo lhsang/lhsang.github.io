@@ -21,8 +21,20 @@
         {{- .Description -}}
       </div>
       {{ else if .Summary }}
+      {{/* Build preview: optionally strip images, then truncate words */}}
+      {{ $summary := .Summary }}
+      {{ if .Site.Params.previewStripImages }}
+        {{ $summary = $summary | replaceRE `(?is)<figure.*?</figure>` "" | replaceRE `(?is)<img[^>]*>` "" }}
+      {{ end }}
+      {{ $max := or .Site.Params.previewMaxWords 60 }}
+      {{ $words := split (plainify $summary) " " }}
+      {{ $truncated := false }}
+      {{ if gt (len $words) $max }}
+        {{ $summary = (delimit (first $max $words) " ") }}
+        {{ $truncated = true }}
+      {{ end }}
       <div class="article-entry text-muted" itemprop="description">
-        {{ .Summary }}
+        {{ $summary }}{{ if $truncated }}…{{ end }}
       </div>
       {{- end }}
       <p class="article-meta">
@@ -38,4 +50,3 @@
   {{ partial "pagination.html" . }}
 </main>
 {{- end }}
-
