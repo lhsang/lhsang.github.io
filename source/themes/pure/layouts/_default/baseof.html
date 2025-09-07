@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language }}">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
       {{- block "title" . -}}
       {{ if .IsPage }}
@@ -46,8 +44,5 @@
     {{ block "content" . }}{{ end }}
     {{- partial "footer.html" . }}
     {{- partial "script.html" . }}
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=1317935755070864&autoLogAppEvents=1"></script>
-
   </body>
 </html>

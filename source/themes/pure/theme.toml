@@ -18,8 +18,8 @@ features = []
 min_version = "0.57.2"
 
 [author]
-name = "xiaoheiah"
-homepage = "https://xiaohei.im"
+name = "Sang Le"
+homepage = "https://github.com/lhsang"
 
 [original]
 name = "hexo-theme-pure"

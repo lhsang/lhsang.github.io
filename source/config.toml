@@ -1,15 +1,174 @@
 baseURL = "https://lhsang.github.io/"
-# Remove deprecated: paginate = 10
-pagination = { pagerSize = 10 }
+title = "Sang Le Hoang"
+theme = "pure"
+defaultContentLanguage = "en"
+footnoteReturnLinkContents = "↩"
+hasCJKLanguage = true
+enableEmoji = true
+PygmentsCodeFences = false
+publishDir = "../"
+ignoreLogs = ["warning-goldmark-raw-html"]
 
-# Suppress goldmark raw HTML warning (optional – or enable unsafe)
-ignoreLogs = ['warning-goldmark-raw-html']
+[pagination]
+  pagerSize = 10
 
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+[services.googleAnalytics]
+  id = ""
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+[outputFormats.SearchIndex]
+  mediaType = "application/json"
+  baseName = "searchindex"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "SearchIndex"]
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[markup.goldmark.renderer]
+  unsafe = true
 
 [params]
+  since = 2020
+  dateFormatToUse = "2006-01-02"
+  enablePostCopyright = true
+  mainSections = ["posts"]
+  enableMathJax = true
   previewMaxWords = 40
   previewStripImages = true
+  sidebar = "right"
+  widgets = ["category", "tag", "recent_posts"]
+
+  [params.highlightjs]
+    langs = ["python", "javascript", "powershell"]
+
+  [params.menuIcons]
+    enable = true
+    home = "icon-home-fill"
+    archives = "icon-archives-fill"
+    categories = "icon-folder"
+    tags = "icon-tags"
+    repository = "icon-project"
+    books = "icon-book-fill"
+    links = "icon-friendship"
+    about = "icon-cup-fill"
+    Resume = "icon-profile"
+
+  [params.profile]
+    enabled = true
+    avatar = "img/profile.jpg"
+    gravatar = ""
+    author = "lhsang"
+    author_title = "while(i){ i++;  }"
+    author_description = "Code for Food or Code for Fun?"
+    location = "Ho Chi Minh, Viet Nam"
+    follow = "https://github.com/lhsang"
+    link_tooltip = false
+    [params.profile.social.links]
+      github = "https://github.com/lhsang"
+      facebook = "https://www.facebook.com/hoangsang135"
+      linkedin = "https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/"
+
+  [params.site]
+    title = "Sang Le Hoang"
+    favicon = "img/favicon.ico"
+    board = "<p>enjoy~</p>"
+    [params.site.logo]
+      enabled = true
+      width = 40
+      height = 40
+      url = "img/favicon.ico"
+
+  [params.share]
+    enable = true
+    sites = "facebook,twitter,linkedin"
+    mobile_sites = "facebook,twitter,linkedin"
+
+  [params.comment]
+    type = ""
+    disqus = "your_disqus_name"
+    [params.comment.gitalk]
+      owner = ""
+      admin = ""
+      repo = ""
+      ClientID = ""
+      ClientSecret = ""
+    [params.comment.valine]
+      appid = ""
+      appkey = ""
+      notify = ""
+      verify = ""
+      placeholder = "enjoy~"
+      avatar = "mm"
+      meta = "nick,mail"
+      pageSize = 10
+      visitor = false
+
+  [params.pv.busuanzi]
+    enable = false
+
+  [params.pv.leancloud]
+    enable = false
+    app_id = ""
+    app_key = ""
+
+  [params.postCount]
+    enable = true
+    wordcount = true
+    min2read = true
+
+  [params.config]
+    skin = "theme-black"
+    layout = "main-center"
+    excerpt_link = "Read More"
+    toc = true
+
+  [params.search]
+    enable = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    title = "Home"
+    url = "/"
+    weight = 1
+  # [[menu.main]]
+  #   identifier = "archives"
+  #   name = "Archives"
+  #   title = "Archives"
+  #   url = "/posts/"
+  #   weight = 2
+  [[menu.main]]
+    identifier = "categories"
+    name = "Categories"
+    title = "Categories"
+    url = "/categories/"
+    weight = 2
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    title = "Tags"
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    identifier = "resume"
+    name = "Resume"
+    title = "Résume"
+    url = "/Résume/"
+    weight = 4
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    title = "About"
+    url = "/about/"
+    weight = 5

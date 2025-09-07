@@ -64,6 +64,4 @@
 {{- partial "_script/comment.html" . }}
 {{- end }}
 {{- partial "_script/fancybox.html" . }}
-{{/* Removed call to partial "_script/analytics.html" to avoid GA fields issue
-     (re-add only when GA configured) */}}
-<!-- custom script-->
+{{- partial "_script/analytics.html" . }}

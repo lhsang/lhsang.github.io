@@ -8,36 +8,29 @@
       {{ .Scratch.Set "class_name" "article-title" }}
       {{- partial "post/title.html" . }}
       {{- end }}
-            {{if .Params.iframe}}
-                <iframe src="{{ .Params.iframe }}" width="100%" style="height: 800px"></iframe>
-            {{end}}
-      {{if not .Params.disable_article_meta}}
       <div class="article-meta">
         {{ .Scratch.Set "class_name" "article-date" }}
         {{- partial "post/date.html" . }}
         {{- partial "post/category.html" . }}
         {{- partial "post/tag.html" . }}
         {{- partial "post/pv.html" . }}
+        {{- if .Site.Params.comment.type }}
         <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="{{ .RelPermalink }}#comments"
             class="article-comment-link">{{T "article_comments" }}</a></span>
+        {{- end }}
         {{- partial "post/wc.html" . }}
       </div>
-      {{end}}
     </div>
     <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
       {{ .Content }}
     </div>
-    {{ if not .Params.disable_article_meta}}
     <div class="article-footer">
-<!--     comment plugin here-->
-      {{if .Params.comment}}
-      <div class="fb-comments" data-href="{{ .Params.comment }}" data-width="100%" data-numposts="5"></div>
-      {{end}}
       {{- partial "post/copyright.html" . }}
     </div>
-    {{end}}
   </article>
+  {{- if (.Site.Params.comment.type) }}
   {{- partial "post/comment.html" . }}
+  {{- end }}
 </div>
 {{- partial "post/nav.html" . }}
 {{- partial "post/donate.html" . }}
