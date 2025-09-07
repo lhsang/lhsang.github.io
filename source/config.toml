@@ -46,10 +46,12 @@ ignoreLogs = ["warning-goldmark-raw-html"]
   previewMaxWords = 40
   previewStripImages = true
   sidebar = "right"
-  widgets = ["category", "tag", "recent_posts"]
+  widgets = ["recent_posts","category", "tag"]
 
   [params.highlightjs]
-    langs = ["python", "javascript", "powershell"]
+    langs = ["python", "javascript", "powershell", "java", "cpp", "css", "html", "json", "bash", "sql", "json", "yaml"]
+    lineNumbers = true
+    theme = "github"
 
   [params.menuIcons]
     enable = true
@@ -65,12 +67,12 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 
   [params.profile]
     enabled = true
-    avatar = "img/profile.jpg"
+    avatar = "img/profile.jpeg"
     gravatar = ""
-    author = "lhsang"
+    author = "Sang Le"
     author_title = "while(i){ i++;  }"
     author_description = "Code for Food or Code for Fun?"
-    location = "Ho Chi Minh, Viet Nam"
+    location = " Da Nang, Viet Nam"
     follow = "https://github.com/lhsang"
     link_tooltip = false
     [params.profile.social.links]
@@ -79,7 +81,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
       linkedin = "https://www.linkedin.com/in/l%C3%AA-ho%C3%A0ng-sang-5767b3115/"
 
   [params.site]
-    title = "Sang Le Hoang"
+    title = "Sang Le"
     favicon = "img/favicon.ico"
     board = "<p>enjoy~</p>"
     [params.site.logo]
