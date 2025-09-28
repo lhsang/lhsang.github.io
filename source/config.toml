@@ -39,7 +39,7 @@ ignoreLogs = ["warning-goldmark-raw-html"]
 
 [params]
   since = 2020
-  dateFormatToUse = "2006-01-02"
+  dateFormatToUse = "01-02-2006"
   enablePostCopyright = true
   mainSections = ["posts"]
   enableMathJax = true
