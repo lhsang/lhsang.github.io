@@ -70,6 +70,89 @@ Refresh Token thường có thời hạn sử dụng dài hơn và chỉ đượ
 ![Abstract Protocol Flow OAuth2](/img/posts/technique/oauth2/jwt_structure.png)
 
 ## OAuth 2.0 Grant Types
+Oauth 2.0 hỗ trợ nhiều luồng ủy quyền (grant types) khác nhau để phù hợp với các tình huống sử dụng khác nhau. Dưới đây là một số grant types phổ biến:
+- __Authorization Code Grant__: Đây là luồng phổ biến nhất, thường được sử dụng trong các ứng dụng có giao diện người dùng (web app, mobile app). 
+Client nhận mã ủy quyền (authorization code) từ Authorization Server và sau đó trao đổi mã này để lấy Access Token.
+- __Client Credentials Grant__: Thường được sử dụng trong các ứng dụng máy chủ (server-to-server).
+Client sử dụng thông tin xác thực của chính nó để lấy Access Token từ Authorization Server mà không cần Resource Owner.
+- __Refresh Token Grant__: Luồng này cho phép Client lấy Access Token mới bằng cách sử dụng Refresh Token khi Access Token hết hạn.
+- __Implicit Grant (Deprecated)__: Thường được sử dụng trong các ứng dụng web dựa trên trình duyệt (browser-based applications). 
+Client nhận Access Token trực tiếp từ Authorization Server mà không cần mã ủy quyền.
+- __Password Grant (Deprecated)__: Trong luồng này, Resource Owner cung cấp trực tiếp tên đăng nhập và mật khẩu cho Client. 
+Client sử dụng thông tin này để lấy Access Token từ Authorization Server. Luồng này chỉ nên được sử dụng trong các tình huống đáng tin cậy.
+
+### 1. Authorization Code Grant
+![Authorization Code Grant](/img/posts/technique/oauth2/auth_code_grant.svg)
+
+Giả sử bạn sử dụng một ứng dụng web (draw.io - client application) muốn truy cập API của một dịch vụ bên thứ ba (google drive - Oauth Service API) 
+thay mặt cho bạn để đọc các file diagram bạn đã lưu trữ trên Drive. Mình sẽ mô tả chi tiết các bước trong luồng Authorization Code Grant như sau:
+- Step 1: Ứng dụng web (draw.io) chuyển hướng bạn đến trang đăng nhập của Google (Authorization Server) để xác thực. Bạn sẽ thâý một pop-up hoặc redirect đến trang Google.
+- Step 2: Bạn đăng nhập vào Google và cấp quyền cho ứng dụng web (draw.io) truy cập các file trên Drive của bạn.
+- Step 3: Sau khi bạn cấp quyền, Google chuyển hướng bạn trở lại ứng dụng web (draw.io) với một mã ủy quyền (authorization code).
+- Step 4: Ứng dụng web (draw.io) gửi mã ủy quyền này đến Google (Authorization Server) để đổi lấy Access Token.
+- Step 5: Google xác thực mã ủy quyền và trả về Access Token cho ứng dụng web (draw.io).
+- Step 6: Ứng dụng web (draw.io) sử dụng Access Token để truy cập API của Google Drive và lấy các file diagram của bạn.
+- Step 7: Google Drive xác thực Access Token và trả về các file diagram cho ứng dụng web (draw.io).
+Ứng dụng web (draw.io) hiển thị các file diagram cho bạn. <br>
+Khi Access Token hết hạn, ứng dụng web (draw.io) có thể sử dụng Refresh Token để lấy Access Token mới từ Google mà không cần bạn phải đăng nhập lại.
+
+### 2. Client Credentials Grant
+
+![Client Credentials Grant](/img/posts/technique/oauth2/client_credentials_grant.png)
+
+Bạn có một ứng dụng máy chủ (server application) muốn truy cập API của một dịch vụ bên thứ ba (ví dụ: một dịch vụ lưu trữ đám mây) để quản lý tài nguyên thay mặt cho chính nó, 
+không liên quan đến người dùng cụ thể nào. Mình sẽ mô tả chi tiết các bước trong luồng Client Credentials Grant như sau:
+- Step 1: Ứng dụng máy chủ (server application) gửi yêu cầu lấy Access Token đến Authorization Server của dịch vụ bên thứ ba, 
+bao gồm thông tin xác thực của chính nó (client ID và client secret).
+```bashPOST /token
+POST /oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+client_id=SERVICE_A
+client_secret=abcXYZ123
+scope=read write
+```
+- Step 2: Authorization Server xác thực thông tin xác thực của ứng dụng máy chủ. Nếu xác thực thành công, Authorization Server cấp Access Token cho ứng dụng máy chủ.
+- Step 3: Ứng dụng máy chủ sử dụng Access Token để truy cập API của dịch vụ bên thứ ba và quản lý tài nguyên.
+
+### 3. Implicit Grant (Deprecated, not recommended)
+![Implicit Grant](/img/posts/technique/oauth2/implicit_grant.png)
+
+- Implicit Grant được thiết kế cho ứng dụng mà token cần được cấp nhanh chóng, cấp trực tiếp cho Client mà không cần bước trao đổi mã ủy quyền.
+- Thường được sử dụng trong các ứng dụng web dựa trên trình duyệt (browser-based applications) như Single Page Applications (SPA).
+- Tuy nhiên, luồng này có những rủi ro bảo mật, vì Access Token được truyền qua URL và có thể bị lộ nếu không được bảo vệ đúng cách.
+- Do đó, hiện nay luồng Implicit Grant không được khuyến khích sử dụng nữa, 
+thay vào đó nên sử dụng Authorization Code Grant với PKCE (Proof Key for Code Exchange) để tăng cường bảo mật
+
+### 4. Password Grant (Resource Owner Password Credentials Grant) (Deprecated, not recommended)
+![Password Grant](/img/posts/technique/oauth2/password_grant.png)
+
+- Với loại này, Resource Owner (người dùng) cung cấp trực tiếp tên đăng nhập và mật khẩu cho Client (ứng dụng).
+- Client sử dụng thông tin này để lấy Access Token từ Authorization Server.
+- Từ OAuth 2.1, luồng này không còn được khuyến khích sử dụng nữa do các rủi ro bảo mật liên quan đến việc chia sẻ thông tin đăng nhập trực tiếp với Client.
+
+```bashPOST /token
+POST /oauth/token
+Content-Type: application/x-www-form-urlencoded 
+grant_type=password
+username=anna
+password=ABC123xyz
+scope=read write
+```
+### 5. Refresh Token Grant
+- Luồng này cho phép Client lấy Access Token mới bằng cách sử dụng Refresh Token khi Access Token hết hạn.
+- Điều này giúp duy trì phiên làm việc của người dùng mà không cần họ phải đăng nhập lại. 
+Tăng bảo mật bằng cách cho Access Token có thời hạn ngắn còn Refresh Token có thời hạn dài hơn.
+
+```bashPOST /token
+POST /oauth/token
+Content-Type: application/x-www-form-urlencoded
+grant_type=refresh_token
+refresh_token=def456UVW
+client_id=YOUR_CLIENT_ID
+client_secret=YOUR_CLIENT_SECRET
+```
 
 
 ## References
